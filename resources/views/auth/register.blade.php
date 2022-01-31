@@ -27,7 +27,7 @@
                     <input id="password" type="password" name="password" required autocomplete="new-password">
 
                     @error('password')
-                        <span class="" role="alert">
+                        <span class="c-form__invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
                         </span>
                     @enderror
