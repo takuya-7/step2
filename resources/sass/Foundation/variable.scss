@@ -1,0 +1,32 @@
+$font-color_default: #4a4a4a;
+$theme_color: linear-gradient(-20deg, #6e45e2 0%, #88d3ce 100%);
+$cv_color: linear-gradient(-20deg, #0cb699 0%, #8ddad5 100%);
+$red_color: #e94f4f;
+$blue_color: #0981ca;
+$green_color: #37c47d;
+$gray_color: #969696;
+
+$font-size_s: 12px;
+$font-size_m: 14px;
+$font-size_default: 16px;
+$font-size_l: 18px;
+$font-size_xl: 24px;
+$font-size_xxl: 30px;
+$font-size_3l: 38px;
+
+$space_s: 5px;
+$space_m: 10px;
+$space_l: 15px;
+$space_xl: 20px;
+$space_xxl: 30px;
+$space_3l: 40px;
+
+$font-family_corp: "メイリオ", sans-serif;
+
+$breakpoints: (
+    "sm": "screen and (max-width: 576px)",
+    "md": "screen and (max-width: 768px)",
+    "lg": "screen and (max-width: 992px)",
+    "xl": "screen and (max-width: 1200px)",
+    "xxl": "screen and (max-width: 1400px)",
+) !default;

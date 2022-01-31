@@ -1,0 +1,29 @@
+.l-header{
+  line-height: 4rem;
+  height: 4rem;
+  width: 100%;
+  top: 0;
+}
+.l-header__inner{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 4rem;
+}
+.l-header--bg-theme{
+  background-image: $theme_color;
+}
+.l-header__icon{
+  color: #fff;
+  text-decoration: none;
+  font-size: 1.6rem;
+  font-weight: 900;
+  display: block;
+  line-height: 4rem;
+  @include mq() {
+    font-size: 1.2rem;
+  }
+}
+.l-header__icon:hover{
+  color: #fff;
+}

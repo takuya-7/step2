@@ -1,8 +1,69 @@
 // Fonts
-@import url('https://fonts.googleapis.com/css?family=Nunito');
+// @import url('https://fonts.googleapis.com/css?family=Nunito');
 
 // Variables
-@import 'variables';
+// @import 'variables';
 
 // Bootstrap
-@import '~bootstrap/scss/bootstrap';
+// @import '~bootstrap/scss/bootstrap';
+
+
+// 各scssの読み込み
+
+// =======================
+// Foundation
+// =======================
+// reset css
+@import 'Foundation/reset';
+// variable
+@import 'Foundation/variable';
+// mixin
+@import 'Foundation/mixin';
+// base
+@import 'Foundation/base';
+
+// =======================
+// Layout
+// =======================
+// layout
+@import 'Layout/l-layout';
+// main layout
+@import 'Layout/l-main';
+// header
+@import 'Layout/l-header';
+// menu
+@import 'Layout/l-menu';
+// footer
+@import 'Layout/l-footer';
+
+// =======================
+// Object
+// =======================
+
+// -----------------------
+// Component
+// -----------------------
+// form
+@import 'Object/Component/c-form';
+// button
+@import 'Object/Component/c-button';
+// menu
+@import 'Object/Component/c-menu';
+
+
+
+// -----------------------
+// Project
+// -----------------------
+// top page style
+@import 'Object/Project/p-home';
+
+// -----------------------
+// Utility
+// -----------------------
+// utility
+@import 'Object/Utility/u-utility.scss';
+// color
+@import 'Object/Utility/u-color.scss';
+// margin
+@import 'Object/Utility/u-margin.scss';

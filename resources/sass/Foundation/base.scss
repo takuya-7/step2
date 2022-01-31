@@ -1,0 +1,95 @@
+html, body {
+  // height: 100%;
+  width: 100%;
+  // color: $font-color_default;
+  font-size: $font-size_default;
+  // line-height: 1.6;
+  // font-family: Quicksand, 游ゴシック体, "Yu Gothic", YuGothic, "ヒラギノ角ゴシック Pro", "Hiragino Kaku Gothic Pro", メイリオ, Meiryo, Osaka, "ＭＳ Ｐゴシック", "MS PGothic", sans-serif; // TODO:リファクタ必要（変数にする）
+  // text-size-adjust: 100%;
+  // letter-spacing: 0.1em;
+
+  line-height: 150%;
+  // font-family: $font-family_corp;
+  // -webkit-font-smoothing: antialiased;
+}
+main{
+  height: 100%;
+}
+h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6{
+  line-height: 150%;
+}
+h1{
+  font-size: 1.8rem;
+  @include mq() {
+    font-size: 1.5rem;
+  }
+}
+h2{
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  @include mq(){
+    font-size: 1.3rem;
+    margin-bottom: .5rem;
+  }
+}
+h3{
+  font-size: 1.3rem;
+  margin-bottom: 1rem;
+  @include mq(){
+    font-size: 1.2rem;
+  }
+}
+p, a {
+  font-family: $font-family_corp;
+  // -webkit-font-smoothing: antialiased;
+}
+a,
+a:active,
+a:focus {
+  color: $blue_color;
+}
+a:hover {
+  cursor: pointer;
+  text-decoration: none;
+  color: initial;
+}
+ul{
+  padding-left: 1.5rem;
+}
+li{
+  line-height: 150%;
+}
+img {
+  width: 100%;
+  vertical-align: bottom;
+}
+label{
+  display: block;
+  line-height: 2rem;
+}
+label.err input, label.err select{
+  background: #f7dcd9;
+}
+input[type="text"], input[type="email"], input[type="password"], input[type="number"], .form select,
+textarea {
+  -webkit-appearance: none;
+  display: block;
+  box-sizing: border-box;
+  padding: 10px;
+  padding-left: 1.125rem;
+  // width: 100%;
+  // height: 3.125rem;
+  border: 0.0625rem solid #ddd;
+  background: #f6f5f5;
+  font-size: 0.9rem;
+}
+input[type="checkbox"]{
+  width: 18px;
+  height: 18px;
+  background: #f6f5f5;
+  vertical-align: middle;
+}
+input[type="number"] {
+  width: 100px;
+  text-align: left;
+}
