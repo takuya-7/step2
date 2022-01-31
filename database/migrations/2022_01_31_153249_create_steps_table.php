@@ -15,6 +15,13 @@ class CreateStepsTable extends Migration
     {
         Schema::create('steps', function (Blueprint $table) {
             $table->id();
+            $table->string('title');
+            $table->integer('estimated_achievement_day')->nullable();
+            $table->integer('estimated_achievement_hour')->nullable();
+            $table->text('description');
+            $table->foreignId('user_id')->constrained();
+            $table->foreignId('category_id')->constrained();
+            $table->boolean('delete_flg')->default(0);
             $table->timestamps();
         });
     }
