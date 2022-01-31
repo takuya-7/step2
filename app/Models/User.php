@@ -41,4 +41,10 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    // Stepモデルへのリレーション作成
+    public function steps()
+    {
+        return $this->hasMany('App\Models\Step');
+    }
 }
