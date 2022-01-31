@@ -28,13 +28,10 @@
       </div>
 
       <div class="menus-container col-md-4">
-        <h2>個人設定</h2>
-        <ul class="u-bg-white">
-          <li><a href="{{ route('profile.edit') }}">プロフィール編集</a></li>
-          <li><a href="{{ route('profile.password') }}">パスワード変更</a></li>
-        </ul>
         <h2>ユーザー情報</h2>
         <ul class="u-bg-white">
+          <li><a href="{{ route('profile.edit') }}">プロフィール編集</a></li>
+          <li><a href="{{ route('password.update') }}">パスワード再設定</a></li>
           <li>
             <form method="POST" action="{{ route('logout') }}">
               @csrf
@@ -45,7 +42,6 @@
               </a>
             </form>  
           </li>
-          <li><a href="withdraw.php">退会</a></li>
         </ul>
       </div>
 
