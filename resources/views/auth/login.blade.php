@@ -8,21 +8,15 @@
     <div class="l-content-wrapper">
         <div class="l-container">
             <form  method="POST" action="{{ route('login') }}"class="c-form c-form--small">
+                @csrf
                 <h1 class="c-form__title">ログイン</h1>
 
-                @if (session('status'))
-                    <div class="mb-4 font-medium text-sm text-green-600">
-                        {{ session('status') }}
-                    </div>
-                @endif
-
-                @csrf
                 <fieldset  class="c-form__field">
                     <label for="email">メールアドレス</label>
-                    <input id="email" type="email" name="email" :value="old('email')" required autofocus>
+                    <input id="email" type="email" name="email" value="{{ old('email') }}" required autofocus>
 
                     @error('email')
-                        <span class="invalid-feedback" role="alert">
+                        <span class="c-form__invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
                         </span>
                     @enderror
@@ -33,7 +27,7 @@
                     <input id="password" type="password" name="password" required autocomplete="current-password">
 
                     @error('password')
-                        <span class="invalid-feedback" role="alert">
+                        <span class="c-form__invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
                         </span>
                     @enderror
