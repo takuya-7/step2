@@ -134,3 +134,10 @@
 .c-selectbox.type01 select {
   padding: 8px 38px 8px 8px;
   color: #666666; }
+
+.c-form__invalid-feedback {
+  width: 100%;
+  margin-top: 0.25rem;
+  font-size: 0.875em;
+  color: #dc3545;
+}
