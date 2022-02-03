@@ -29,7 +29,7 @@ class Step extends Model
         return $this->belongsTo('App\Models\Category');
     }
     // ChildStepモデルへのリレーション作成
-    public function childStep()
+    public function childSteps()
     {
         return $this->hasMany('App\Models\ChildStep');
     }
