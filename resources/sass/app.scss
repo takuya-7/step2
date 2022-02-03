@@ -43,10 +43,12 @@
 // -----------------------
 // Component
 // -----------------------
-// form
-@import 'Object/Component/c-form';
 // button
 @import 'Object/Component/c-button';
+// card
+@import 'Object/Component/c-card';
+// form
+@import 'Object/Component/c-form';
 // menu
 @import 'Object/Component/c-menu';
 
@@ -57,6 +59,9 @@
 // -----------------------
 // top page style
 @import 'Object/Project/p-home';
+// step content style
+@import 'Object/Project/p-step';
+
 
 // -----------------------
 // Utility
