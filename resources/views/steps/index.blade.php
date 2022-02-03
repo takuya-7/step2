@@ -5,30 +5,19 @@
 @section('title', 'STEP一覧')
 
 @section('content')
-    <div class="l-content-wrapper">
-        <div class="l-container">
-          <div class="l-content">
-            <div class="l-inner-container">
+  <div class="l-content-wrapper">
+    <div class="l-container">
+      <div class="l-inner-container">
 
-              <h2>
-                STEP一覧
-              </h2>
+        <h2>
+          STEP一覧
+        </h2>
 
-              <ul>
-                <li>{{ $steps }}</li>
-                <li>{{ $steps[0] }}</li>
-                <li>{{ $steps[0]->title }}</li>
-              </ul>
-
-              <div id="app">
-                <!-- デフォルトだとこの中ではvue.jsが有効 -->
-                <!-- example-component はLaravelに入っているサンプルのコンポーネント名 -->
-                <ExampleComponent></ExampleComponent>
-                <!-- 配列系の変数をコンポーネントに渡すときは「:」をつける -->
-              </div>
-              
-            </div>
-          </div>
+        <div id="app">
+          <list :steps="{{ $steps }}" :categories="{{ $categories }}"></list>
         </div>
+        
+      </div>
     </div>
+  </div>
 @endsection
