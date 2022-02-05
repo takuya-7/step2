@@ -62,6 +62,21 @@
         <p>プログラミングや英語など、あなたがこれまで学んで良かった手順を共有でき、他の人はそれに「チャレンジ」することでゲーム感覚で学習を進められます。</p>
       </div>
     </section>
+
+    <section class="p-top-section">
+      <h2 class="p-top-section__title">STEP</h2>
+      <div id="app">
+        <list :steps="{{ $steps }}" :categories="{{ $categories }}"></list>
+      </div>
+      <a href="{{ route('steps') }}" class="c-button c-button--gray c-button--radius100">STEP一覧へ</a>
+    </section>
+
+    <section class="p-top-section">
+      <h2 class="p-top-section__title">ユーザー登録してSTEP投稿、挑戦しよう！</h2>
+      <a href="{{ route('register') }}" class="c-button c-button--green c-button--radius100">ユーザー登録する（無料）</a>
+      <a href="{{ route('login') }}" class="p-top-section__login-link">ログインする</a>
+    </section>
+
   </div>
 </div>
 @endsection
