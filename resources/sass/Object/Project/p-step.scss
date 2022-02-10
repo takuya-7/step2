@@ -28,3 +28,19 @@
   list-style: none;
   padding: 0;
 }
+.p-child-step-list{
+  border: 1px solid #e1e1e1;
+  list-style: none;
+  padding: 0;
+  box-shadow: 0 1px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 0.3rem;
+}
+.p-child-step-list__item{
+  border-bottom: 1px solid #e1e1e1;
+}
+.p-child-step-list__item a{
+  text-decoration: none;
+  color: #333;
+  display: block;
+  padding: 1rem 1.5rem;
+}
