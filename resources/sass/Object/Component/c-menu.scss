@@ -1,26 +1,26 @@
-.menus-container {
+.c-menus-container {
   /* padding: 1rem 1rem 1.5rem; */
   box-sizing: border-box; }
   @media screen and (max-width: 768px) {
-    .menus-container {
+    .c-menus-container {
       width: 100rem; } }
 
-.menus-container h2, .menus-container .h2 {
+.c-menus-container h2, .c-menus-container .h2 {
   margin-top: 2rem;
   margin-bottom: 1rem;
   font-size: 1.2rem; }
 
-.menus-container ul {
+.c-menus-container ul {
   border: 1px solid #e1e1e1;
   list-style: none;
   padding: 0;
   box-shadow: 0 1px 8px rgba(0, 0, 0, 0.1);
   border-radius: 0.3rem; }
 
-.menus-container ul li {
+.c-menus-container ul li {
   border-bottom: 1px solid #e1e1e1; }
 
-.menus-container ul li a {
+.c-menus-container ul li a {
   text-decoration: none;
   color: #333;
   display: block;
