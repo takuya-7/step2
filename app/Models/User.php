@@ -47,4 +47,9 @@ class User extends Authenticatable
     {
         return $this->hasMany('App\Models\Step');
     }
+    // Challengeモデルへのリレーション作成
+    public function challenges()
+    {
+        return $this->hasMany('App\Models\Challenge');
+    }
 }

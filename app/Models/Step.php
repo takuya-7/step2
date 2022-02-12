@@ -33,4 +33,9 @@ class Step extends Model
     {
         return $this->hasMany('App\Models\ChildStep');
     }
+    // Challengeモデルへのリレーション作成
+    public function challenges()
+    {
+        return $this->hasMany('App\Models\Challenge');
+    }
 }
