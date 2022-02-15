@@ -20,7 +20,7 @@ class ChildStep extends Model
     ];
 
     // Stepモデルへのリレーション作成
-    public function user()
+    public function step()
     {
         return $this->belongsTo('App\Models\Step');
     }
