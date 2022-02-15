@@ -14,9 +14,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 // トップページ
-Route::get('/', function () {
-    return view('index');
-});
+Route::get('/', [App\Http\Controllers\TopController::class, 'index'])->name('top');
 
 Route::group(['middleware' => 'auth'], function() {
     // マイページ
@@ -24,14 +22,23 @@ Route::group(['middleware' => 'auth'], function() {
     // プロフィール登録・編集
     Route::get('/profile/edit', [App\Http\Controllers\UsersController::class, 'edit'])->name('profile.edit');
     // パスワード変更
-    Route::get('/profile/password', [App\Http\Controllers\UsersController::class, 'updatePassword'])->name('profile.password');
+    // Route::get('/profile/password', [App\Http\Controllers\UsersController::class, 'updatePassword'])->name('profile.password');
 
     // STEP投稿画面
     Route::get('/steps/new', [App\Http\Controllers\StepsController::class, 'new'])->name('steps.new');
     // STEP登録処理
     Route::post('/steps', [App\Http\Controllers\StepsController::class, 'create'])->name('steps.create');
-    // STEP編集
+    // STEP編集画面
     Route::get('/steps/{id}/edit', [App\Http\Controllers\StepsController::class, 'edit'])->name('steps.edit');
+    // STEP更新処理
+    Route::post('/steps/{id}/edit', [App\Http\Controllers\StepsController::class, 'update'])->name('steps.update');
+
+    // STEPチャレンジ登録・解除
+    Route::get('/steps/challenge/{step}', [App\Http\Controllers\ChallengesController::class, 'challenge'])->name('challenge');
+    Route::get('/steps/unchallenge/{step}', [App\Http\Controllers\ChallengesController::class, 'unchallenge'])->name('unchallenge');
+
+    // 子STEPクリア
+    Route::get('/steps/clear/{step}', [App\Http\Controllers\ChallengesController::class, 'clear'])->name('clear');
 });
 
 // STEP一覧
@@ -48,7 +55,6 @@ Route::get('/sitemap', function () {
 
 
 // デフォルト設定↓
-
 // Route::get('/', function () {
 //     return view('welcome');
 // });
