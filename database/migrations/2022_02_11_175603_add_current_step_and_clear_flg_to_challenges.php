@@ -17,8 +17,8 @@ class AddCurrentStepAndClearFlgToChallenges extends Migration
             // レコード削除
             DB::statement('DELETE FROM challenges');
             // カラム追加
-            $table->integer('current_step')->default(1);;
-            $table->integer('clear_flg')->default(0);;
+            $table->integer('current_step')->default(1);
+            $table->integer('clear_flg')->default(0);
         });
     }
 
