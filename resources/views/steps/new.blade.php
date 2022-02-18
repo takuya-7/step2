@@ -18,7 +18,7 @@
                 @csrf
                 <fieldset class="c-form__field">
                   <label for="title" class="c-form__field__name">タイトル<span class="c-form__field--required">（必須）</span></label>
-                  <input id="title" type="text" name="title" :value="old('title', isset($step->title) ? $step->title : '')" class="" placeholder="例：最短でWebエンジニアになる手順を大公開！" required autofocus>
+                  <input id="title" type="text" name="title" value="{{ old('title', isset($step->title) ? $step->title : '') }}" class="" placeholder="例：最短でWebエンジニアになる手順を大公開！" required autofocus>
                 </fieldset>
                 
                 
@@ -32,7 +32,11 @@
                   <div class="c-selectbox type01">
                     <select name="category_id" id="category">
                       @foreach ($categories as $category)
-                        <option value="{{ $category->id }}">{{ $category->name }}</option>
+                        @if((!empty($request->category_id) && $request->category_id == $step->category_id) || old('category_id') == $category->id )
+                          <option value = "{{ $category->id }}" selected>{{ $category->name }}</option>
+                        @else
+                          <option value = "{{ $category->id }}">{{ $category->name }}</option>
+                        @endif
                       @endforeach
                     </select>
                   </div>
@@ -40,7 +44,7 @@
 
                 <div class="c-form__field">
                   <div class="c-form__field__name">
-                    全体の所要時間<span class="c-form__field--required">（必須）</span>
+                    全体の所要時間<span class="c-form__field--required">（入力推奨）</span>
                   </div>
 
                   <div class="c-form__child-item">
@@ -63,15 +67,20 @@
                   </div>
                 </div>
 
-                <!-- <fieldset class="c-form__field">
-                  <label for="child-step001" class="c-form__field__name">ステップ1見出し<span class="c-form__field--required">（必須）</span></label>
-                  <input id="child-step001" type="text" name="child-step001" :value="old('child-step001', isset($child_step->title) ? $child_step->title : '')" class="" placeholder="学ぶ手順の見出し" required>
-                </fieldset>
+                @for ($i = 1; $i <= $child_steps_num; $i++)
+                  <fieldset class="c-form__field">
+                    <label for="child-step{{ $i }}-title" class="c-form__field__name">ステップ{{ $i }}
+                      @if($i === 1)
+                        <span class="c-form__field--required">（必須）</span>
+                      @endif
+                    </label>
+                    <input id="child-step{{ $i }}-title" type="text" name="child-step{{ $i }}-title" value="{{ old('child-step'.$i.'-title') }}" class="" placeholder="学ぶ手順の見出し">
+                  </fieldset>
 
-                <fieldset class="c-form__field">
-                  <label for="child-step001-description" class="c-form__field__name">ステップ1内容<span class="c-form__field--required">（必須）</span></label>
-                  <textarea name="child-step001-description" id="child-step001-description" class="c-form__field__textarea" style="min-height: 8rem;" placeholder="具体的にやること、コツやポイントについて">{{ old('description') }}</textarea>
-                </fieldset> -->
+                  <fieldset class="c-form__field">
+                    <textarea name="child-step{{ $i }}-description" id="child-step{{ $i }}-description" class="c-form__field__textarea" style="min-height: 8rem;" placeholder="具体的にやること、コツやポイントについて">{{ old('child-step'.$i.'-description') }}</textarea>
+                  </fieldset>
+                @endfor
 
                 <button type="submit" class="c-button c-button--blue c-button--width100">投稿する</button>
 
