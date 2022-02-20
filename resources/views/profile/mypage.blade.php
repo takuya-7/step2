@@ -24,6 +24,7 @@
                 <a href="/steps/{{ $registered_step->id }}">
                   {{ $registered_step['title'] }}
                 </a>
+                （<a href="/steps/{{ $registered_step->id }}/edit">更新する</a>）
               </li>
             @endforeach
           </ul>
@@ -36,7 +37,7 @@
             <ul>
               @foreach($challenge_steps as $challenge_step)
                 <li class="">
-                  <a href="/steps/{{ $challenge_step->id }}">
+                  <a href="/steps/{{ $challenge_step->id }}/{{ ($challenge_step['challenges'][0]['current_step'] > count($challenge_step['childSteps'])) ? count($challenge_step['childSteps']) : $challenge_step['challenges'][0]['current_step'] }}">
                     {{ $challenge_step['title'] }}
                   </a>
                   （ {{ $challenge_step['challenges'][0]['current_step']-1 }} / {{ count($challenge_step['childSteps']) }} STEP完了 ）
