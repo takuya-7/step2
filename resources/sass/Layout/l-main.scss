@@ -1,9 +1,12 @@
 .l-all-wrapper{
   background: #edf1f5;
   min-height: 100vh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
 }
 .l-container{
-  width: 100%;
+  // width: 100%;
   padding-right: var(--bs-gutter-x, 0.75rem);
   padding-left: var(--bs-gutter-x, 0.75rem);
   margin-right: auto;
