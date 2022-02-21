@@ -12,7 +12,7 @@
                 <h1 class="c-form__title u-mb-5">パスワード再設定</h1>
 
                 @if (session('status'))
-                    <div class="alert alert-success" role="alert">
+                    <div class="c-alert" role="alert">
                         {{ session('status') }}
                     </div>
                 @endif
@@ -21,7 +21,7 @@
                     <p>あなたが登録したメールアドレスにパスワード再設定のリンクを送信いたします。</p>
                 </div>
 
-                <fieldset  class="c-form__field">
+                <fieldset class="c-form__field">
                     <label for="email">メールアドレス</label>
                     <input id="email" type="email" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
 
