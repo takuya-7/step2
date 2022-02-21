@@ -19,7 +19,6 @@
                   <input id="title" type="text" name="title" value="{{ old('title', isset($step->title) ? $step->title : '') }}" class="" placeholder="例：最短でWebエンジニアになる手順を大公開！" required autofocus>
                 </fieldset>
                 
-                
                 <fieldset class="c-form__field">
                   <label for="description" class="c-form__field__name">概要<span class="c-form__field--required">（必須）</span></label>
                   <textarea name="description" id="description" class="c-form__field__textarea" style="min-height: 8rem;" placeholder="学びのステップに関するサマリー。対象者や難易度、得られるものについて。">{{ old('description', isset($step->description) ? $step->description : '') }}</textarea>
