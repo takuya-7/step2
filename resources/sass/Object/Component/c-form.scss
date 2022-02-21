@@ -11,10 +11,12 @@
   }
 }
 .c-form--small{
-  width: 25rem;
+  // width: 25rem;
+  max-width: 25rem;
   padding: 2rem;
   @include mq() {
-    width: 100%;
+    // width: 100%;
+    max-width: 25rem;
     padding: 1rem;
   }
 }
