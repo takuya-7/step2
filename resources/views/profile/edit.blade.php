@@ -11,33 +11,46 @@
     <div class="l-content">
       <div class="l-inner-container">
         
-        <form method="post" action="" class="c-form">
-          <h2>プロフィール編集</h2>
-
+        <form method="POST" action="{{ route('profile.update') }}" class="c-form" enctype="multipart/form-data">
           @csrf
-
-          <fieldset  class="c-form__field">
-            <label for="icon">アイコン画像</label>
-            <input id="icon" type="" name="icon" required autocomplete="">
-          </fieldset>
-
-          <fieldset  class="c-form__field">
-            <label for="name">ニックネーム</label>
-            <input id="name" type="text" name="name" :value="old('name')" required autofocus autocomplete="name">
-          </fieldset>
+          @method('patch')
+          <h2>プロフィール編集</h2>
 
           <fieldset  class="c-form__field">
             <label for="email">メールアドレス</label>
-            <input id="email" type="email" name="email" :value="old('email')" required>
+            <input id="email" type="email" name="email" value="{{ old('email', isset($user[0]['email']) ? $user[0]['email'] : '') }}" required>
+
+            @error('email')
+              <span class="c-form__invalid-feedback" role="alert">
+                <strong>{{ $message }}</strong>
+              </span>
+            @enderror
           </fieldset>
           
           <fieldset  class="c-form__field">
             <label for="profile">自己紹介文</label>
-            <input id="profile" type="text" name="profile" :value="old('profile')">
+            <textarea name="profile" id="profile" class="c-form__field__textarea" style="min-height: 8rem;" placeholder="">{{ old('profile', isset($user[0]['profile']) ? $user[0]['profile'] : '') }}</textarea>
+
+            @error('profile')
+              <span class="c-form__invalid-feedback" role="alert">
+                <strong>{{ $message }}</strong>
+              </span>
+            @enderror
           </fieldset>
 
+          <fieldset  class="c-form__field">
+            <label for="icon">アイコン画像</label>
+            @if($user[0]['profile_img'])
+              <div>
+                <div>現在のアイコン</div>
+                <img src="{{ asset('storage/uploads/'.$user[0]['profile_img'])}}" alt="" class="c-form__field__icon">
+              </div>
+            @endif
+            <input type="file" name="profile_img">
+          </fieldset>
+          
           <div class="u-mb-3">
-            <button type="submit" class="c-button c-button--blue c-button--width100">登録する</button>
+            <button type="submit" class="c-button c-button--blue c-button--width100">更新する</button>
           </div>
           
         </form>
