@@ -21,6 +21,8 @@ Route::group(['middleware' => 'auth'], function() {
     Route::get('/mypage', [App\Http\Controllers\UsersController::class, 'mypage'])->name('mypage');
     // プロフィール登録・編集
     Route::get('/profile/edit', [App\Http\Controllers\UsersController::class, 'edit'])->name('profile.edit');
+    // プロフィール更新処理
+    Route::patch('/profile/edit', [App\Http\Controllers\UsersController::class, 'update'])->name('profile.update');
     // パスワード変更
     // Route::get('/profile/password', [App\Http\Controllers\UsersController::class, 'updatePassword'])->name('profile.password');
 
