@@ -33,10 +33,8 @@ class UsersController extends Controller
 
     // ユーザー情報更新画面
     public function edit(){
-        $user = User::find(auth()->user()->id)->get();
-        // $user = Auth::user();
-        $user_profile_img = User::find(auth()->user()->id)->get(['profile_img']);
-        return view('profile/edit', compact('user', 'user_profile_img'));
+        $user = Auth::user();
+        return view('profile/edit', compact('user'));
     }
     // ユーザー情報更新処理
     public function update(Request $request){

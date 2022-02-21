@@ -18,7 +18,7 @@
 
           <fieldset  class="c-form__field">
             <label for="email">メールアドレス</label>
-            <input id="email" type="email" name="email" value="{{ old('email', isset($user[0]['email']) ? $user[0]['email'] : '') }}" required>
+            <input id="email" type="email" name="email" value="{{ old('email', isset($user->email) ? $user->email : '') }}" required>
 
             @error('email')
               <span class="c-form__invalid-feedback" role="alert">
@@ -29,7 +29,7 @@
           
           <fieldset  class="c-form__field">
             <label for="profile">自己紹介文</label>
-            <textarea name="profile" id="profile" class="c-form__field__textarea" style="min-height: 8rem;" placeholder="">{{ old('profile', isset($user[0]['profile']) ? $user[0]['profile'] : '') }}</textarea>
+            <textarea name="profile" id="profile" class="c-form__field__textarea" style="min-height: 8rem;" placeholder="">{{ old('profile', isset($user->profile) ? $user->profile : '') }}</textarea>
 
             @error('profile')
               <span class="c-form__invalid-feedback" role="alert">
@@ -40,10 +40,10 @@
 
           <fieldset  class="c-form__field">
             <label for="icon">アイコン画像</label>
-            @if($user[0]['profile_img'])
+            @if($user->profile_img)
               <div>
                 <div>現在のアイコン</div>
-                <img src="{{ asset('storage/uploads/'.$user[0]['profile_img'])}}" alt="" class="c-form__field__icon">
+                <img src="{{ asset('storage/uploads/'.$user->profile_img) }}" alt="" class="c-form__field__icon">
               </div>
             @endif
             <input type="file" name="profile_img">
