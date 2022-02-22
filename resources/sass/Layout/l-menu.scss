@@ -8,7 +8,7 @@
     width: 100vw;
     height: 100vh;
     z-index: 2;
-    &.active {
+    &.js-active {
       display: block;
     }
   }
@@ -80,7 +80,7 @@
       bottom: 0;
     }
   }
-  &.active span {
+  &.js-active span {
     &:nth-of-type(1) {
       transform: translateY(12px) rotate(-45deg);
     }
