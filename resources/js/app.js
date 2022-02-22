@@ -2,10 +2,14 @@ require('./bootstrap');
 
 import { createApp } from 'vue'
 import ExampleComponent from './components/ExampleComponent.vue'
+import List from './components/list/List.vue'
+import ChildStepForm from './components/child-steps-form/ChildStepForm.vue'
 
 createApp({
     components:{
-        ExampleComponent
+        ExampleComponent,
+        List,
+        ChildStepForm
     }
 }).mount('#app')
 
@@ -42,3 +46,10 @@ createApp({
 // const app = new Vue({
 //     el: '#app',
 // });
+
+ // ハンバーガーメニュー
+document.querySelector('.js-toggle-sp-menu').addEventListener('click', function(){
+    console.log('ハンガーがーメニュークリックされた！');
+    this.classList.toggle('js-active');
+    document.querySelector('.js-toggle-sp-menu-target').classList.toggle('js-active');
+});
