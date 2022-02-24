@@ -10,37 +10,46 @@
     <div class="">
       <h1 class="c-page-title u-mb-5">マイページ</h1>
 
-      <div class="">
-
+      <div>
         <div class="u-mb-5">
           <a href="{{ route('steps.new') }}" class="c-button c-button--blue c-button--width100">STEPを投稿する</a>
         </div>
         
         <section class="u-mb-4">
-          <h2>登録済みSTEP</h2>
-          <ul>
-            @foreach($registered_steps as $registered_step)
-              <li class="">
-                <a href="/steps/{{ $registered_step->id }}">
-                  {{ $registered_step['title'] }}
-                </a>
-                （<a href="/steps/{{ $registered_step->id }}/edit">更新する</a>）
-              </li>
-            @endforeach
-          </ul>
+          <h2>投稿済みSTEP</h2>
+          <div>
+            @if(!empty($registered_steps[0]->id))
+              <ul class="p-mypage-step-list">
+                @foreach($registered_steps as $registered_step)
+                  <li class="p-mypage-step-list__item">
+                    <a href="/steps/{{ $registered_step->id }}" class="p-mypage-step-list__title">
+                      {{ $registered_step['title'] }}
+                    </a>
+                    <a href="/steps/{{ $registered_step->id }}/edit" class="p-mypage-step-list__button">更新する</a>
+                  </li>
+                @endforeach
+              </ul>
+            @else
+              <div>
+                <p class="u-mb-3">投稿したSTEPはありません。</p>
+              </div>
+            @endif
+          </div>
         </section>
 
         <section class="u-mb-4">
           <h2>チャレンジ中STEP</h2>
           <div>
             @if(!empty($challenge_steps[0]->id))
-            <ul>
+            <ul class="p-mypage-step-list">
               @foreach($challenge_steps as $challenge_step)
-                <li class="">
-                  <a href="/steps/{{ $challenge_step->id }}/{{ ($challenge_step['challenges'][0]['current_step'] > count($challenge_step['childSteps'])) ? count($challenge_step['childSteps']) : $challenge_step['challenges'][0]['current_step'] }}">
+                <li class="p-mypage-step-list__item">
+                  <a href="/steps/{{ $challenge_step->id }}/{{ ($challenge_step['challenges'][0]['current_step'] > count($challenge_step['childSteps'])) ? count($challenge_step['childSteps']) : $challenge_step['challenges'][0]['current_step'] }}"  class="p-mypage-step-list__title">
                     {{ $challenge_step['title'] }}
                   </a>
-                  （ {{ $challenge_step['challenges'][0]['current_step']-1 }} / {{ count($challenge_step['childSteps']) }} STEP完了 ）
+                  <span class="p-mypage-step-list__progress">
+                    {{ $challenge_step['challenges'][0]['current_step']-1 }} / {{ count($challenge_step['childSteps']) }}
+                  </span>
                 </li>
               @endforeach
               </ul>
