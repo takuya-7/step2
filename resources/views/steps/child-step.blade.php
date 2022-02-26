@@ -29,13 +29,56 @@
                 <h2>STEP{{ $child_step[0]['order'] }}：{{ $child_step[0]['title'] }}</h2>
                 <p>{{ $child_step[0]['description'] }}</p>
 
-                <form method="POST" action="{{ route('steps.registChallenge') }}">
-                  <input type="hidden" name="id" value="{{ $step->id }}">
-                  <button type="submit" class="c-button c-button--blue c-button--width100">このSTEPにチャレンジする</button>
-                </form>
-                
-              </div>
-              
+                <!-- クリアボタン -->
+                <div>
+                  <!-- ログインチェック -->
+                  @if (Auth::check())
+                    <!-- ユーザーがチャレンジしている場合 -->
+                    @if($challenge)
+                      <!-- まだクリアしていない場合 -->
+                      @if($challenge['current_step']-1 < $child_step[0]['order'])
+                        <a href="{{ route('clear', $step) }}" class="c-button c-button--blue c-button--width100">
+                          クリア
+                        </a>
+                      <!-- クリア済みの場合 -->
+                      @else
+                        <button class="c-button c-button--gray c-button--width100" disable>
+                          クリア済み
+                        </button>
+                      @endif
+                    @endif
+                  @endif
+                </div>
+
+                <h2>STEP</h2>
+                <div class="u-mb-5">
+                  <ul class="p-child-step-list">
+                    @foreach($child_steps as $child_step)
+                      <li class="p-child-step-list__item">
+                        <a href="/steps/{{ $step->id }}/{{ $child_step['order'] }}">
+                          STEP{{ $child_step['order'] }}：{{ $child_step['title'] }}
+                        </a>
+                      </li>
+                    @endforeach
+                  </ul>
+                </div>
+
+                <!-- チャレンジボタン -->
+                <div>
+                  <!-- ログインチェック -->
+                  @if (Auth::check())
+                    <!-- チャレンジしていなければチャレンジボタンを表示 -->
+                    @if(!$challenge)
+                      <a href="{{ route('challenge', $step) }}" class="c-button c-button--blue c-button--width100">
+                        チャレンジする
+                      </a>
+                    @endif
+                  @else
+                    <a href="{{ route('login') }}" class="c-button c-button--blue c-button--width100">ログインしてチャレンジする</a>
+                  @endif
+                </div>
+
+              </div>  
             </div>
           </div>
         </div>
