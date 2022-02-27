@@ -1,0 +1,41 @@
+.p-mypage-step-list{
+  background: #ffffff;
+  border: 1px solid #e1e1e1;
+  list-style: none;
+  padding: 0;
+  box-shadow: 0 1px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 0.3rem;
+}
+.p-mypage-step-list__item{
+  border-bottom: 1px solid #e1e1e1;
+  display: flex;
+}
+.p-mypage-step-list__item a{
+  text-decoration: none;
+  display: block;
+}
+.p-mypage-step-list__title{
+  width: 100%;
+  color: $font-color_default;
+  padding: 1rem 1.5rem;
+}
+.p-mypage-step-list__button{
+  width: 5rem;
+  height: 3rem;
+  font-size: .9rem;
+  -webkit-appearance: none;
+  box-sizing: border-box;
+  margin: auto .7rem auto auto;
+  border: 0;
+  background: $gray_color;
+  color: #fff;
+  padding: .8rem;
+  border-radius: 5px;
+  box-shadow: .2rem .2rem .4rem #cad4e2;
+  white-space: nowrap;
+}
+.p-mypage-step-list__progress{
+  color: $font-color_default;
+  padding: 1rem 1.5rem;
+  white-space: nowrap;
+}
