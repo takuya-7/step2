@@ -76,8 +76,5 @@ class UsersController extends Controller
         // マイページへ遷移
         return redirect()->route('mypage')->with('flash_message', __('プロフィールが更新されました！'));
     }
-
-    public function updatePassword(){
-        return view('profile/update-password');
-    }
+    
 }
