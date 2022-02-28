@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\Route;
 // トップページ
 Route::get('/', [App\Http\Controllers\TopController::class, 'index'])->name('top');
 
+// ユーザー認証必要ページ
 Route::group(['middleware' => 'auth'], function() {
     // マイページ
     Route::get('/mypage', [App\Http\Controllers\UsersController::class, 'mypage'])->name('mypage');
@@ -23,8 +24,6 @@ Route::group(['middleware' => 'auth'], function() {
     Route::get('/profile/edit', [App\Http\Controllers\UsersController::class, 'edit'])->name('profile.edit');
     // プロフィール更新処理
     Route::patch('/profile/edit', [App\Http\Controllers\UsersController::class, 'update'])->name('profile.update');
-    // パスワード変更
-    // Route::get('/profile/password', [App\Http\Controllers\UsersController::class, 'updatePassword'])->name('profile.password');
 
     // STEP投稿画面
     Route::get('/steps/new', [App\Http\Controllers\StepsController::class, 'new'])->name('steps.new');
@@ -54,12 +53,6 @@ Route::get('/steps/{id}/{order}', [App\Http\Controllers\StepsController::class, 
 Route::get('/sitemap', function () {
     return view('sitemap');
 })->name('sitemap');
-
-
-// デフォルト設定↓
-// Route::get('/', function () {
-//     return view('welcome');
-// });
 
 Auth::routes();
 
