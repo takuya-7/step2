@@ -16,14 +16,18 @@ use Illuminate\Support\Facades\Log;
 class UsersController extends Controller
 {
     public function mypage(){
+        // ユーザーIDを取得
+        $user_id = auth()->id();
         // 投稿したSTEPを取得
-        $registered_steps = Step::where('user_id', auth()->user()->id)->get();
+        $registered_steps = Step::where('user_id', $user_id)->get();
         // チャレンジしているSTEPのidを取得
-        $challenge_steps_id = Challenge::where('user_id', auth()->user()->id)->pluck('step_id');
+        $challenge_steps_id = Challenge::where('user_id', $user_id)->get(['step_id']);
         // チャレンジしているSTEPがある場合
         if($challenge_steps_id){
-            // STEPのidからチャレンジしているSTEP、チャレンジ状況、子STEP数を取得
-            $challenge_steps = Step::with('challenges', 'childSteps')->find($challenge_steps_id);
+            // ユーザーのチャレンジ状況、チャレンジ中のSTEP・子STEPを取得
+            $challenge_steps = Step::with(['challenges' => function ($query) {
+                $query->where('user_id', auth()->id());
+            }, 'childSteps'])->find($challenge_steps_id);
         }else{
             $challenge_steps = null;
         }
