@@ -53,6 +53,7 @@ html, body {
   width: 100%;
   font-size: 16px;
   line-height: 150%;
+  font-family: "メイリオ", "Meiryo", sans-serif;
 }
 
 html {
@@ -102,7 +103,7 @@ h3 {
 }
 
 p, a {
-  font-family: "メイリオ", sans-serif;
+  font-family: "メイリオ", "Meiryo", sans-serif;
 }
 
 a,

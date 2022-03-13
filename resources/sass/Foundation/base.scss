@@ -4,12 +4,12 @@ html, body {
   // color: $font-color_default;
   font-size: $font-size_default;
   // line-height: 1.6;
-  // font-family: Quicksand, 游ゴシック体, "Yu Gothic", YuGothic, "ヒラギノ角ゴシック Pro", "Hiragino Kaku Gothic Pro", メイリオ, Meiryo, Osaka, "ＭＳ Ｐゴシック", "MS PGothic", sans-serif; // TODO:リファクタ必要（変数にする）
+  // font-family: Quicksand, 游ゴシック体, "Yu Gothic", YuGothic, "ヒラギノ角ゴシック Pro", "Hiragino Kaku Gothic Pro", メイリオ, Meiryo, Osaka, "ＭＳ Ｐゴシック", "MS PGothic", sans-serif;
   // text-size-adjust: 100%;
   // letter-spacing: 0.1em;
 
   line-height: 150%;
-  // font-family: $font-family_corp;
+  font-family: $font-family_corp;
   // -webkit-font-smoothing: antialiased;
 }
 html{
