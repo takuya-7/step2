@@ -44,7 +44,7 @@
             <ul class="p-mypage-step-list">
               @foreach($challenge_steps as $challenge_step)
                 <li class="p-mypage-step-list__item">
-                  <a href="/steps/{{ $challenge_step->id }}/{{ ($challenge_step['challenges'][0]['current_step'] > count($challenge_step['childSteps'])) ? count($challenge_step['childSteps']) : $challenge_step['challenges'][0]['current_step'] }}"  class="p-mypage-step-list__title">
+                  <a href="/steps/{{ $challenge_step->id }}/{{ ($challenge_step['challenges'][0]['clear_flg'] === 1) ? count($challenge_step['childSteps']) : $challenge_step['challenges'][0]['current_step'] }}"  class="p-mypage-step-list__title">
                     {{ $challenge_step['title'] }}
                   </a>
                   <span class="p-mypage-step-list__progress">
