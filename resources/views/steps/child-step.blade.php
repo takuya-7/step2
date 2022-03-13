@@ -35,10 +35,15 @@
                   @if (Auth::check())
                     <!-- ユーザーがチャレンジしている場合 -->
                     @if($challenge)
-                      <!-- まだクリアしていない場合 -->
-                      @if($challenge['current_step']-1 < $child_step[0]['order'])
+                      <!-- まだクリアしておらず、チャレンジ中の子ステップと表示する子ステップが同じだった場合 -->
+                      @if($challenge['current_step'] === $child_step[0]['order'])
                         <a href="{{ route('clear', $step) }}" class="c-button c-button--blue c-button--width100">
                           クリア
+                        </a>
+                      <!-- 表示している子ステップがまだクリアしていない子ステップよりも先のものだった場合 -->
+                      @elseif($challenge['current_step'] < $child_step[0]['order'])
+                        <a href="/steps/{{ $step->id }}/{{ $challenge['current_step'] }}" class="c-button c-button--blue c-button--width100" disable>
+                          チャレンジ中のステップへ
                         </a>
                       <!-- クリア済みの場合 -->
                       @else
@@ -71,6 +76,11 @@
                     @if(!$challenge)
                       <a href="{{ route('challenge', $step) }}" class="c-button c-button--blue c-button--width100">
                         チャレンジする
+                      </a>
+                    <!-- チャレンジしていればチャレンジ取り消しボタンを表示 -->
+                    @else
+                      <a href="{{ route('unchallenge', $step) }}" class="c-button c-button--gray c-button--width100">
+                        チャレンジを取り消す
                       </a>
                     @endif
                   @else
