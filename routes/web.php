@@ -21,8 +21,6 @@ use App\Http\Controllers\ChallengesController;
 // トップページ
 Route::get('/', [TopController::class, 'index'])->name('top');
 
-Auth::routes();
-
 // ユーザー認証必要ページ
 Route::group(['middleware' => 'auth'], function() {
     // マイページ
@@ -63,4 +61,6 @@ Route::get('/sitemap', function () {
     return view('sitemap');
 })->name('sitemap');
 
-// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
