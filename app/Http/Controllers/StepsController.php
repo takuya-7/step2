@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\StepRequest;
 
 use App\Models\Category;
 use App\Models\Step;
@@ -80,36 +81,8 @@ class StepsController extends Controller
         return view('steps.new', compact('categories', 'child_steps_num'));
     }
     // STEP新規作成処理
-    public function create(Request $request)
+    public function create(StepRequest $request)
     {
-        // 入力値のバリデーション
-        $request->validate([
-            'title' => 'required|string|max:255',
-            'estimated_achievement_day' => 'nullable|integer',
-            'estimated_achievement_hour' => 'nullable|integer',
-            'description' => 'required|string',
-            'category_id' => 'required|integer',
-            'child-step1-title' => 'required|string',
-            'child-step2-title' => 'nullable|string',
-            'child-step3-title' => 'nullable|string',
-            'child-step4-title' => 'nullable|string',
-            'child-step5-title' => 'nullable|string',
-            'child-step6-title' => 'nullable|string',
-            'child-step7-title' => 'nullable|string',
-            'child-step8-title' => 'nullable|string',
-            'child-step9-title' => 'nullable|string',
-            'child-step10-title' => 'nullable|string',
-            'child-step1-description' => 'required|string',
-            'child-step2-description' => 'nullable|string',
-            'child-step3-description' => 'nullable|string',
-            'child-step4-description' => 'nullable|string',
-            'child-step5-description' => 'nullable|string',
-            'child-step6-description' => 'nullable|string',
-            'child-step7-description' => 'nullable|string',
-            'child-step8-description' => 'nullable|string',
-            'child-step9-description' => 'nullable|string',
-            'child-step10-description' => 'nullable|string',
-        ]);
         // --------------------------------
         // step登録処理
         $step = new Step;
@@ -168,40 +141,11 @@ class StepsController extends Controller
         return view('steps.edit', compact('categories', 'child_steps_num', 'step', 'child_steps'));
     }
     // STEP更新処理
-    public function update(Request $request, $id){
+    public function update(StepRequest $request, $id){
         // GETパラメータが数字かどうかをチェック
         if(!ctype_digit($id)){
             return redirect(route('steps.new'))->with('flash_message', __('Invalid operation was performed.'));
         }
-
-        // 入力値のバリデーション
-        $request->validate([
-            'title' => 'required|string|max:255',
-            'estimated_achievement_day' => 'nullable|integer',
-            'estimated_achievement_hour' => 'nullable|integer',
-            'description' => 'required|string',
-            'category_id' => 'required|integer',
-            'child-step1-title' => 'required|string',
-            'child-step2-title' => 'nullable|string',
-            'child-step3-title' => 'nullable|string',
-            'child-step4-title' => 'nullable|string',
-            'child-step5-title' => 'nullable|string',
-            'child-step6-title' => 'nullable|string',
-            'child-step7-title' => 'nullable|string',
-            'child-step8-title' => 'nullable|string',
-            'child-step9-title' => 'nullable|string',
-            'child-step10-title' => 'nullable|string',
-            'child-step1-description' => 'required|string',
-            'child-step2-description' => 'nullable|string',
-            'child-step3-description' => 'nullable|string',
-            'child-step4-description' => 'nullable|string',
-            'child-step5-description' => 'nullable|string',
-            'child-step6-description' => 'nullable|string',
-            'child-step7-description' => 'nullable|string',
-            'child-step8-description' => 'nullable|string',
-            'child-step9-description' => 'nullable|string',
-            'child-step10-description' => 'nullable|string',
-        ]);
         // --------------------------------
         // step更新処理
         $step = Step::find($id);
@@ -239,5 +183,19 @@ class StepsController extends Controller
         }
         // マイページへリダイレクト
         return redirect()->route('mypage')->with('flash_message', __('STEPが更新されました！'));        
+    }
+
+    // 削除処理アクション
+    public function destroy($id)
+    {
+        // GETパラメータが数字かどうかをチェック
+        if(!ctype_digit($id)){
+            return redirect('mypage')->with('flash_message', __('Invalid operation was performed.'));
+        }
+        
+        // STEP削除（STEP削除で子STEP、チャレンジも削除される）
+        Step::find($id)->delete();
+
+        return redirect('mypage')->with('flash_message', __('STEPが削除されました。'));
     }
 }

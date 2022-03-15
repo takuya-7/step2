@@ -25,7 +25,12 @@
                     <a href="/steps/{{ $registered_step->id }}" class="p-mypage-step-list__title">
                       {{ $registered_step['title'] }}
                     </a>
-                    <a href="/steps/{{ $registered_step->id }}/edit" class="p-mypage-step-list__button">更新する</a>
+                    <a href="/steps/{{ $registered_step->id }}/edit" class="p-mypage-step-list__button">更新</a>
+                    <form action="{{ route('steps.delete', $registered_step->id) }}" method="post" class="">
+                      @csrf
+                      <button class="p-mypage-step-list__button p-mypage-step-list__button--gray" onclick='return confirm("削除しますか？");'>削除</button>
+                    </form>
+
                   </li>
                 @endforeach
               </ul>
