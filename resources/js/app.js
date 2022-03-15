@@ -3,13 +3,11 @@ require('./bootstrap');
 import { createApp } from 'vue'
 import ExampleComponent from './components/ExampleComponent.vue'
 import List from './components/list/List.vue'
-import ChildStepForm from './components/child-steps-form/ChildStepForm.vue'
 
 createApp({
     components:{
         ExampleComponent,
         List,
-        ChildStepForm
     }
 }).mount('#app')
 
