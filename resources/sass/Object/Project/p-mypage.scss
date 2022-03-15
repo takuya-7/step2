@@ -20,19 +20,23 @@
   padding: 1rem 1.5rem;
 }
 .p-mypage-step-list__button{
-  width: 5rem;
-  height: 3rem;
+  // width: 4.7rem;
+  height: 2.8rem;
   font-size: .9rem;
   -webkit-appearance: none;
   box-sizing: border-box;
-  margin: auto .7rem auto auto;
+  margin: .5rem;
   border: 0;
-  background: $gray_color;
+  background: $blue_color;
   color: #fff;
-  padding: .8rem;
+  padding: .7rem;
   border-radius: 5px;
   box-shadow: .2rem .2rem .4rem #cad4e2;
   white-space: nowrap;
+  letter-spacing: .2rem;
+}
+.p-mypage-step-list__button--gray{
+  background: $gray_color;
 }
 .p-mypage-step-list__progress{
   color: $font-color_default;
