@@ -20,7 +20,7 @@ class CreateChildStepsTable extends Migration
             $table->integer('estimated_achievement_day')->nullable();
             $table->integer('estimated_achievement_hour')->nullable();
             $table->text('description');
-            $table->foreignId('step_id')->constrained();
+            $table->foreignId('step_id')->constrained()->cascadeOnDelete();
             $table->boolean('delete_flg')->default(0);
             $table->timestamps();
         });

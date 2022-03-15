@@ -15,8 +15,8 @@ class CreateChallengesTable extends Migration
     {
         Schema::create('challenges', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained();
-            $table->foreignId('step_id')->constrained();
+            $table->foreignId('user_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('step_id')->constrained()->cascadeOnDelete();
             $table->boolean('delete_flg')->default(0);
             $table->timestamps();
         });
