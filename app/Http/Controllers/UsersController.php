@@ -44,7 +44,7 @@ class UsersController extends Controller
     public function update(Request $request){
         // バリデーション
         $request->validate([
-            'email' => 'required|string|email|max:255',
+            'email' => 'required|string|email|max:255|unique:users',
             'profile' => 'nullable|string|max:255',
             'profile_img' => 'nullable|image|file',
         ]);
