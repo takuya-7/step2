@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Validation\Rule;
 
 class UsersController extends Controller
 {
@@ -42,9 +43,17 @@ class UsersController extends Controller
     }
     // ユーザー情報更新処理
     public function update(Request $request){
+        $user = Auth::user();
         // バリデーション
         $request->validate([
-            'email' => 'required|string|email|max:255|unique:users',
+            'email' => [
+                'required',
+                'string',
+                'email',
+                'max:255',
+                Rule::unique('users')->ignore($user),
+            ],
+            'name' => 'nullable|string|max:20',
             'profile' => 'nullable|string|max:255',
             'profile_img' => 'nullable|image|file',
         ]);
@@ -60,7 +69,7 @@ class UsersController extends Controller
         }
 
         // ユーザーのプロフィール画像名取得
-        $user_profile_img = Auth::user()->profile_img;
+        $user_profile_img = $user->profile_img;
 
         // 既にプロフィール画像が登録されていた場合
         if($user_profile_img){
@@ -76,9 +85,8 @@ class UsersController extends Controller
         }
 
         // DB更新
-        DB::table('users')->where('id', auth()->user()->id)->update(['email' => $request->email, 'profile' => $request->profile, 'profile_img' => $file_name]);
+        DB::table('users')->where('id', auth()->user()->id)->update(['email' => $request->email, 'name' => $request->name, 'profile' => $request->profile, 'profile_img' => $file_name]);
         // マイページへ遷移
         return redirect()->route('mypage')->with('flash_message', __('プロフィールが更新されました！'));
     }
-    
 }

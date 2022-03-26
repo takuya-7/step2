@@ -26,6 +26,17 @@
               </span>
             @enderror
           </fieldset>
+
+          <fieldset  class="c-form__field">
+            <label for="name">ニックネーム</label>
+            <input id="name" type="text" name="name" value="{{ old('name', isset($user->name) ? $user->name : '') }}" required>
+
+            @error('name')
+              <span class="c-form__invalid-feedback" role="alert">
+                <strong>{{ $message }}</strong>
+              </span>
+            @enderror
+          </fieldset>
           
           <fieldset  class="c-form__field">
             <label for="profile">自己紹介文</label>
