@@ -887,13 +887,13 @@ input[type=number] {
 .c-selectbox select::-ms-expand {
   display: none;
 }
-.c-selectbox .type01 {
+.c-selectbox.type01 {
   position: relative;
   border: 1px solid #bbbbbb;
   border-radius: 2px;
   background: #ffffff;
 }
-.c-selectbox .type01::before {
+.c-selectbox.type01::before {
   position: absolute;
   top: 1.4em;
   right: 0.9em;
@@ -906,7 +906,7 @@ input[type=number] {
   border-top: 6px solid #666666;
   pointer-events: none;
 }
-.c-selectbox .type01 select {
+.c-selectbox.type01 select {
   padding: 8px 38px 8px 8px;
   color: #666666;
 }
@@ -1124,6 +1124,30 @@ input[type=number] {
   color: #333;
   display: block;
   padding: 1rem 1.5rem;
+}
+
+.p-step-profile {
+  display: flex;
+}
+.p-step-profile__left {
+  flex-shrink: 0;
+  margin-right: 16px;
+}
+.p-step-profile__left__image {
+  border-radius: 50%;
+  height: 64px;
+}
+.p-step-profile__name {
+  font-size: 18px;
+  font-weight: bold;
+  line-height: 1.6;
+  word-break: break-all;
+}
+.p-step-profile__profile {
+  font-size: 14px;
+  line-height: 1.8;
+  margin-top: 8px;
+  word-break: break-all;
 }
 
 .u-vertical-middle {

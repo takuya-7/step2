@@ -87,3 +87,28 @@
 //   display: block;
 //   padding: 1rem 1.5rem;
 // }
+
+.p-step-profile{
+  display: flex;
+  &__left{
+    flex-shrink: 0;
+    margin-right: 16px;
+    &__image{
+      border-radius: 50%;
+      height: 64px;
+      // width: 64px;
+    }
+  }
+  &__name{
+    font-size: 18px;
+    font-weight: bold;
+    line-height: 1.6;
+    word-break: break-all;
+  }
+  &__profile{
+    font-size: 14px;
+    line-height: 1.8;
+    margin-top: 8px;
+    word-break: break-all;
+  }
+}
