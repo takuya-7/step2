@@ -37,4 +37,13 @@ class LoginController extends Controller
     {
         $this->middleware('guest')->except('logout');
     }
+
+    // ログイン後、元のページへ遷移させる
+    public function showLoginForm()
+    {
+        if (!session()->has('url.intended')) {
+            redirect()->setIntendedUrl(session()->previousUrl());
+        }
+        return view('auth.login');
+    }
 }
