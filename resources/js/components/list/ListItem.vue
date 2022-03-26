@@ -16,12 +16,10 @@
   import { ref } from "vue";
   export default {
     props: ['step', 'categories'],
-
     computed: {
       stepURL: function(){
         return '/steps/' + this.step.id
       }
     },
-
   }
 </script>

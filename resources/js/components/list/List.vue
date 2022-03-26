@@ -17,6 +17,5 @@
       ListItem,
     },
     props: ['steps', 'categories'],
-
   }
-</script>   
+</script>
