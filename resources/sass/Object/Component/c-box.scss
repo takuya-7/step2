@@ -6,17 +6,30 @@
   @include mq(){
     margin-bottom: 2rem;
   }
+  &__title{
+    text-align: center;
+    font-size: 1.2rem;
+  }
+  &__note{
+    text-align: center;
+    margin-bottom: 0;
+  }
+  &__caution{
+    margin-bottom: 0;
+    text-align: center;
+    color: $red_color;
+  }
 }
-.c-box__title{
-  text-align: center;
-  font-size: 1.2rem;
-}
-.c-box__note{
-  text-align: center;
-  margin-bottom: 0;
-}
-.c-box__caution{
-  margin-bottom: 0;
-  text-align: center;
-  color: $red_color;
-}
+// .c-box__title{
+//   text-align: center;
+//   font-size: 1.2rem;
+// }
+// .c-box__note{
+//   text-align: center;
+//   margin-bottom: 0;
+// }
+// .c-box__caution{
+//   margin-bottom: 0;
+//   text-align: center;
+//   color: $red_color;
+// }

@@ -1,29 +1,58 @@
-.p-step-content h1{
-  padding: 15px 0;
-  font-size: 2rem;
-  line-height: 1.6;
+.p-step-content{
+  h1{
+    padding: 15px 0;
+    font-size: 2rem;
+    line-height: 1.6;
+  }
+  h2{
+    margin: 2.5em 0 1em;
+    font-size: 1.4em;
+    line-height: 1.6;
+    background: #86BCD2;
+    padding: 0.5em;
+    color: white;
+    border-radius: 0.5em;
+  }
+  h3{
+    margin: 1.5em 0 0.7em;
+    padding: 10px 0 10px 10px;
+    border-color: #86BCD2;
+    border-left-width: 4px;
+    border-left-style: solid;
+    font-size: 1.3em;
+    line-height: 1.5;
+  }
+  p{
+    margin-bottom: 1.5rem;
+  }
 }
-.p-step-content h2{
-  margin: 2.5em 0 1em;
-  font-size: 1.4em;
-  line-height: 1.6;
-  background: #86BCD2;
-  padding: 0.5em;
-  color: white;
-  border-radius: 0.5em;
-}
-.p-step-content h3{
-  margin: 1.5em 0 0.7em;
-  padding: 10px 0 10px 10px;
-  border-color: #86BCD2;
-  border-left-width: 4px;
-  border-left-style: solid;
-  font-size: 1.3em;
-  line-height: 1.5;
-}
-.p-step-content p{
-  margin-bottom: 1.5rem;
-}
+
+// .p-step-content h1{
+//   padding: 15px 0;
+//   font-size: 2rem;
+//   line-height: 1.6;
+// }
+// .p-step-content h2{
+//   margin: 2.5em 0 1em;
+//   font-size: 1.4em;
+//   line-height: 1.6;
+//   background: #86BCD2;
+//   padding: 0.5em;
+//   color: white;
+//   border-radius: 0.5em;
+// }
+// .p-step-content h3{
+//   margin: 1.5em 0 0.7em;
+//   padding: 10px 0 10px 10px;
+//   border-color: #86BCD2;
+//   border-left-width: 4px;
+//   border-left-style: solid;
+//   font-size: 1.3em;
+//   line-height: 1.5;
+// }
+// .p-step-content p{
+//   margin-bottom: 1.5rem;
+// }
 .p-step-list{
   list-style: none;
   padding: 0;
@@ -34,13 +63,22 @@
   padding: 0;
   box-shadow: 0 1px 8px rgba(0, 0, 0, 0.1);
   border-radius: 0.3rem;
+  &__item{
+    border-bottom: 1px solid #e1e1e1;
+    a{
+      text-decoration: none;
+      color: #333;
+      display: block;
+      padding: 1rem 1.5rem;
+    }
+  }
 }
-.p-child-step-list__item{
-  border-bottom: 1px solid #e1e1e1;
-}
-.p-child-step-list__item a{
-  text-decoration: none;
-  color: #333;
-  display: block;
-  padding: 1rem 1.5rem;
-}
+// .p-child-step-list__item{
+//   border-bottom: 1px solid #e1e1e1;
+// }
+// .p-child-step-list__item a{
+//   text-decoration: none;
+//   color: #333;
+//   display: block;
+//   padding: 1rem 1.5rem;
+// }

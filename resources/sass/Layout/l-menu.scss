@@ -24,30 +24,53 @@
     top: 4rem;
     position: relative;
   }
-}
-.l-menu__link{
-  padding: 0 1rem;
-  display: block;
-  line-height: 4rem;
-  font-size: 1rem;
-  color: #fff;
-  text-decoration: none;
-  transition: all 0.5s;
-  text-align: center;
-  @include mq() {
-    color: $font-color_default;
+  &__link{
+    padding: 0 1rem;
+    display: block;
+    line-height: 4rem;
     font-size: 1rem;
-    padding: 0.8rem;
+    color: #fff;
+    text-decoration: none;
+    transition: all 0.5s;
+    text-align: center;
+    @include mq() {
+      color: $font-color_default;
+      font-size: 1rem;
+      padding: 0.8rem;
+    }
+  }
+  &__link:hover{
+    background-color: rgba(255, 255, 255, 0.3);
+    color: #fff;
+    @include mq() {
+      color: $font-color_default;
+      background: #eeeeee;
+    }
   }
 }
-.l-menu__link:hover{
-  background-color: rgba(255, 255, 255, 0.3);
-  color: #fff;
-  @include mq() {
-    color: $font-color_default;
-    background: #eeeeee;
-  }
-}
+// .l-menu__link{
+//   padding: 0 1rem;
+//   display: block;
+//   line-height: 4rem;
+//   font-size: 1rem;
+//   color: #fff;
+//   text-decoration: none;
+//   transition: all 0.5s;
+//   text-align: center;
+//   @include mq() {
+//     color: $font-color_default;
+//     font-size: 1rem;
+//     padding: 0.8rem;
+//   }
+// }
+// .l-menu__link:hover{
+//   background-color: rgba(255, 255, 255, 0.3);
+//   color: #fff;
+//   @include mq() {
+//     color: $font-color_default;
+//     background: #eeeeee;
+//   }
+// }
 // ハンバーガーメニュー
 .l-menu-trigger {
   display: none;

@@ -12,38 +12,73 @@
   display: inline-flex;
   justify-content: center;
   align-items: center;
+
+  &:hover{
+    color: #fff;
+  }
+  &--blue{
+    background: $blue_color;
+    color: #fff;
+    padding: .7rem;
+    border-radius: 5px;
+    box-shadow: .2rem .2rem .4rem #cad4e2;
+  }
+  &--green{
+    background: $cv_color;
+    color: #fff;
+    padding: .7rem;
+    border-radius: 5px;
+    box-shadow: .2rem .2rem .4rem #cad4e2;
+  }
+  &--gray{
+    background: $gray_color;
+    color: #fff;
+    padding: .7rem;
+    border-radius: 5px;
+    box-shadow: .2rem .2rem .4rem #cad4e2;
+  }
+  &--width100{
+    width: 100%;
+  }
+  &--radius100{
+    width: 100%;
+    line-height: 2.3rem;
+    font-size: 1rem;
+    border-radius: 2rem;
+    margin-bottom: 1rem;
+  }
 }
-.c-button:hover{
-  color: #fff;
-}
-.c-button--blue{
-  background: $blue_color;
-  color: #fff;
-  padding: .7rem;
-  border-radius: 5px;
-  box-shadow: .2rem .2rem .4rem #cad4e2;
-}
-.c-button--green{
-  background: $cv_color;
-  color: #fff;
-  padding: .7rem;
-  border-radius: 5px;
-  box-shadow: .2rem .2rem .4rem #cad4e2;
-}
-.c-button--gray{
-  background: $gray_color;
-  color: #fff;
-  padding: .7rem;
-  border-radius: 5px;
-  box-shadow: .2rem .2rem .4rem #cad4e2;
-}
-.c-button--width100{
-  width: 100%;
-}
-.c-button--radius100{
-  width: 100%;
-  line-height: 2.3rem;
-  font-size: 1rem;
-  border-radius: 2rem;
-  margin-bottom: 1rem;
-}
+// .c-button:hover{
+//   color: #fff;
+// }
+// .c-button--blue{
+//   background: $blue_color;
+//   color: #fff;
+//   padding: .7rem;
+//   border-radius: 5px;
+//   box-shadow: .2rem .2rem .4rem #cad4e2;
+// }
+// .c-button--green{
+//   background: $cv_color;
+//   color: #fff;
+//   padding: .7rem;
+//   border-radius: 5px;
+//   box-shadow: .2rem .2rem .4rem #cad4e2;
+// }
+// .c-button--gray{
+//   background: $gray_color;
+//   color: #fff;
+//   padding: .7rem;
+//   border-radius: 5px;
+//   box-shadow: .2rem .2rem .4rem #cad4e2;
+// }
+// .c-button--width100{
+//   width: 100%;
+// }
+// .c-button--radius100{
+//   width: 100%;
+//   line-height: 2.3rem;
+//   font-size: 1rem;
+//   border-radius: 2rem;
+//   margin-bottom: 1rem;
+// }
