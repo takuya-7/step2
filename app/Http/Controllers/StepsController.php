@@ -9,6 +9,7 @@ use App\Models\Category;
 use App\Models\Step;
 use App\Models\ChildStep;
 use App\Models\Challenge;
+use App\Models\User;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 
@@ -44,7 +45,10 @@ class StepsController extends Controller
             $challenge = null;
         }
 
-        return view('steps.show', compact('step', 'created_at', 'updated_at', 'category', 'child_steps', 'challenge'));
+        // 著者情報取得
+        $author = User::find($step->user_id);
+
+        return view('steps.show', compact('step', 'created_at', 'updated_at', 'category', 'child_steps', 'challenge', 'author'));
     }
     // 子STEP詳細画面表示
     public function showChild($id, $order){
