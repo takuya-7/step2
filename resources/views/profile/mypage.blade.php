@@ -15,7 +15,7 @@
           <a href="{{ route('steps.new') }}" class="c-button c-button--blue c-button--width100">STEPを投稿する</a>
         </div>
         
-        <section class="u-mb-4">
+        <section class="u-mb-5">
           <h2>投稿済みSTEP</h2>
           <div>
             @if(!empty($registered_steps[0]->id))
@@ -42,7 +42,7 @@
           </div>
         </section>
 
-        <section class="u-mb-4">
+        <section class="u-mb-5">
           <h2>チャレンジ中STEP</h2>
           <div>
             @if(!empty($challenge_steps[0]->id))
@@ -68,8 +68,8 @@
         </section>
       </div>
 
+      <h2>ユーザー情報</h2>
       <div class="c-menus-container u-mb-5">
-        <h2>ユーザー情報</h2>
         <ul class="u-bg-white">
           <li><a href="{{ route('profile.edit') }}">プロフィール編集</a></li>
           <li><a href="{{ route('password.update') }}">パスワード再設定</a></li>
