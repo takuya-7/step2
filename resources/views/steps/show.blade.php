@@ -9,7 +9,7 @@
         <div class="l-container">
           <div class="l-content">
             <div class="l-inner-container">
-              <div class="p-step-content">
+              <div id="app" class="p-step-content">
                 <h1>{{ $step->title }}</h2>
 
                 <div class="u-text-gray u-mb-4">
@@ -60,28 +60,7 @@
                 </div>
 
                 <!-- プロフィール -->
-                <h2>著者プロフィール</h2>
-                <div class="p-step-profile">
-                  <div class="p-step-profile__left">
-                    @if($author->profile_img)
-                      <!-- <div class="p-step-profile__left__image"> -->
-                        <img src="{{ asset('storage/uploads/'.$author->profile_img) }}" alt="" class="p-step-profile__left__image">
-                      <!-- </div> -->
-                    @endif
-                  </div>
-                  <div>
-                    <div class="p-step-profile__name">
-                      @if($author->name)
-                        {{ $author->name }}
-                      @else
-                        匿名
-                      @endif
-                    </div>
-                    <div class="p-step-profile__profile">
-                      {{ $author->profile }}
-                    </div>
-                  </div>
-                </div>
+                <profile :author="{{ $author }}"></profile>
               </div>
             </div>
           </div>

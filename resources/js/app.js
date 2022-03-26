@@ -3,11 +3,13 @@ require('./bootstrap');
 import { createApp } from 'vue'
 import ExampleComponent from './components/ExampleComponent.vue'
 import List from './components/list/List.vue'
+import Profile from './components/Profile.vue'
 
 createApp({
     components:{
         ExampleComponent,
         List,
+        Profile,
     }
 }).mount('#app')
 

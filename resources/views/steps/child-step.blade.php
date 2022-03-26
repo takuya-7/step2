@@ -10,7 +10,7 @@
           <div class="l-content">
             <div class="l-inner-container">
 
-              <div class="p-step-content">
+              <div id="app" class="p-step-content">
                 <h1>{{ $step->title }}</h2>
 
                 <div class="u-text-gray u-mb-4">
@@ -87,6 +87,9 @@
                     <a href="{{ route('login') }}" class="c-button c-button--blue c-button--width100">ログインしてチャレンジする</a>
                   @endif
                 </div>
+
+                <!-- プロフィール -->
+                <profile :author="{{ $author }}"></profile>
 
               </div>  
             </div>

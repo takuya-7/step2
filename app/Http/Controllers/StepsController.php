@@ -74,7 +74,10 @@ class StepsController extends Controller
             $challenge = null;
         }
 
-        return view('steps.child-step', compact('step', 'created_at', 'updated_at', 'category', 'child_step', 'child_steps', 'challenge'));
+        // 著者情報取得
+        $author = User::find($step->user_id);
+
+        return view('steps.child-step', compact('step', 'created_at', 'updated_at', 'category', 'child_step', 'child_steps', 'challenge', 'author'));
     }
     // STEP登録画面表示
     public function new(){
