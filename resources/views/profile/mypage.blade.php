@@ -7,8 +7,8 @@
 @section('content')
 <div class="l-content-wrapper">
   <div class="l-container">
-    <div class="">
-      <h1 class="c-page-title u-mb-5">マイページ</h1>
+    <div class="p-mypage-content">
+      <h1>マイページ</h1>
 
       <div>
         <div class="u-mb-5">
@@ -68,7 +68,7 @@
         </section>
       </div>
 
-      <div class="c-menus-container">
+      <div class="c-menus-container u-mb-5">
         <h2>ユーザー情報</h2>
         <ul class="u-bg-white">
           <li><a href="{{ route('profile.edit') }}">プロフィール編集</a></li>
@@ -85,6 +85,8 @@
           </li>
         </ul>
       </div>
+
+      <a href="{{ route('steps') }}" class="c-button c-button--gray c-button--radius100">STEP一覧へ</a>
 
     </div>
   </div>
