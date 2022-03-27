@@ -27,10 +27,13 @@ class StepsController extends Controller
     public function show($id){
         // GETパラメータが数字かどうかをチェック
         if(!ctype_digit($id)){
-            return redirect(route('steps.index'))->with('flash_message', __('Invalid operation was performed.'));
+            return redirect(route('steps'))->with('flash_message', __('不正な操作がおこなわれました'));
         }
         // step取得
         $step = Step::find($id);
+        if(empty($step)){
+            return redirect(route('steps'))->with('flash_message', __('不正な操作がおこなわれました'));
+        }
         $category = Category::find($step->category_id)->name;
         $created_at = date('Y/m/d', strtotime($step->created_at));
         $updated_at = date('Y/m/d', strtotime($step->updated_at));
@@ -53,20 +56,28 @@ class StepsController extends Controller
     // 子STEP詳細画面表示
     public function showChild($id, $order){
         // GETパラメータが数字かどうかをチェック
-        if(!ctype_digit($id) && !ctype_digit($order)){
-            return redirect(route('steps.index'))->with('flash_message', __('Invalid operation was performed.'));
+        if(!ctype_digit($id) || !ctype_digit($order)){
+            return redirect(route('steps'))->with('flash_message', __('不正な操作がおこなわれました'));
         }
         // step取得
         $step = Step::find($id);
+        if(empty($step)){
+            return redirect(route('steps'))->with('flash_message', __('不正な操作がおこなわれました'));
+        }
         $category = Category::find($step->category_id)->name;
         $created_at = date('Y/m/d', strtotime($step->created_at));
         $updated_at = date('Y/m/d', strtotime($step->updated_at));
 
         // child_step取得
         $child_steps = ChildStep::where('step_id', $id)->get();
+        if(empty($child_steps)){
+            return redirect(route('steps'))->with('flash_message', __('不正な操作がおこなわれました'));
+        }
         // 該当のchild_stepを取得
         $child_step = ChildStep::where('step_id', $id)->where('order', $order)->get();
-
+        if(empty($child_step)){
+            return redirect(route('steps'))->with('flash_message', __('不正な操作がおこなわれました'));
+        }
         // challenge取得
         if(!empty(auth()->user()->id)){
             $challenge = Challenge::where('step_id', $step->id)->where('user_id', auth()->user()->id)->first();
@@ -143,8 +154,14 @@ class StepsController extends Controller
         $child_steps_num = 10;
         // 対象のSTEPを取得
         $step = Auth::user()->steps()->find($id);
+        if(empty($step)){
+            return redirect()->route('mypage')->with('flash_message', __('不正な操作がおこなわれました'));
+        }
         // 子STEPを取得
         $child_steps = ChildStep::where('step_id', $step->id)->get();
+        if(empty($child_steps)){
+            return redirect()->route('mypage')->with('flash_message', __('不正な操作がおこなわれました'));
+        }
         return view('steps.edit', compact('categories', 'child_steps_num', 'step', 'child_steps'));
     }
     // STEP更新処理
@@ -189,7 +206,7 @@ class StepsController extends Controller
             );
         }
         // マイページへリダイレクト
-        return redirect()->route('mypage')->with('flash_message', __('STEPが更新されました！'));        
+        return redirect()->route('mypage')->with('flash_message', __('STEPが更新されました！'));
     }
 
     // 削除処理アクション
