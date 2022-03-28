@@ -47,6 +47,33 @@
     border-radius: 2rem;
     margin-bottom: 1rem;
   }
+  &--plus{
+    background: #cbcbcb;
+    color: #fff;
+    padding: .7rem;
+    border-radius: 5px;
+    box-shadow: .2rem .2rem .4rem #cad4e2;
+    width: 50%;
+    line-height: 2rem;
+    font-size: 1.3rem;
+    border-radius: 2rem;
+    margin: 1rem auto;
+    border: none;
+    cursor: pointer;
+  }
+  &--x{
+    background: #cbcbcb;
+    color: #fff;
+    padding: .5rem;
+    box-shadow: .2rem .2rem .4rem #cad4e2;
+    width: 2rem;
+    line-height: 1rem;
+    font-size: 1.3rem;
+    border-radius: 1rem;
+    border: none;
+    float: right;
+    cursor: pointer;
+  }
 }
 // .c-button:hover{
 //   color: #fff;

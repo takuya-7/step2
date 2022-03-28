@@ -28,7 +28,7 @@
     }
   }
   &__field{
-    margin-bottom: 2rem;
+    margin-bottom: 1rem;
     @include mq(){
       margin-bottom: 1.5rem;
     }
@@ -50,7 +50,7 @@
     }
     &__textarea{
       width: 100%;
-      margin-bottom: .5rem;
+      // margin-bottom: .5rem;
     }
     &__text-count{
       font-size: .8rem;
@@ -65,7 +65,7 @@
     color: $red_color;
   }
   &__child-item{
-    margin-bottom: 1.5rem;
+    margin-bottom: 1rem;
     &__left{
       width: 40%;
       display: inline-block;
@@ -82,6 +82,7 @@
     &-name{
       margin-left: 1.5rem;
       line-height: 2.5rem;
+      font-size: .9rem;
       @include mq(){
         margin-left: .5rem;
       }
