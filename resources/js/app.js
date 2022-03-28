@@ -4,12 +4,14 @@ import { createApp } from 'vue'
 import ExampleComponent from './components/ExampleComponent.vue'
 import List from './components/list/List.vue'
 import Profile from './components/Profile.vue'
+import ChildStepForms from './components/form/ChildStepForms.vue'
 
 createApp({
     components:{
         ExampleComponent,
         List,
         Profile,
+        ChildStepForms,
     }
 }).mount('#app')
 
