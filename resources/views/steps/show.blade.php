@@ -45,14 +45,16 @@
                   @if (Auth::check())
                     <!-- チャレンジしている場合 -->
                     @if($challenge)
-                      <a href="{{ route('unchallenge', $step) }}" class="c-button c-button--gray c-button--width100">
-                        チャレンジを取り消す
-                      </a>
+                      <form action="{{ route('unchallenge', $step) }}" method="post">
+                        @csrf
+                        <button class="c-button c-button--gray c-button--width100 js-unchallenge" onclick='return confirm("チャレンジを取り消しますか？");'>チャレンジを取り消す</button>
+                      </form>
                     @else
                     <!-- チャレンジボタンを表示 -->
-                      <a href="{{ route('challenge', $step) }}" class="c-button c-button--blue c-button--width100">
-                        チャレンジする
-                      </a>
+                      <form action="{{ route('challenge', $step) }}" method="post">
+                        @csrf
+                        <button class="c-button c-button--blue c-button--width100">チャレンジする</button>
+                      </form>
                     @endif
                   @else
                     <a href="{{ route('login') }}" class="c-button c-button--blue c-button--width100">ログインしてチャレンジする</a>

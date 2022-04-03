@@ -37,12 +37,13 @@
                     @if($challenge)
                       <!-- まだクリアしておらず、チャレンジ中の子ステップと表示する子ステップが同じだった場合 -->
                       @if($challenge['current_step'] === $child_step[0]['order'])
-                        <a href="{{ route('clear', $step) }}" class="c-button c-button--blue c-button--width100">
-                          クリア
-                        </a>
+                        <form action="{{ route('clear', $step) }}" method="post">
+                          @csrf
+                          <button class="c-button c-button--blue c-button--width100" onclick='return confirm("クリアしましたか？");'>クリア</button>
+                        </form>
                       <!-- 表示している子ステップがまだクリアしていない子ステップよりも先のものだった場合 -->
                       @elseif($challenge['current_step'] < $child_step[0]['order'])
-                        <a href="/steps/{{ $step->id }}/{{ $challenge['current_step'] }}" class="c-button c-button--blue c-button--width100" disable>
+                        <a href="/steps/{{ $step->id }}/{{ $challenge['current_step'] }}" class="c-button c-button--blue c-button--width100">
                           チャレンジ中のステップへ
                         </a>
                       <!-- クリア済みの場合 -->
@@ -74,14 +75,16 @@
                   @if (Auth::check())
                     <!-- チャレンジしていなければチャレンジボタンを表示 -->
                     @if(!$challenge)
-                      <a href="{{ route('challenge', $step) }}" class="c-button c-button--blue c-button--width100">
-                        チャレンジする
-                      </a>
+                      <form action="{{ route('challenge', $step) }}" method="post">
+                        @csrf
+                        <button class="c-button c-button--blue c-button--width100">チャレンジする</button>
+                      </form>
                     <!-- チャレンジしていればチャレンジ取り消しボタンを表示 -->
                     @else
-                      <a href="{{ route('unchallenge', $step) }}" class="c-button c-button--gray c-button--width100">
-                        チャレンジを取り消す
-                      </a>
+                      <form action="{{ route('unchallenge', $step) }}" method="post">
+                        @csrf
+                        <button class="c-button c-button--gray c-button--width100 js-unchallenge" onclick='return confirm("チャレンジを取り消しますか？");'>チャレンジを取り消す</button>
+                      </form>
                     @endif
                   @else
                     <a href="{{ route('login') }}" class="c-button c-button--blue c-button--width100">ログインしてチャレンジする</a>

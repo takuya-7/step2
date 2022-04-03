@@ -42,11 +42,11 @@ Route::group(['middleware' => 'auth'], function() {
     Route::post('/steps/{id}/delete', [StepsController::class, 'destroy'])->name('steps.delete');
 
     // STEPチャレンジ登録・解除
-    Route::get('/steps/challenge/{step}', [ChallengesController::class, 'challenge'])->name('challenge');
-    Route::get('/steps/unchallenge/{step}', [ChallengesController::class, 'unchallenge'])->name('unchallenge');
+    Route::post('/steps/challenge/{step}', [ChallengesController::class, 'challenge'])->name('challenge');
+    Route::post('/steps/unchallenge/{step}', [ChallengesController::class, 'unchallenge'])->name('unchallenge');
 
     // 子STEPクリア
-    Route::get('/steps/clear/{step}', [ChallengesController::class, 'clear'])->name('clear');
+    Route::post('/steps/clear/{step}', [ChallengesController::class, 'clear'])->name('clear');
 });
 
 // STEP一覧
