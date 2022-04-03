@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
@@ -78,17 +77,32 @@ class StepsController extends Controller
         if(empty($child_step)){
             return redirect(route('steps'))->with('flash_message', __('不正な操作がおこなわれました'));
         }
-        // challenge取得
-        if(!empty(auth()->user()->id)){
-            $challenge = Challenge::where('step_id', $step->id)->where('user_id', auth()->user()->id)->first();
-        }else{
-            $challenge = null;
-        }
 
         // 著者情報取得
         $author = User::find($step->user_id);
 
-        return view('steps.child-step', compact('step', 'created_at', 'updated_at', 'category', 'child_step', 'child_steps', 'challenge', 'author'));
+        // チャレンジ状況によるアクセス制御
+        // ログインチェック
+        if(!empty(auth()->user()->id)){
+            // challenge取得
+            $challenge = Challenge::where('step_id', $step->id)->where('user_id', auth()->user()->id)->first();
+            // チャレンジしている場合
+            if($challenge){
+                // チャレンジで到達していなければ、現在のステップへリダイレクト
+                if($challenge->current_step < $order){
+                    return redirect('/steps/'.$id.'/'.$challenge->current_step);
+                }else{
+                    // チャレンジで既に到達していればそのまま表示
+                    return view('steps.child-step', compact('step', 'created_at', 'updated_at', 'category', 'child_step', 'child_steps', 'challenge', 'author'));
+                }
+            }else{
+                // チャレンジしていなければ親ステップへリダイレクト
+                return redirect(route('steps.show', $id));
+            }
+        }else{
+            // ログインしていなければ親ステップへリダイレクト
+            return redirect(route('steps.show', $id));
+        }
     }
     // STEP登録画面表示
     public function new(){
@@ -106,8 +120,8 @@ class StepsController extends Controller
         $step = new Step;
         // データをセット
         $step->title = $request->title;
-        $step->estimated_achievement_day = isset($request->estimated_achievement_day) ? $request->estimated_achievement_day : 0;
-        $step->estimated_achievement_hour = isset($request->estimated_achievement_hour) ? $request->estimated_achievement_hour : 0;
+        // $step->estimated_achievement_day = isset($request->estimated_achievement_day) ? $request->estimated_achievement_day : 0;
+        // $step->estimated_achievement_hour = isset($request->estimated_achievement_hour) ? $request->estimated_achievement_hour : 0;
         $step->description = $request->description;
         $step->category_id = $request->category_id;
         // ログインユーザーの投稿STEPをDBに保存
@@ -117,14 +131,16 @@ class StepsController extends Controller
         // child_step登録処理
         // step_id取得
         $step_id = $step->id;
-        // 入力されたchiild_stepを配列に格納
+        // 入力されたchiild_stepを配列に格納        時間も登録！！！！！！！！
         $child_steps = [];
         for($i = 1; $i <= 10; $i++){
-            if(!empty($request->get('child-step'.$i.'-title')) && !empty($request->get('child-step'.$i.'-description'))){
+            if(!empty($request->get('child_step'.$i.'_title')) && !empty($request->get('child_step'.$i.'_description'))){
                 $child_steps[] = [
                     'order' => $i,
-                    'title' => $request->get('child-step'.$i.'-title'),
-                    'description' => $request->get('child-step'.$i.'-description'),
+                    'title' => $request->get('child_step'.$i.'_title'),
+                    'estimated_achievement_day' => $request->get('child_step'.$i.'_estimated_achievement_day'),
+                    'estimated_achievement_hour' => $request->get('child_step'.$i.'_estimated_achievement_hour'),
+                    'description' => $request->get('child_step'.$i.'_description'),
                     'step_id' => $step_id,
                 ];
             }
@@ -134,6 +150,8 @@ class StepsController extends Controller
             $child_step = new ChildStep;
             $child_step->order = $value['order'];
             $child_step->title = $value['title'];
+            $child_step->estimated_achievement_day = $value['estimated_achievement_day'];
+            $child_step->estimated_achievement_hour = $value['estimated_achievement_hour'];
             $child_step->description = $value['description'];
             // 保存
             $step->childSteps()->save($child_step);

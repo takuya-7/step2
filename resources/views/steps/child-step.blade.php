@@ -61,9 +61,23 @@
                   <ul class="p-child-step-list">
                     @foreach($child_steps as $child_step)
                       <li class="p-child-step-list__item">
-                        <a href="/steps/{{ $step->id }}/{{ $child_step['order'] }}">
-                          STEP{{ $child_step['order'] }}：{{ $child_step['title'] }}
-                        </a>
+                        <!-- チャレンジしている場合 -->
+                        @if($challenge)
+                          <!-- 子ステップ到達まではリンクを無効にする -->
+                          @if($challenge->current_step >= $child_step->order)
+                            <a href="/steps/{{ $step->id }}/{{ $child_step->order }}">
+                              STEP{{ $child_step->order }}：{{ $child_step->title }}
+                            </a>
+                          @else
+                            <a style="cursor: default">
+                              STEP{{ $child_step->order }}：{{ $child_step->title }}
+                            </a>
+                          @endif
+                        @else
+                          <a style="cursor: default">
+                            STEP{{ $child_step->order }}：{{ $child_step->title }}
+                          </a>
+                        @endif
                       </li>
                     @endforeach
                   </ul>

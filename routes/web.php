@@ -41,6 +41,9 @@ Route::group(['middleware' => 'auth'], function() {
     // STEP削除処理
     Route::post('/steps/{id}/delete', [StepsController::class, 'destroy'])->name('steps.delete');
 
+    // 子STEP詳細
+    Route::get('/steps/{id}/{order}', [StepsController::class, 'showChild'])->name('steps.showChild');
+
     // STEPチャレンジ登録・解除
     Route::post('/steps/challenge/{step}', [ChallengesController::class, 'challenge'])->name('challenge');
     Route::post('/steps/unchallenge/{step}', [ChallengesController::class, 'unchallenge'])->name('unchallenge');
@@ -53,8 +56,6 @@ Route::group(['middleware' => 'auth'], function() {
 Route::get('/steps', [StepsController::class, 'index'])->name('steps');
 // STEP詳細
 Route::get('/steps/{id}', [StepsController::class, 'show'])->name('steps.show');
-// 子STEP詳細
-Route::get('/steps/{id}/{order}', [StepsController::class, 'showChild'])->name('steps.showChild');
 
 // サイトマップ
 Route::get('/sitemap', function () {
