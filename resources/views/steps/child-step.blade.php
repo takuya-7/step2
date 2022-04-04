@@ -9,21 +9,9 @@
         <div class="l-container">
           <div class="l-content">
             <div class="l-inner-container">
-
               <div id="app" class="p-step-content">
-                <h1>{{ $step->title }}</h2>
 
-                <div class="u-text-gray u-mb-4">
-                  <time datetime="{{ $created_at }}">投稿：{{ $created_at }}　</time>
-                  <time datetime="{{ $updated_at }}">更新：{{ $updated_at }}</time>
-                </div>
-
-                <div class="u-mb-4">
-                  <div class="u-mb-2">カテゴリー：{{ $category }}</div>
-                </div>
-
-                <h2>概要</h2>
-                <p>{{ $step->description }}</p>
+                <parent-step :step="{{ $step }}" created_at="{{ $created_at }}" updated_at="{{ $updated_at }}" category="{{ $category }}" estimated_achievement_day="{{ $step->estimated_achievement_day }}" estimated_achievement_hour="{{ $step->estimated_achievement_hour }}"></parent-step>
 
                 <h2>STEP{{ $child_step[0]['order'] }}：{{ $child_step[0]['title'] }}</h2>
                 <div class="u-mb-3">
@@ -58,32 +46,7 @@
                   @endif
                 </div>
 
-                <h2>STEP</h2>
-                <div class="u-mb-5">
-                  <ul class="p-child-step-list">
-                    @foreach($child_steps as $child_step)
-                      <li class="p-child-step-list__item">
-                        <!-- チャレンジしている場合 -->
-                        @if($challenge)
-                          <!-- 子ステップ到達まではリンクを無効にする -->
-                          @if($challenge->current_step >= $child_step->order)
-                            <a href="/steps/{{ $step->id }}/{{ $child_step->order }}">
-                              STEP{{ $child_step->order }}：{{ $child_step->title }}
-                            </a>
-                          @else
-                            <a style="cursor: default">
-                              STEP{{ $child_step->order }}：{{ $child_step->title }}
-                            </a>
-                          @endif
-                        @else
-                          <a style="cursor: default">
-                            STEP{{ $child_step->order }}：{{ $child_step->title }}
-                          </a>
-                        @endif
-                      </li>
-                    @endforeach
-                  </ul>
-                </div>
+                <child-step-list :step="{{ $step }}" :child_steps="{{ $child_steps }}" :challenge="{{ $challenge }}"></child-step-list>
 
                 <!-- チャレンジボタン -->
                 <div>
