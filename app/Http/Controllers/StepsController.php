@@ -40,6 +40,21 @@ class StepsController extends Controller
         // child_step取得
         $child_steps = ChildStep::where('step_id', $id)->get();
 
+        // 所要時間算出
+        $estimated_achievement_hour = 0;
+        foreach ($child_steps as $key => $value) {
+            $estimated_achievement_hour += $value->estimated_achievement_hour;
+        }
+        $add_estimated_achievement_day = floor($estimated_achievement_hour / 24);
+        $estimated_achievement_hour = $estimated_achievement_hour % 24;
+        
+        // 所要日数算出
+        $estimated_achievement_day = 0;
+        foreach ($child_steps as $key => $value) {
+            $estimated_achievement_day += $value->estimated_achievement_day;
+        }
+        $estimated_achievement_day = $estimated_achievement_day + $add_estimated_achievement_day;
+
         // challenge取得
         if(!empty(auth()->user()->id)){
             $challenge = Challenge::where('step_id', $step->id)->where('user_id', auth()->user()->id)->first();
@@ -50,7 +65,7 @@ class StepsController extends Controller
         // 著者情報取得
         $author = User::find($step->user_id);
 
-        return view('steps.show', compact('step', 'created_at', 'updated_at', 'category', 'child_steps', 'challenge', 'author'));
+        return view('steps.show', compact('step', 'created_at', 'updated_at', 'category', 'child_steps', 'challenge', 'author', 'estimated_achievement_day', 'estimated_achievement_hour'));
     }
     // 子STEP詳細画面表示
     public function showChild($id, $order){

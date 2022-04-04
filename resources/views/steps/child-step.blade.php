@@ -20,7 +20,7 @@
 
                 <div class="u-mb-4">
                   <div class="u-mb-2">カテゴリー：{{ $category }}</div>
-                  <div>所要時間：{{ $step->estimated_achievement_day }}日 {{ $step->estimated_achievement_hour }}時間</div>
+                  <div>所要時間：{{ $child_step[0]->estimated_achievement_day }}日 {{ $child_step[0]->estimated_achievement_hour }}時間</div>
                 </div>
 
                 <h2>概要</h2>

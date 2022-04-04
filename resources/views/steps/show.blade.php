@@ -19,7 +19,7 @@
   
                 <div class="u-mb-4">
                   <div class="u-mb-2">カテゴリー：{{ $category }}</div>
-                  <div class="u-mb-3">所要時間：{{ $step->estimated_achievement_day }}日 {{ $step->estimated_achievement_hour }}時間</div>
+                  <div class="u-mb-3">所要時間：{{ $estimated_achievement_day }}日 {{ $estimated_achievement_hour }}時間</div>
                   <div><a href="https://twitter.com/intent/tweet?url={{ url()->current() }}&text={{ $step->title }}" class="c-button c-button--blue" target="_blank" rel="noopener noreferrer">Twitterでシェア</a></div>
                 </div>
   
