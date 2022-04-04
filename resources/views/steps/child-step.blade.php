@@ -20,13 +20,15 @@
 
                 <div class="u-mb-4">
                   <div class="u-mb-2">カテゴリー：{{ $category }}</div>
-                  <div>所要時間：{{ $child_step[0]->estimated_achievement_day }}日 {{ $child_step[0]->estimated_achievement_hour }}時間</div>
                 </div>
 
                 <h2>概要</h2>
                 <p>{{ $step->description }}</p>
 
                 <h2>STEP{{ $child_step[0]['order'] }}：{{ $child_step[0]['title'] }}</h2>
+                <div class="u-mb-3">
+                  所要時間：{{ $child_step[0]->estimated_achievement_day }}日 {{ $child_step[0]->estimated_achievement_hour }}時間
+                </div>
                 <p>{{ $child_step[0]['description'] }}</p>
 
                 <!-- クリアボタン -->
