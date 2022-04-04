@@ -19,6 +19,8 @@ class StepsController extends Controller
         $categories = Category::all();
         $steps = Step::all();
 
+        
+
         return view('steps.index', ['steps' => $steps], ['categories' => $categories]);
         
     }
@@ -45,15 +47,15 @@ class StepsController extends Controller
         foreach ($child_steps as $key => $value) {
             $estimated_achievement_hour += $value->estimated_achievement_hour;
         }
-        $add_estimated_achievement_day = floor($estimated_achievement_hour / 24);
-        $estimated_achievement_hour = $estimated_achievement_hour % 24;
+        // $add_estimated_achievement_day = floor($estimated_achievement_hour / 24);
+        // $estimated_achievement_hour = $estimated_achievement_hour % 24;
         
         // 所要日数算出
         $estimated_achievement_day = 0;
         foreach ($child_steps as $key => $value) {
             $estimated_achievement_day += $value->estimated_achievement_day;
         }
-        $estimated_achievement_day = $estimated_achievement_day + $add_estimated_achievement_day;
+        // $estimated_achievement_day = $estimated_achievement_day + $add_estimated_achievement_day;
 
         // challenge取得
         if(!empty(auth()->user()->id)){
@@ -130,24 +132,16 @@ class StepsController extends Controller
     // STEP新規作成処理
     public function create(StepRequest $request)
     {
-        // --------------------------------
-        // step登録処理
+        // -------------------------------------------
+        // 登録するデータ準備
         $step = new Step;
-        // データをセット
-        $step->title = $request->title;
-        // $step->estimated_achievement_day = isset($request->estimated_achievement_day) ? $request->estimated_achievement_day : 0;
-        // $step->estimated_achievement_hour = isset($request->estimated_achievement_hour) ? $request->estimated_achievement_hour : 0;
-        $step->description = $request->description;
-        $step->category_id = $request->category_id;
-        // ログインユーザーの投稿STEPをDBに保存
-        Auth::user()->steps()->save($step);
-        
-        // --------------------------------
-        // child_step登録処理
         // step_id取得
         $step_id = $step->id;
-        // 入力されたchiild_stepを配列に格納        時間も登録！！！！！！！！
+        // 入力されたchiild_stepを配列に格納
         $child_steps = [];
+        // 全体の所要日数・所要時間算出用変数
+        $estimated_achievement_day = 0;
+        $estimated_achievement_hour = 0;
         for($i = 1; $i <= 10; $i++){
             if(!empty($request->get('child_step'.$i.'_title')) && !empty($request->get('child_step'.$i.'_description'))){
                 $child_steps[] = [
@@ -158,8 +152,25 @@ class StepsController extends Controller
                     'description' => $request->get('child_step'.$i.'_description'),
                     'step_id' => $step_id,
                 ];
+                // 所要日数算出
+                $estimated_achievement_day += $request->get('child_step'.$i.'_estimated_achievement_day');
+                // 所要時間算出
+                $estimated_achievement_hour += $request->get('child_step'.$i.'_estimated_achievement_hour');
             }
         }
+
+        // -------------------------------------------
+        // step登録
+        $step->title = $request->title;
+        $step->estimated_achievement_day = $estimated_achievement_day;
+        $step->estimated_achievement_hour = $estimated_achievement_hour;
+        $step->description = $request->description;
+        $step->category_id = $request->category_id;
+        // ログインユーザーの投稿STEPをDBに保存
+        Auth::user()->steps()->save($step);
+        
+        // -------------------------------------------
+        // child_step登録
         // 入力されたchild_stepsを展開、データをセットしてDBへ保存する
         foreach ($child_steps as $key => $value) {
             $child_step = new ChildStep;
@@ -171,6 +182,7 @@ class StepsController extends Controller
             // 保存
             $step->childSteps()->save($child_step);
         }
+        
         // マイページへリダイレクト
         return redirect()->route('mypage')->with('flash_message', __('STEPが投稿されました！'));
     }
