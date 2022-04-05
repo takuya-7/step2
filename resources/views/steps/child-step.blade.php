@@ -12,32 +12,7 @@
 
                 <child-step :child_step="{{ $child_step }}"></child-step>
 
-                <!-- クリアボタン -->
-                <div>
-                  <!-- ログインチェック -->
-                  @if (Auth::check())
-                    <!-- ユーザーがチャレンジしている場合 -->
-                    @if($challenge)
-                      <!-- まだクリアしておらず、チャレンジ中の子ステップと表示する子ステップが同じだった場合 -->
-                      @if($challenge['current_step'] === $child_step[0]['order'])
-                        <form action="{{ route('clear', $step) }}" method="post">
-                          @csrf
-                          <button class="c-button c-button--blue c-button--width100" onclick='return confirm("クリアしましたか？");'>クリア</button>
-                        </form>
-                      <!-- 表示している子ステップがまだクリアしていない子ステップよりも先のものだった場合 -->
-                      @elseif($challenge['current_step'] < $child_step[0]['order'])
-                        <a href="/steps/{{ $step->id }}/{{ $challenge['current_step'] }}" class="c-button c-button--blue c-button--width100">
-                          チャレンジ中のステップへ
-                        </a>
-                      <!-- クリア済みの場合 -->
-                      @else
-                        <button class="c-button c-button--gray c-button--width100" disable>
-                          クリア済み
-                        </button>
-                      @endif
-                    @endif
-                  @endif
-                </div>
+                <clear-button :auth_check="{{ Auth::check() }}" :challenge="{{ $challenge }}" :step="{{ $step }}" :child_step="{{ $child_step }}" :csrf="{{ json_encode(csrf_token()) }}"></clear-button>
 
                 <child-step-list :step="{{ $step }}" :child_steps="{{ $child_steps }}" :challenge="{{ $challenge }}"></child-step-list>
 
