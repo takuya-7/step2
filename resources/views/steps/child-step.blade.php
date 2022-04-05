@@ -1,7 +1,4 @@
-<!-- レイアウト読み込み -->
 @extends('layouts.layout')
-
-<!-- title設定 -->
 @section('title', '小STEP詳細')
 
 @section('content')
@@ -44,29 +41,8 @@
 
                 <child-step-list :step="{{ $step }}" :child_steps="{{ $child_steps }}" :challenge="{{ $challenge }}"></child-step-list>
 
-                <!-- チャレンジボタン -->
-                <div>
-                  <!-- ログインチェック -->
-                  @if (Auth::check())
-                    <!-- チャレンジしていなければチャレンジボタンを表示 -->
-                    @if(!$challenge)
-                      <form action="{{ route('challenge', $step) }}" method="post">
-                        @csrf
-                        <button class="c-button c-button--blue c-button--width100">チャレンジする</button>
-                      </form>
-                    <!-- チャレンジしていればチャレンジ取り消しボタンを表示 -->
-                    @else
-                      <form action="{{ route('unchallenge', $step) }}" method="post">
-                        @csrf
-                        <button class="c-button c-button--gray c-button--width100 js-unchallenge" onclick='return confirm("チャレンジを取り消しますか？");'>チャレンジを取り消す</button>
-                      </form>
-                    @endif
-                  @else
-                    <a href="{{ route('login') }}" class="c-button c-button--blue c-button--width100">ログインしてチャレンジする</a>
-                  @endif
-                </div>
+                <challenge-button :auth_check="{{ Auth::check() }}" :challenge="{{ $challenge }}" :step="{{ $step }}" :csrf="{{ json_encode(csrf_token()) }}"></challenge-button>
 
-                <!-- プロフィール -->
                 <profile :author="{{ $author }}"></profile>
 
               </div>  
