@@ -13,11 +13,7 @@
 
                 <parent-step :step="{{ $step }}" created_at="{{ $created_at }}" updated_at="{{ $updated_at }}" category="{{ $category }}" estimated_achievement_day="{{ $step->estimated_achievement_day }}" estimated_achievement_hour="{{ $step->estimated_achievement_hour }}"></parent-step>
 
-                <h2>STEP{{ $child_step[0]['order'] }}：{{ $child_step[0]['title'] }}</h2>
-                <div class="u-mb-3">
-                  所要時間：{{ $child_step[0]->estimated_achievement_day }}日 {{ $child_step[0]->estimated_achievement_hour }}時間
-                </div>
-                <p>{{ $child_step[0]['description'] }}</p>
+                <child-step :child_step="{{ $child_step }}"></child-step>
 
                 <!-- クリアボタン -->
                 <div>
