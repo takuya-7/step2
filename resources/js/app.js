@@ -3,15 +3,30 @@ require('./bootstrap');
 import { createApp } from 'vue'
 import ExampleComponent from './components/ExampleComponent.vue'
 import List from './components/list/List.vue'
+import ParentStep from './components/step/ParentStep.vue'
+import ChildStep from './components/step/ChildStep.vue'
+import ChildStepList from './components/step/ChildStepList.vue'
 import Profile from './components/Profile.vue'
+import StepForm from './components/form/StepForm.vue'
 import ChildStepForms from './components/form/ChildStepForms.vue'
+import ChallengeButton from './components/button/ChallengeButton.vue'
+import ClearButton from './components/button/ClearButton.vue'
+
+import Form from 'form-backend-validation';
+window.Form = Form;
 
 createApp({
     components:{
         ExampleComponent,
         List,
+        ParentStep,
+        ChildStep,
+        ChildStepList,
         Profile,
+        StepForm,
         ChildStepForms,
+        ChallengeButton,
+        ClearButton,
     }
 }).mount('#app')
 
@@ -51,7 +66,6 @@ createApp({
 
  // ハンバーガーメニュー
 document.querySelector('.js-toggle-sp-menu').addEventListener('click', function(){
-    console.log('ハンガーがーメニュークリックされた！');
     this.classList.toggle('js-active');
     document.querySelector('.js-toggle-sp-menu-target').classList.toggle('js-active');
 });
