@@ -122,9 +122,7 @@ class StepsController extends Controller
     public function new(){
         // カテゴリー取得
         $categories = Category::all();
-        // 子ステップのフォーム表示数を設定
-        $child_steps_num = 10;
-        return view('steps.new', compact('categories', 'child_steps_num'));
+        return view('steps.new', compact('categories'));
     }
     // STEP新規作成処理
     public function create(StepRequest $request)
