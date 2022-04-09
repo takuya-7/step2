@@ -23257,6 +23257,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 
 var _hoisted_1 = {
+  key: 0,
+  "class": "u-mb-4 u-text-center"
+};
+var _hoisted_2 = {
+  key: 1,
   "class": "u-text-center u-mb-4"
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
@@ -23283,13 +23288,13 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     , ["index", "childStepFormCount", "oldInputs", "errors", "onDeleteChildStepForm"]);
   }), 128
   /* KEYED_FRAGMENT */
-  )), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+  )), _ctx.childStepFormCount > 99 ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, " 登録できるSTEPは100個以下です。 ")) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
     type: "button",
     onClick: _cache[1] || (_cache[1] = function () {
       return $options.addChildStepForm && $options.addChildStepForm.apply($options, arguments);
     }),
     "class": "c-button--plus"
-  }, "＋")])]);
+  }, "＋")]))]);
 }
 
 /***/ }),

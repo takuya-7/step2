@@ -142,6 +142,11 @@ class StepsController extends Controller
         // 送信された子ステップフォームの個数
         $child_step_form_count = $request->get('child_step_form_count');
 
+        // 子ステップフォームの個数が100より大きければ登録ページへリダイレクト
+        if($child_step_form_count > 100){
+            return redirect()->route('/steps/new')->with('flash_message', __('登録できるステップは100個以下です'));
+        }
+
         // 子STEPの入力情報（配列）を取得
         $child_step_title = $request->get('child_step_title');
         $child_step_estimated_achievement_day = $request->get('child_step_estimated_achievement_day');

@@ -3,7 +3,10 @@
     <input type="hidden" name="child_step_form_count" v-model="childStepFormCount">
     <ChildStepForm v-for="(childStepForm, index) in childStepForms" :key="childStepForm"  :index='index' :childStepFormCount='childStepFormCount' :oldInputs='oldInputs' :errors='errors' @deleteChildStepForm="deleteChildStepForm"></ChildStepForm>
 
-    <div class="u-text-center u-mb-4">
+    <div v-if="childStepFormCount > 99" class="u-mb-4 u-text-center">
+      登録できるSTEPは100個以下です。
+    </div>
+    <div v-else class="u-text-center u-mb-4">
       <button type="button" @click="addChildStepForm" class="c-button--plus">＋</button>
     </div>
   </div>
