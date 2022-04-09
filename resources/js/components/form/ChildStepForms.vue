@@ -1,5 +1,6 @@
 <template>
   <div>
+    <input type="hidden" name="child_step_form_count" v-model="childStepFormCount">
     <ChildStepForm v-for="(childStepForm, index) in childStepForms" :key="childStepForm"  :index='index' :childStepFormCount='childStepFormCount' :oldInputs='oldInputs' :errors='errors' @deleteChildStepForm="deleteChildStepForm"></ChildStepForm>
 
     <div class="u-text-center u-mb-4">
