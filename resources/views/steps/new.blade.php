@@ -8,14 +8,18 @@
     <div class="l-content-wrapper">
         <div class="l-container">
           <div class="l-content">
-            <div class="l-inner-container">
+            <div class="l-inner-container" id="app">
 
               <h2>
                 STEP投稿
               </h2>
 
-              <form method="POST" action="{{ route('steps.create') }}" class="c-form">
-                @csrf
+              <step-form :csrf="{{json_encode(csrf_token())}}" :categories="{{ $categories }}" :old-inputs="{{ json_encode(Session::getOldInput()) }}" :errors= "{{ $errors }}"></step-form>
+
+
+
+              <!-- <form method="POST" action="{{ route('steps.create') }}" class="c-form"> -->
+                <!-- @csrf
                 <fieldset class="c-form__field">
                   <label for="title" class="c-form__field__name">タイトル<span class="c-form__field--required">（必須）</span></label>
                   @error('title')
@@ -55,9 +59,9 @@
                       @endforeach
                     </select>
                   </div>
-                </fieldset>
+                </fieldset> -->
 
-                <div class="c-form__field">
+                <!-- <div class="c-form__field">
                   <div class="c-form__field__name">
                     全体の所要時間<span class="c-form__field--required">（入力推奨）</span>
                   </div>
@@ -90,9 +94,9 @@
                       <span class="u-fs-08">時間</span>
                     </div>
                   </div>
-                </div>
+                </div> -->
 
-                <div class="c-box">
+                <!-- <div class="c-box">
                   <div>　＜ ステップ入力について ＞</div>
                   <ul>
                     <li>「＋」ボタンでステップを増やすことができます</li>
@@ -100,12 +104,41 @@
                     <li>「＋」ボタンで入力フォームを表示しているものは入力必須となります</li>
                     <li>ステップ右横の「×」でステップを削除できます</li>
                   </ul>
-                </div>
+                </div> -->
 
-                <div id="app">
+                <!-- <div>
                   <h2>Vue！</h2>
-                  <child-step-forms></child-steps-forms>
-                </div>
+
+                  <div>バリデーションエラー</div>
+                  <div>{{ var_dump(json_decode(json_encode($errors), true)) }}</div><br>
+                  <div>{{ var_dump($errors) }}</div><br>
+                  <div>{{ var_dump(get_object_vars($errors)) }}</div><br>
+                  <div>{{ var_dump((array)$errors) }}</div><br>
+                  <div>{{ var_dump($errors->get('title')) }}</div><br>
+                  <div>{{ var_dump(json_encode((array)$errors, JSON_UNESCAPED_UNICODE)) }}</div>
+
+                  <div>
+                    array(1) { 
+                      ["*bags"]=> array(1) { 
+                        ["default"]=> object(Illuminate\Support\MessageBag)#351 (2) { 
+                          ["messages":protected]=> array(4) { 
+                            ["title"]=> array(1) { [0]=> string(28) "タイトル は必須です" } 
+                            ["description"]=> array(1) { [0]=> string(22) "概要 は必須です" } ["child_step1_title"]=> array(1) { [0]=> string(33) "child step1 title は必須です" } ["child_step1_description"]=> array(1) { [0]=> string(39) "child step1 description は必須です" } 
+                          } ["format":protected]=> string(8) ":message" 
+                        } 
+                      } 
+                    }
+                  </div>
+
+                  <div>
+                    {{ var_dump(Session::getOldInput()) }}
+                  </div>
+                  <div>
+                    {{ var_dump(json_encode(Session::getOldInput())) }}
+                  </div>
+
+                  <child-step-forms :old-inputs="{{ json_encode(Session::getOldInput()) }}"></child-steps-forms>
+                </div> -->
 
                 <!-- @for ($i = 1; $i <= $child_steps_num; $i++)
                   <label class="c-form__field__name">ステップ{{ $i }}
@@ -164,9 +197,9 @@
                   </div>
                 @endfor -->
 
-                <button type="submit" class="c-button c-button--blue c-button--width100">投稿する</button>
+                <!-- <button type="submit" class="c-button c-button--blue c-button--width100">投稿する</button> -->
 
-              </form>
+              <!-- </form> -->
 
             </div>
           </div>
