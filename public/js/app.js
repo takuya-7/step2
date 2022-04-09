@@ -22565,30 +22565,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
-
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: ['childStepForm', 'index', 'childStepFormCount', 'oldInputs', 'errors', 'childStepForms'],
   data: function data() {
     return {
       i: this.index + 1,
-      // 入力保持全てできているもの
+      // 入力保持
       child_step_title: this.oldInputs['child_step_title'] ? this.oldInputs['child_step_title'][this.index] : null,
       child_step_description: this.oldInputs['child_step_description'] ? this.oldInputs['child_step_description'][this.index] : null,
       child_step_estimated_achievement_day: this.oldInputs['child_step_estimated_achievement_day'] ? this.oldInputs['child_step_estimated_achievement_day'][this.index] : null,
       child_step_estimated_achievement_hour: this.oldInputs['child_step_estimated_achievement_hour'] ? this.oldInputs['child_step_estimated_achievement_hour'][this.index] : null,
-      // title: 'child_step' + (this.index + 1) + '_title',
-      // description: 'child_step' + (this.index + 1) + '_description',
-      // estimatedAchievementDay: 'child_step' + (this.index + 1) + '_estimated_achievement_day',
-      // estimatedAchievementHour: 'child_step' + (this.index + 1) + '_estimated_achievement_hour',
-      // old_title: this.oldInputs['child_step' + (this.index + 1) + '_title'],
-      // old_description: this.oldInputs['child_step' + (this.index + 1) + '_description'],
-      // old_estimated_achievement_day: this.oldInputs['child_step' + (this.index + 1) + '_estimated_achievement_day'],
-      // old_estimated_achievement_hour: this.oldInputs['child_step' + (this.index + 1) + '_estimated_achievement_hour'],
-      // child_step1_title: this.oldInputs.child_step1_title,
-      // child_step1_description: this.oldInputs.child_step1_description,
-      // child_step1_estimated_achievement_day: this.oldInputs.child_step1_estimated_achievement_day,
-      // child_step1_estimated_achievement_hour: this.oldInputs.child_step1_estimated_achievement_hour,
       error: {
         title: this.errors['child_step_title.' + this.index],
         description: this.errors['child_step_description.' + this.index],
@@ -22597,37 +22583,8 @@ __webpack_require__.r(__webpack_exports__);
       }
     };
   },
-  computed: {// title: function(){
-    //   return 'child_step' + this.i + '_title'
-    // },
-    // description: function(){
-    //   return 'child_step' + this.i + '_description'
-    // },
-    // estimatedAchievementDay: function(){
-    //   return 'child_step' + this.i + '_estimated_achievement_day'
-    // },
-    // estimatedAchievementHour: function(){
-    //   return 'child_step' + this.i + '_estimated_achievement_hour'
-    // },
-  },
-  created: function created() {
-    console.log('created: child');
-    console.log('this.errors');
-    console.log(this.errors);
-    console.log(this.errors['child_step1_title']);
-    console.log(this.error.title);
-    console.log('this.childStepForm');
-    console.log(this.childStepForm);
-    console.log('this.index');
-    console.log(this.index);
-    console.log('this.oldInputs.child_step_title[0]');
-
-    if (this.oldInputs.child_step_title) {
-      console.log(this.oldInputs.child_step_title[0]);
-    } // this.oldInputs.child_step_title = this.oldInputs.child_step_title.split(',')
-
-  },
   methods: {
+    // 子STEPフォーム削除
     deleteChildStepForm: function deleteChildStepForm() {
       this.$emit('deleteChildStepForm', this.index);
     }
@@ -22647,22 +22604,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
-/* harmony import */ var _ChildStepForm_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ChildStepForm.vue */ "./resources/js/components/form/ChildStepForm.vue");
-
+/* harmony import */ var _ChildStepForm_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ChildStepForm.vue */ "./resources/js/components/form/ChildStepForm.vue");
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   components: {
-    ChildStepForm: _ChildStepForm_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
+    ChildStepForm: _ChildStepForm_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
   },
   props: ['oldInputs', 'errors'],
   data: function data() {
     return {
-      childStepForms: [{// title: '',
-        // description: '',
-        // estimatedAchievementDay: 0,
-        // estimatedAchievementHour: 0,
-      }],
+      childStepForms: [],
       childStepForm: {
         title: '',
         description: '',
@@ -22673,38 +22624,22 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   created: function created() {
-    console.log('created: child forms');
-    console.log('this.oldInputs');
-    console.log(this.oldInputs);
-    console.log('this.childStepForms');
-    console.log(this.childStepForms); // 子ステップで入力保持があればそのフォームを作成
-
+    // 子ステップで入力保持があればそのフォームを作成
     if (this.oldInputs['child_step_title']) {
-      if (Object.keys(this.oldInputs['child_step_title']).length) {
-        this.childStepForms.length = 0;
-
-        for (var i = 0; i < Object.keys(this.oldInputs['child_step_title']).length; i++) {
-          this.childStepForms.push({
-            title: this.oldInputs['child_step_title'] ? this.oldInputs['child_step_title'][i] : null,
-            description: this.oldInputs['child_step_description'] ? this.oldInputs['child_step_description'][i] : null,
-            estimatedAchievementDay: this.oldInputs['child_step_estimated_achievement_day'] ? this.oldInputs['child_step_estimated_achievement_day'][i] : null,
-            estimatedAchievementHour: this.oldInputs['child_step_estimated_achievement_hour'] ? this.oldInputs['child_step_estimated_achievement_hour'][i] : null
-          });
-          ++this.childStepFormCount;
-        }
-      } else {
-        this.childStepForms.length = 0;
-        this.childStepForms.push(this.childStepForm);
+      for (var i = 0; i < Object.keys(this.oldInputs['child_step_title']).length; i++) {
+        this.childStepForms.push({
+          title: this.oldInputs['child_step_title'] ? this.oldInputs['child_step_title'][i] : null,
+          description: this.oldInputs['child_step_description'] ? this.oldInputs['child_step_description'][i] : null,
+          estimatedAchievementDay: this.oldInputs['child_step_estimated_achievement_day'] ? this.oldInputs['child_step_estimated_achievement_day'][i] : null,
+          estimatedAchievementHour: this.oldInputs['child_step_estimated_achievement_hour'] ? this.oldInputs['child_step_estimated_achievement_hour'][i] : null
+        });
         ++this.childStepFormCount;
       }
     } else {
+      this.childStepForms.push(this.childStepForm);
       ++this.childStepFormCount;
     }
-
-    console.log('this.childStepFormCount');
-    console.log(this.childStepFormCount);
   },
-  mounted: function mounted() {},
   methods: {
     // 子ステップフォーム追加
     addChildStepForm: function addChildStepForm() {
@@ -22735,13 +22670,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
-/* harmony import */ var _ChildStepForms_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ChildStepForms.vue */ "./resources/js/components/form/ChildStepForms.vue");
-
+/* harmony import */ var _ChildStepForms_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ChildStepForms.vue */ "./resources/js/components/form/ChildStepForms.vue");
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   components: {
-    ChildStepForms: _ChildStepForms_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
+    ChildStepForms: _ChildStepForms_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
   },
   props: ['csrf', 'categories', 'oldInputs', 'errors'],
   data: function data() {
@@ -22753,37 +22686,11 @@ __webpack_require__.r(__webpack_exports__);
         title: this.errors.title,
         description: this.errors.description,
         category_id: this.errors.category_id
-      } // form: new Form({
-      //   title: '',
-      //   description: '',
-      //   category_id: '',
-      //   child_step1_title: '',
-      //   child_step1_description: '',
-      //   child_step1_estimated_achievement_day: '',
-      //   child_step1_estimated_achievement_hour: '',
-      //   child_step2_title: '',
-      //   child_step2_description: '',
-      //   child_step2_estimated_achievement_day: '',
-      //   child_step2_estimated_achievement_hour: '',
-      // }),
-
+      }
     };
   },
-  computed: {// selectedCategory() {
-    //   return (this.oldInputs['category_id'] === this.category.id)
-    //     ? { selected: true }
-    //     : { selected: false }
-    // }
-  },
-  created: function created() {
-    console.log('created: StepForm');
-    console.log('this.errors: ');
-    console.log(this.errors);
-  },
-  methods: {// onSubmit() {
-    //   this.form['post']('/steps')
-    // },
-  }
+  created: function created() {},
+  methods: {}
 });
 
 /***/ }),
@@ -23241,7 +23148,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       return $options.deleteChildStepForm && $options.deleteChildStepForm.apply($options, arguments);
     }),
     "class": "c-button--x"
-  }, "×")) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("fieldset", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <div class=\"c-form__invalid-feedback\"\n          v-if=\"form.errors.has(title)\"\n          v-text=\"form.errors.first(title)\"></div> "), ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)(_ctx.error.title, function (value) {
+  }, "×")) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("fieldset", _hoisted_3, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)(_ctx.error.title, function (value) {
     return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", {
       "class": "c-form__invalid-feedback",
       key: value
@@ -23250,7 +23157,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     );
   }), 128
   /* KEYED_FRAGMENT */
-  )), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <input :name=\"title\" type=\"text\" v-model=\"form[title]\" :class=\"{ 'is-invalid': form.errors.has(title) }\" placeholder=\"学ぶ手順の見出し\"> "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <input :name=\"this.title\" type=\"text\" v-model=\"old_title\" :class=\"{ 'is-invalid': (error.title) }\" placeholder=\"学ぶ手順の見出し\"> "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+  )), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
     name: "child_step_title[]",
     type: "text",
     value: _ctx.child_step_title,
@@ -23260,7 +23167,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     placeholder: "学ぶ手順の見出し"
   }, null, 10
   /* CLASS, PROPS */
-  , _hoisted_4)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("fieldset", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <div class=\"c-form__invalid-feedback\"\n        v-if=\"form.errors.has(description)\"\n        v-text=\"form.errors.first(description)\"></div> "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <textarea :name=\"description\" v-model=\"form[description]\" class=\"c-form__field__textarea\" :class=\"{ 'is-invalid': form.errors.has(description) }\" style=\"min-height: 8rem;\" placeholder=\"具体的にやること、コツやポイントについて\"></textarea> "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <textarea :name=\"description\" v-model=\"old_description\" class=\"c-form__field__textarea\" :class=\"{ 'is-invalid': false }\" style=\"min-height: 8rem;\" placeholder=\"具体的にやること、コツやポイントについて\"></textarea> "), ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)(_ctx.error.description, function (value) {
+  , _hoisted_4)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("fieldset", _hoisted_5, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)(_ctx.error.description, function (value) {
     return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", {
       "class": "c-form__invalid-feedback",
       key: value
@@ -23281,7 +23188,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     placeholder: "具体的にやること、コツやポイントについて"
   }, null, 10
   /* CLASS, PROPS */
-  , _hoisted_6)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_7, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_8, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <div class=\"c-form__invalid-feedback\"\n          v-if=\"form.errors.has(estimatedAchievementDay)\"\n          v-text=\"form.errors.first(estimatedAchievementDay)\"></div> "), ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)(_ctx.error.estimated_achievement_day, function (value) {
+  , _hoisted_6)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_7, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_8, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)(_ctx.error.estimated_achievement_day, function (value) {
     return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", {
       "class": "c-form__invalid-feedback",
       key: value
@@ -23295,7 +23202,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     "class": "c-form__child-item__left"
   }, _hoisted_11, 8
   /* PROPS */
-  , _hoisted_9), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_12, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <input :id=\"estimatedAchievementDay\" :name=\"estimatedAchievementDay\" :class=\"{ 'is-invalid': form.errors.has(estimatedAchievementDay) }\" v-model=\"form[estimatedAchievementDay]\" type=\"text\" placeholder=\"例：3\" class=\"\"> "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+  , _hoisted_9), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_12, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
     id: _ctx.estimatedAchievementDay,
     name: "child_step_estimated_achievement_day[]",
     "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)([{
@@ -23306,7 +23213,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     placeholder: "例：3"
   }, null, 10
   /* CLASS, PROPS */
-  , _hoisted_13), _hoisted_14])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_15, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <div class=\"c-form__invalid-feedback\"\n          v-if=\"form.errors.has(estimatedAchievementHour)\"\n          v-text=\"form.errors.first(estimatedAchievementHour)\"></div> "), ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)(_ctx.error.estimated_achievement_hour, function (value) {
+  , _hoisted_13), _hoisted_14])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_15, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)(_ctx.error.estimated_achievement_hour, function (value) {
     return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", {
       "class": "c-form__invalid-feedback",
       key: value
@@ -23320,7 +23227,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     "class": "c-form__child-item__left"
   }, _hoisted_18, 8
   /* PROPS */
-  , _hoisted_16), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_19, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <input :id=\"estimatedAchievementHour\" :name=\"estimatedAchievementHour\" :class=\"{ 'is-invalid': form.errors.has(estimatedAchievementHour) }\" v-model=\"form[estimatedAchievementHour]\" type=\"text\" placeholder=\"例：6\" class=\"\"> "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+  , _hoisted_16), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_19, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
     id: _ctx.estimatedAchievementHour,
     name: "child_step_estimated_achievement_hour[]",
     "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)([{
@@ -23355,18 +23262,17 @@ var _hoisted_1 = {
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_ChildStepForm = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("ChildStepForm");
 
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <ChildStepForm v-for=\"(childStepForm, index) in childStepForms\" :key=\"childStepForm\" :childStepForm='childStepForm' :index='index' :childStepFormCount='childStepFormCount' :oldInputs='oldInputs' :form='form' @deleteChildStepForm=\"deleteChildStepForm\"></ChildStepForm> "), ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)(_ctx.childStepForms, function (childStepForm, index) {
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", null, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)(_ctx.childStepForms, function (childStepForm, index) {
     return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_ChildStepForm, {
       key: childStepForm,
       index: index,
       childStepFormCount: _ctx.childStepFormCount,
       oldInputs: $props.oldInputs,
       errors: $props.errors,
-      onDeleteChildStepForm: $options.deleteChildStepForm,
-      childStepForm: childStepForm
+      onDeleteChildStepForm: $options.deleteChildStepForm
     }, null, 8
     /* PROPS */
-    , ["index", "childStepFormCount", "oldInputs", "errors", "onDeleteChildStepForm", "childStepForm"]);
+    , ["index", "childStepFormCount", "oldInputs", "errors", "onDeleteChildStepForm"]);
   }), 128
   /* KEYED_FRAGMENT */
   )), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
@@ -23456,13 +23362,13 @@ var _hoisted_11 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElement
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_ChildStepForms = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("ChildStepForms");
 
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <form @submit.prevent=\"onSubmit\" class=\"c-form\"> "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("form", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("form", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
     type: "hidden",
     name: "_token",
     value: $props.csrf
   }, null, 8
   /* PROPS */
-  , _hoisted_2), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("fieldset", _hoisted_3, [_hoisted_4, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <div class=\"c-form__invalid-feedback\"\n        v-if=\"form.errors.has('title')\"\n        v-text=\"form.errors.first('title')\"></div> "), ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)(_ctx.error.title, function (value) {
+  , _hoisted_2), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("fieldset", _hoisted_3, [_hoisted_4, ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)(_ctx.error.title, function (value) {
     return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", {
       "class": "c-form__invalid-feedback",
       key: value
@@ -23471,7 +23377,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     );
   }), 128
   /* KEYED_FRAGMENT */
-  )), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <strong class=\"error\" v-for=\"value in error.title\" :key=\"value\">{{ value }}</strong> "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <input id=\"title\" type=\"text\" name=\"title\" v-model=\"form.title\" :class=\"{ 'is-invalid': form.errors.has('title') }\" placeholder=\"例：最短でWebエンジニアになる手順を公開！\"> "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+  )), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
     id: "title",
     type: "text",
     name: "title",
@@ -23484,7 +23390,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     placeholder: "例：最短でWebエンジニアになる手順を公開！"
   }, null, 2
   /* CLASS */
-  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, _ctx.title]])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("fieldset", _hoisted_5, [_hoisted_6, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <div class=\"c-form__invalid-feedback\"\n        v-if=\"form.errors.has('description')\"\n        v-text=\"form.errors.first('description')\"></div> "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <textarea name=\"description\" id=\"description\" v-model=\"form.description\" class=\"c-form__field__textarea\" :class=\"{ 'is-invalid': form.errors.has('description') }\" style=\"min-height: 8rem;\" placeholder=\"学びのステップに関するサマリー。対象者や難易度、得られるものについて。\"></textarea> "), ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)(_ctx.error.description, function (value) {
+  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, _ctx.title]])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("fieldset", _hoisted_5, [_hoisted_6, ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)(_ctx.error.description, function (value) {
     return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", {
       "class": "c-form__invalid-feedback",
       key: value
@@ -23508,7 +23414,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     placeholder: "学びのステップに関するサマリー。対象者や難易度、得られるものについて。"
   }, null, 2
   /* CLASS */
-  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, _ctx.description]])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("fieldset", _hoisted_7, [_hoisted_8, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <div class=\"c-form__invalid-feedback\"\n        v-if=\"form.errors.has('category_id')\"\n        v-text=\"form.errors.first('category_id')\"></div> "), ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)(_ctx.error.category_id, function (value) {
+  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, _ctx.description]])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("fieldset", _hoisted_7, [_hoisted_8, ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)(_ctx.error.category_id, function (value) {
     return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", {
       "class": "c-form__invalid-feedback",
       key: value
@@ -23517,7 +23423,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     );
   }), 128
   /* KEYED_FRAGMENT */
-  )), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <div class=\"c-selectbox type01\" :class=\"{ 'is-invalid': form.errors.has('category_id') }\"> "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  )), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
     "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["c-selectbox type01", {
       'is-invalid': _ctx.error.category_id
     }])
@@ -23531,10 +23437,8 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("option", {
       key: category.id,
       value: category.id
-    }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <option v-for=\"category in categories\" :key=\"category.id\" :value=\"category.id\" v-bind=\"selectedCategory\"> "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)((0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(category.name), 1
-    /* TEXT */
-    )], 8
-    /* PROPS */
+    }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(category.name), 9
+    /* TEXT, PROPS */
     , _hoisted_9);
   }), 128
   /* KEYED_FRAGMENT */
@@ -23547,9 +23451,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     errors: $props.errors
   }, null, 8
   /* PROPS */
-  , ["oldInputs", "errors"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <ChildStepForms :oldInputs='oldInputs' :form='this.form'></ChildStepForms> "), _hoisted_11])], 2112
-  /* STABLE_FRAGMENT, DEV_ROOT_FRAGMENT */
-  );
+  , ["oldInputs", "errors"]), _hoisted_11]);
 }
 
 /***/ }),
@@ -23822,8 +23724,6 @@ __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
 
 
- // import Form from 'form-backend-validation';
-// window.Form = Form;
 
 (0,vue__WEBPACK_IMPORTED_MODULE_0__.createApp)({
   components: {

@@ -12,9 +12,6 @@ import ChildStepForms from './components/form/ChildStepForms.vue'
 import ChallengeButton from './components/button/ChallengeButton.vue'
 import ClearButton from './components/button/ClearButton.vue'
 
-import Form from 'form-backend-validation';
-window.Form = Form;
-
 createApp({
     components:{
         ExampleComponent,
