@@ -45,8 +45,8 @@ Route::group(['middleware' => 'auth'], function() {
     Route::get('/steps/{id}/{order}', [StepsController::class, 'showChild'])->name('steps.showChild');
 
     // STEPチャレンジ登録・解除
-    Route::post('/steps/challenge/{step}', [ChallengesController::class, 'challenge'])->name('challenge');
-    Route::post('/steps/unchallenge/{step}', [ChallengesController::class, 'unchallenge'])->name('unchallenge');
+    Route::post('/steps/challenge/{step_id}', [ChallengesController::class, 'challenge'])->name('challenge');
+    Route::post('/steps/unchallenge/{step_id}', [ChallengesController::class, 'unchallenge'])->name('unchallenge');
 
     // 子STEPクリア
     Route::post('/steps/clear/{step}', [ChallengesController::class, 'clear'])->name('clear');
