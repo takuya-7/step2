@@ -19,10 +19,7 @@ class StepsController extends Controller
         $categories = Category::all();
         $steps = Step::all();
 
-        
-
         return view('steps.index', ['steps' => $steps], ['categories' => $categories]);
-        
     }
     // STEP詳細画面表示
     public function show($id){
@@ -137,26 +134,34 @@ class StepsController extends Controller
         $step = new Step;
         // step_id取得
         $step_id = $step->id;
-        // 入力されたchiild_stepを配列に格納
+        // 入力されたchiild_step用配列
         $child_steps = [];
         // 全体の所要日数・所要時間算出用変数
         $estimated_achievement_day = 0;
         $estimated_achievement_hour = 0;
-        for($i = 1; $i <= 10; $i++){
-            if(!empty($request->get('child_step'.$i.'_title')) && !empty($request->get('child_step'.$i.'_description'))){
-                $child_steps[] = [
-                    'order' => $i,
-                    'title' => $request->get('child_step'.$i.'_title'),
-                    'estimated_achievement_day' => $request->get('child_step'.$i.'_estimated_achievement_day'),
-                    'estimated_achievement_hour' => $request->get('child_step'.$i.'_estimated_achievement_hour'),
-                    'description' => $request->get('child_step'.$i.'_description'),
-                    'step_id' => $step_id,
-                ];
-                // 所要日数算出
-                $estimated_achievement_day += $request->get('child_step'.$i.'_estimated_achievement_day');
-                // 所要時間算出
-                $estimated_achievement_hour += $request->get('child_step'.$i.'_estimated_achievement_hour');
-            }
+        // 送信された子ステップフォームの個数
+        $child_step_form_count = $request->get('child_step_form_count');
+
+        // 子STEPの入力情報（配列）を取得
+        $child_step_title = $request->get('child_step_title');
+        $child_step_estimated_achievement_day = $request->get('child_step_estimated_achievement_day');
+        $child_step_estimated_achievement_hour = $request->get('child_step_estimated_achievement_hour');
+        $child_step_description = $request->get('child_step_description');
+
+        for($i = 0; $i < $child_step_form_count; $i++){
+            // 入力された子STEPを配列に格納
+            $child_steps[] = [
+                'order' => $i + 1,
+                'title' => $child_step_title[$i],
+                'estimated_achievement_day' => $child_step_estimated_achievement_day[$i],
+                'estimated_achievement_hour' => $child_step_estimated_achievement_hour[$i],
+                'description' => $child_step_description[$i],
+                'step_id' => $step_id,
+            ];
+            // 所要日数算出
+            $estimated_achievement_day += $request->get('child_step'.$i.'_estimated_achievement_day');
+            // 所要時間算出
+            $estimated_achievement_hour += $request->get('child_step'.$i.'_estimated_achievement_hour');
         }
 
         // -------------------------------------------

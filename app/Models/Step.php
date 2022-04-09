@@ -11,8 +11,8 @@ class Step extends Model
 
     protected $fillable = [
         'title',
-        'estimated_achievement_day',
-        'estimated_achievement_hour',
+        // 'estimated_achievement_day',
+        // 'estimated_achievement_hour',
         'description',
         'category_id',
         'delete_flg',
