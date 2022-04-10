@@ -23132,7 +23132,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     key: 0
   }, [$props.challenge ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("form", {
     key: 0,
-    action: "/steps/unchallenge/".concat($props.step.id),
+    action: "/steps/unchallenge/".concat(this.step.id),
     method: "post"
   }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
     type: "hidden",
@@ -23144,7 +23144,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   /* PROPS */
   , _hoisted_1)) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("form", {
     key: 1,
-    action: "/steps/challenge/".concat($props.step.id),
+    action: "/steps/challenge/".concat(this.step.id),
     method: "post"
   }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
     type: "hidden",
