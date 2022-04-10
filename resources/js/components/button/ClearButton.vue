@@ -11,7 +11,7 @@
         チャレンジ中のステップへ
       </a>
       <!-- クリア済みの場合 -->
-      <button v-else class="c-button c-button--gray c-button--width100" disable>
+      <button v-else class="c-button c-button--gray c-button--width100" style="cursor: default;">
         クリア済み
       </button>
     </template>

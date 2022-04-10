@@ -23188,7 +23188,9 @@ var _hoisted_4 = ["href"];
 
 var _hoisted_5 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
   "class": "c-button c-button--gray c-button--width100",
-  disable: ""
+  style: {
+    "cursor": "default"
+  }
 }, " クリア済み ", -1
 /* HOISTED */
 );
