@@ -7,6 +7,7 @@ import ParentStep from './components/step/ParentStep.vue'
 import ChildStep from './components/step/ChildStep.vue'
 import ChildStepList from './components/step/ChildStepList.vue'
 import Profile from './components/Profile.vue'
+import LoginForm from './components/form/LoginForm.vue'
 import StepForm from './components/form/StepForm.vue'
 import ChildStepForms from './components/form/ChildStepForms.vue'
 import ChallengeButton from './components/button/ChallengeButton.vue'
@@ -20,6 +21,7 @@ createApp({
         ChildStep,
         ChildStepList,
         Profile,
+        LoginForm,
         StepForm,
         ChildStepForms,
         ChallengeButton,
