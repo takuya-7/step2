@@ -2,7 +2,7 @@
   <section class="u-mb-5">
     <h2>チャレンジ中STEP</h2>
     <div>
-      <ul v-if="challengeSteps[0].id" class="p-mypage-step-list">
+      <ul v-if="this.challengeSteps.length" class="p-mypage-step-list">
         <li
           v-for="(challengeStep) in this.challengeSteps"
           :key="challengeStep"

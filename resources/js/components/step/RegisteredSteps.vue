@@ -2,9 +2,9 @@
   <section class="u-mb-5">
     <h2>投稿済みSTEP</h2>
     <div>
-      <ul v-if="registeredSteps" class="p-mypage-step-list">
+      <ul v-if="this.registeredSteps.length" class="p-mypage-step-list">
         <li
-          v-for="(registeredStep) in registeredSteps"
+          v-for="(registeredStep) in this.registeredSteps"
           :key="registeredStep"
           class="p-mypage-step-list__item"
         >
@@ -28,5 +28,9 @@
 <script>
   export default {
     props: ['registeredSteps', 'csrf'],
+    created(){
+      console.log('this.registeredSteps')
+      console.log(this.registeredSteps)
+    }
   }
 </script>
