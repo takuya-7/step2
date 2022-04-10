@@ -38,12 +38,11 @@
         <div class="c-form__invalid-feedback" v-for="value in error.estimated_achievement_day" :key="value">
           {{ value }}
         </div>
-        <label :for="estimatedAchievementDay" class="c-form__child-item__left">
+        <label class="c-form__child-item__left">
           <span class="c-form__child-item-name">所要日数</span>
         </label>
         <div class="c-form__child-item__right">
           <input
-            :id="estimatedAchievementDay"
             name="child_step_estimated_achievement_day[]"
             :class="{ 'is-invalid': (error.estimated_achievement_day) }"
             v-model="child_step_estimated_achievement_day"
@@ -58,12 +57,11 @@
         <div class="c-form__invalid-feedback" v-for="value in error.estimated_achievement_hour" :key="value">
           {{ value }}
         </div>
-        <label :for="estimatedAchievementHour" class="c-form__child-item__left">
+        <label class="c-form__child-item__left">
           <span class="c-form__child-item-name">所要時間</span>
         </label>
         <div class="c-form__child-item__right">
           <input
-            :id="estimatedAchievementHour"
             name="child_step_estimated_achievement_hour[]"
             :class="{ 'is-invalid': (error.estimated_achievement_hour) }"
             v-model="child_step_estimated_achievement_hour"
@@ -97,13 +95,6 @@
     data: function() {
       return {
         i: this.$props.index + 1,
-
-        // 入力保持
-        // child_step_title: (this.oldInputs['child_step_title']) ? this.oldInputs['child_step_title'][this.index]: null,
-        // child_step_description: (this.oldInputs['child_step_description']) ? this.oldInputs['child_step_description'][this.index]: null,
-        // child_step_estimated_achievement_day: (this.oldInputs['child_step_estimated_achievement_day']) ? this.oldInputs['child_step_estimated_achievement_day'][this.index]: null,
-        // child_step_estimated_achievement_hour: (this.oldInputs['child_step_estimated_achievement_hour']) ? this.oldInputs['child_step_estimated_achievement_hour'][this.index]: null,
-
         error:{
           title: this.errors['child_step_title.' + this.index],
           description: this.errors['child_step_description.' + this.index],
@@ -145,26 +136,6 @@
           this.$emit('update:childStepEstimatedAchievementHour', value)
         }
       },
-    },
-    created() {
-      console.log('this.childStepForm')
-      console.log(this.$props.childStepForm)
-      console.log('this.child_step_title')
-      console.log(this.child_step_title)
-      // 編集時（childStepsがある場合）
-      // if(this.childSteps){
-      //   // this.child_step_title = (this.childSteps[this.index]) ? this.childSteps[this.index].title : null
-      //   this.child_step_description = (this.childSteps[this.index]) ? this.childSteps[this.index].description : null 
-      //   this.child_step_estimated_achievement_day = (this.childSteps[this.index]) ? this.childSteps[this.index].estimated_achievement_day : null 
-      //   this.child_step_estimated_achievement_hour = (this.childSteps[this.index]) ? this.childSteps[this.index].estimated_achievement_hour : null
-      // }
-      // 入力保持がある時
-      // if(this.oldInputs['child_step_title']){
-      //   // this.child_step_title = (this.oldInputs['child_step_title']) ? this.oldInputs['child_step_title'][this.index]: null
-      //   this.child_step_description = (this.oldInputs['child_step_description']) ? this.oldInputs['child_step_description'][this.index]: null
-      //   this.child_step_estimated_achievement_day = (this.oldInputs['child_step_estimated_achievement_day']) ? this.oldInputs['child_step_estimated_achievement_day'][this.index]: null
-      //   this.child_step_estimated_achievement_hour = (this.oldInputs['child_step_estimated_achievement_hour']) ? this.oldInputs['child_step_estimated_achievement_hour'][this.index]: null
-      // }
     },
     methods: {
       // 子STEPフォーム削除

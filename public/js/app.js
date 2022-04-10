@@ -22572,11 +22572,6 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       i: this.$props.index + 1,
-      // 入力保持
-      // child_step_title: (this.oldInputs['child_step_title']) ? this.oldInputs['child_step_title'][this.index]: null,
-      // child_step_description: (this.oldInputs['child_step_description']) ? this.oldInputs['child_step_description'][this.index]: null,
-      // child_step_estimated_achievement_day: (this.oldInputs['child_step_estimated_achievement_day']) ? this.oldInputs['child_step_estimated_achievement_day'][this.index]: null,
-      // child_step_estimated_achievement_hour: (this.oldInputs['child_step_estimated_achievement_hour']) ? this.oldInputs['child_step_estimated_achievement_hour'][this.index]: null,
       error: {
         title: this.errors['child_step_title.' + this.index],
         description: this.errors['child_step_description.' + this.index],
@@ -22619,25 +22614,6 @@ __webpack_require__.r(__webpack_exports__);
       }
     }
   },
-  created: function created() {
-    console.log('this.childStepForm');
-    console.log(this.$props.childStepForm);
-    console.log('this.child_step_title');
-    console.log(this.child_step_title); // 編集時（childStepsがある場合）
-    // if(this.childSteps){
-    //   // this.child_step_title = (this.childSteps[this.index]) ? this.childSteps[this.index].title : null
-    //   this.child_step_description = (this.childSteps[this.index]) ? this.childSteps[this.index].description : null 
-    //   this.child_step_estimated_achievement_day = (this.childSteps[this.index]) ? this.childSteps[this.index].estimated_achievement_day : null 
-    //   this.child_step_estimated_achievement_hour = (this.childSteps[this.index]) ? this.childSteps[this.index].estimated_achievement_hour : null
-    // }
-    // 入力保持がある時
-    // if(this.oldInputs['child_step_title']){
-    //   // this.child_step_title = (this.oldInputs['child_step_title']) ? this.oldInputs['child_step_title'][this.index]: null
-    //   this.child_step_description = (this.oldInputs['child_step_description']) ? this.oldInputs['child_step_description'][this.index]: null
-    //   this.child_step_estimated_achievement_day = (this.oldInputs['child_step_estimated_achievement_day']) ? this.oldInputs['child_step_estimated_achievement_day'][this.index]: null
-    //   this.child_step_estimated_achievement_hour = (this.oldInputs['child_step_estimated_achievement_hour']) ? this.oldInputs['child_step_estimated_achievement_hour'][this.index]: null
-    // }
-  },
   methods: {
     // 子STEPフォーム削除
     deleteChildStepForm: function deleteChildStepForm() {
@@ -22671,8 +22647,8 @@ __webpack_require__.r(__webpack_exports__);
     return {
       childStepForms: [],
       childStepForm: {
-        title: '',
-        description: '',
+        title: null,
+        description: null,
         estimatedAchievementDay: null,
         estimatedAchievementHour: null
       },
@@ -22711,15 +22687,12 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     // 子ステップフォーム追加
     addChildStepForm: function addChildStepForm() {
-      console.log('add');
-      console.log(this.childStepForms);
       this.childStepForms.push({
         title: null,
         description: null,
         estimatedAchievementDay: null,
         estimatedAchievementHour: null
       });
-      console.log(this.childStepForms);
       ++this.childStepFormCount;
     },
     // 子ステップフォーム削除
@@ -22763,9 +22736,7 @@ __webpack_require__.r(__webpack_exports__);
         category_id: this.errors.category_id
       }
     };
-  },
-  created: function created() {},
-  methods: {}
+  }
 });
 
 /***/ }),
@@ -23168,44 +23139,42 @@ var _hoisted_5 = {
 var _hoisted_6 = {
   "class": "c-form__child-item"
 };
-var _hoisted_7 = ["for"];
 
-var _hoisted_8 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
+var _hoisted_7 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
+  "class": "c-form__child-item__left"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
   "class": "c-form__child-item-name"
-}, "所要日数", -1
+}, "所要日数")], -1
 /* HOISTED */
 );
 
-var _hoisted_9 = [_hoisted_8];
-var _hoisted_10 = {
+var _hoisted_8 = {
   "class": "c-form__child-item__right"
 };
-var _hoisted_11 = ["id"];
 
-var _hoisted_12 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
+var _hoisted_9 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
   "class": "u-fs-08"
 }, " 日", -1
 /* HOISTED */
 );
 
-var _hoisted_13 = {
+var _hoisted_10 = {
   "class": "c-form__child-item"
 };
-var _hoisted_14 = ["for"];
 
-var _hoisted_15 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
+var _hoisted_11 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
+  "class": "c-form__child-item__left"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
   "class": "c-form__child-item-name"
-}, "所要時間", -1
+}, "所要時間")], -1
 /* HOISTED */
 );
 
-var _hoisted_16 = [_hoisted_15];
-var _hoisted_17 = {
+var _hoisted_12 = {
   "class": "c-form__child-item__right"
 };
-var _hoisted_18 = ["id"];
 
-var _hoisted_19 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
+var _hoisted_13 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
   "class": "u-fs-08"
 }, " 時間", -1
 /* HOISTED */
@@ -23274,13 +23243,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     );
   }), 128
   /* KEYED_FRAGMENT */
-  )), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
-    "for": _ctx.estimatedAchievementDay,
-    "class": "c-form__child-item__left"
-  }, _hoisted_9, 8
-  /* PROPS */
-  , _hoisted_7), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_10, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
-    id: _ctx.estimatedAchievementDay,
+  )), _hoisted_7, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_8, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
     name: "child_step_estimated_achievement_day[]",
     "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)({
       'is-invalid': _ctx.error.estimated_achievement_day
@@ -23290,9 +23253,9 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     }),
     type: "text",
     placeholder: "例：3"
-  }, null, 10
-  /* CLASS, PROPS */
-  , _hoisted_11), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $options.child_step_estimated_achievement_day]]), _hoisted_12])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_13, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)(_ctx.error.estimated_achievement_hour, function (value) {
+  }, null, 2
+  /* CLASS */
+  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $options.child_step_estimated_achievement_day]]), _hoisted_9])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_10, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)(_ctx.error.estimated_achievement_hour, function (value) {
     return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", {
       "class": "c-form__invalid-feedback",
       key: value
@@ -23301,13 +23264,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     );
   }), 128
   /* KEYED_FRAGMENT */
-  )), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
-    "for": _ctx.estimatedAchievementHour,
-    "class": "c-form__child-item__left"
-  }, _hoisted_16, 8
-  /* PROPS */
-  , _hoisted_14), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_17, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
-    id: _ctx.estimatedAchievementHour,
+  )), _hoisted_11, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_12, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
     name: "child_step_estimated_achievement_hour[]",
     "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)({
       'is-invalid': _ctx.error.estimated_achievement_hour
@@ -23317,9 +23274,9 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     }),
     type: "text",
     placeholder: "例：6"
-  }, null, 10
-  /* CLASS, PROPS */
-  , _hoisted_18), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $options.child_step_estimated_achievement_hour]]), _hoisted_19])])])]);
+  }, null, 2
+  /* CLASS */
+  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $options.child_step_estimated_achievement_hour]]), _hoisted_13])])])]);
 }
 
 /***/ }),

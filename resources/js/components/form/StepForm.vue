@@ -93,9 +93,5 @@
         }
       }
     },
-    created() {
-    },
-    methods: {
-    }
   }
 </script>

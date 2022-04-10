@@ -43,8 +43,8 @@
       return {
         childStepForms: [],
         childStepForm: {
-          title: '',
-          description: '',
+          title: null,
+          description: null,
           estimatedAchievementDay: null,
           estimatedAchievementHour: null,
         },
@@ -89,8 +89,6 @@
     methods: {
       // 子ステップフォーム追加
       addChildStepForm: function(){
-        console.log('add')
-        console.log(this.childStepForms)
         this.childStepForms.push(
           {
             title: null,
@@ -99,7 +97,6 @@
             estimatedAchievementHour: null,
           }
         )
-        console.log(this.childStepForms)
         ++this.childStepFormCount
       },
       // 子ステップフォーム削除
