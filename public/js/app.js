@@ -22949,10 +22949,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: ['registeredSteps', 'csrf'],
-  created: function created() {
-    console.log('this.registeredSteps');
-    console.log(this.registeredSteps);
-  }
+  created: function created() {}
 });
 
 /***/ }),
@@ -24388,7 +24385,6 @@ var _hoisted_6 = {
 var _hoisted_7 = ["value"];
 
 var _hoisted_8 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
-  href: "/logout",
   onclick: "event.preventDefault();\n                this.closest('form').submit();"
 }, " ログアウト ", -1
 /* HOISTED */

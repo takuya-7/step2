@@ -33,11 +33,12 @@
               @auth
                 <li><a class="l-menu__link" href="{{ route('mypage') }}">マイページ</a></li>
                 <li>
-                  <form method="POST" action="{{ route('logout') }}">
+                  <form method="POST" action="/logout">
                     @csrf
-                    <a class="l-menu__link" href="{{ route('logout') }}"
-                              onclick="event.preventDefault();
-                                    this.closest('form').submit();">
+                    <a
+                      class="l-menu__link"
+                      onclick="event.preventDefault();
+                        this.closest('form').submit();">
                       ログアウト
                     </a>
                   </form>  
