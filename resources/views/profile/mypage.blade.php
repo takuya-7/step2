@@ -7,40 +7,18 @@
 @section('content')
 <div class="l-content-wrapper">
   <div class="l-container">
-    <div class="p-mypage-content">
+    <div class="p-mypage-content" id="app">
       <h1>マイページ</h1>
 
       <div>
         <div class="u-mb-5">
-          <a href="{{ route('steps.new') }}" class="c-button c-button--blue c-button--width100">STEPを投稿する</a>
+          <blue-width100-button url="{{ route('steps.new') }}" text="STEPを投稿する"></blue-width100-button>
         </div>
-        
-        <section class="u-mb-5">
-          <h2>投稿済みSTEP</h2>
-          <div>
-            @if(!empty($registered_steps[0]->id))
-              <ul class="p-mypage-step-list">
-                @foreach($registered_steps as $registered_step)
-                  <li class="p-mypage-step-list__item">
-                    <a href="/steps/{{ $registered_step->id }}" class="p-mypage-step-list__title">
-                      {{ $registered_step['title'] }}
-                    </a>
-                    <a href="/steps/{{ $registered_step->id }}/edit" class="p-mypage-step-list__button">更新</a>
-                    <form action="{{ route('steps.delete', $registered_step->id) }}" method="post" class="">
-                      @csrf
-                      <button class="p-mypage-step-list__button p-mypage-step-list__button--gray" onclick='return confirm("削除しますか？");'>削除</button>
-                    </form>
 
-                  </li>
-                @endforeach
-              </ul>
-            @else
-              <div>
-                <p class="u-mb-3">投稿したSTEPはありません。</p>
-              </div>
-            @endif
-          </div>
-        </section>
+        <registered-steps
+          :registered-steps="{{ $registered_steps }}"
+          :csrf="{{json_encode(csrf_token())}}"
+        ></registered-steps>
 
         <section class="u-mb-5">
           <h2>チャレンジ中STEP</h2>

@@ -6,11 +6,13 @@ import List from './components/list/List.vue'
 import ParentStep from './components/step/ParentStep.vue'
 import ChildStep from './components/step/ChildStep.vue'
 import ChildStepList from './components/step/ChildStepList.vue'
+import RegisteredSteps from './components/step/RegisteredSteps.vue'
 import Profile from './components/Profile.vue'
 import LoginForm from './components/form/LoginForm.vue'
 import RegisterForm from './components/form/RegisterForm.vue'
 import StepForm from './components/form/StepForm.vue'
 import ChildStepForms from './components/form/ChildStepForms.vue'
+import BlueWidth100Button from './components/button/BlueWidth100Button.vue'
 import ChallengeButton from './components/button/ChallengeButton.vue'
 import ClearButton from './components/button/ClearButton.vue'
 
@@ -21,11 +23,13 @@ createApp({
         ParentStep,
         ChildStep,
         ChildStepList,
+        RegisteredSteps,
         Profile,
         LoginForm,
         RegisterForm,
         StepForm,
         ChildStepForms,
+        BlueWidth100Button,
         ChallengeButton,
         ClearButton,
     }
