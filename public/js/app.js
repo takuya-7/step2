@@ -22566,11 +22566,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  props: ['childStepForm', 'index', 'childStepFormCount', 'oldInputs', 'errors', 'childStepForms', // edit用
+  props: ['childStepForm', 'index', 'childStepFormCount', 'oldInputs', 'errors', // edit用
   'childSteps'],
+  emits: ['update:childStepTitle', 'update:childStepDescription', 'update:childStepEstimatedAchievementDay', 'update:childStepEstimatedAchievementHour'],
   data: function data() {
     return {
-      i: this.index + 1,
+      i: this.$props.index + 1,
       // 入力保持
       // child_step_title: (this.oldInputs['child_step_title']) ? this.oldInputs['child_step_title'][this.index]: null,
       // child_step_description: (this.oldInputs['child_step_description']) ? this.oldInputs['child_step_description'][this.index]: null,
@@ -22587,42 +22588,42 @@ __webpack_require__.r(__webpack_exports__);
   computed: {
     child_step_title: {
       get: function get() {
-        return this.$props.childStepForms[this.$props.index].title;
+        return this.$props.childStepForm.title;
       },
       set: function set(value) {
-        this.$emit('input', value);
+        this.$emit('update:childStepTitle', value);
       }
     },
     child_step_description: {
       get: function get() {
-        return this.$props.childStepForms[this.$props.index].description;
+        return this.$props.childStepForm.description;
       },
       set: function set(value) {
-        this.$emit('input', value);
+        this.$emit('update:childStepDescription', value);
       }
     },
     child_step_estimated_achievement_day: {
       get: function get() {
-        return this.$props.childStepForms[this.$props.index].estimatedAchievementDay;
+        return this.$props.childStepForm.estimatedAchievementDay;
       },
       set: function set(value) {
-        this.$emit('input', value);
+        this.$emit('update:childStepEstimatedAchievementDay', value);
       }
     },
     child_step_estimated_achievement_hour: {
       get: function get() {
-        return this.$props.childStepForms[this.$props.index].estimatedAchievementHour;
+        return this.$props.childStepForm.estimatedAchievementHour;
       },
       set: function set(value) {
-        this.$emit('input', value);
+        this.$emit('update:childStepEstimatedAchievementHour', value);
       }
     }
   },
   created: function created() {
+    console.log('this.childStepForm');
+    console.log(this.$props.childStepForm);
     console.log('this.child_step_title');
-    console.log(this.child_step_title);
-    console.log('this.$props.childStepForms[this.$props.index].title');
-    console.log(this.$props.childStepForms); // 編集時（childStepsがある場合）
+    console.log(this.child_step_title); // 編集時（childStepsがある場合）
     // if(this.childSteps){
     //   // this.child_step_title = (this.childSteps[this.index]) ? this.childSteps[this.index].title : null
     //   this.child_step_description = (this.childSteps[this.index]) ? this.childSteps[this.index].description : null 
@@ -22712,7 +22713,12 @@ __webpack_require__.r(__webpack_exports__);
     addChildStepForm: function addChildStepForm() {
       console.log('add');
       console.log(this.childStepForms);
-      this.childStepForms.push(this.childStepForm);
+      this.childStepForms.push({
+        title: null,
+        description: null,
+        estimatedAchievementDay: null,
+        estimatedAchievementHour: null
+      });
       console.log(this.childStepForms);
       ++this.childStepFormCount;
     },
@@ -23276,9 +23282,9 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   , _hoisted_7), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_10, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
     id: _ctx.estimatedAchievementDay,
     name: "child_step_estimated_achievement_day[]",
-    "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)([{
+    "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)({
       'is-invalid': _ctx.error.estimated_achievement_day
-    }, ""]),
+    }),
     "onUpdate:modelValue": _cache[3] || (_cache[3] = function ($event) {
       return $options.child_step_estimated_achievement_day = $event;
     }),
@@ -23303,9 +23309,9 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   , _hoisted_14), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_17, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
     id: _ctx.estimatedAchievementHour,
     name: "child_step_estimated_achievement_hour[]",
-    "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)([{
+    "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)({
       'is-invalid': _ctx.error.estimated_achievement_hour
-    }, ""]),
+    }),
     "onUpdate:modelValue": _cache[4] || (_cache[4] = function ($event) {
       return $options.child_step_estimated_achievement_hour = $event;
     }),
@@ -23353,17 +23359,28 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, _ctx.childStepFormCount]]), ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)(_ctx.childStepForms, function (childStepForm, index) {
     return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_ChildStepForm, {
       key: childStepForm,
+      childStepForm: childStepForm,
       index: index,
       childStepFormCount: _ctx.childStepFormCount,
       oldInputs: $props.oldInputs,
       errors: $props.errors,
-      onDeleteChildStepForm: $options.deleteChildStepForm,
       childSteps: $props.childSteps,
-      childStepForms: _ctx.childStepForms,
-      onInput: _ctx.input
+      "onUpdate:childStepTitle": function onUpdateChildStepTitle($event) {
+        return _ctx.childStepForms[index].title = $event;
+      },
+      "onUpdate:childStepDescription": function onUpdateChildStepDescription($event) {
+        return _ctx.childStepForms[index].description = $event;
+      },
+      "onUpdate:childStepEstimatedAchievementDay": function onUpdateChildStepEstimatedAchievementDay($event) {
+        return _ctx.childStepForms[index].estimatedAchievementDay = $event;
+      },
+      "onUpdate:childStepEstimatedAchievementHour": function onUpdateChildStepEstimatedAchievementHour($event) {
+        return _ctx.childStepForms[index].estimatedAchievementHour = $event;
+      },
+      onDeleteChildStepForm: $options.deleteChildStepForm
     }, null, 8
     /* PROPS */
-    , ["index", "childStepFormCount", "oldInputs", "errors", "onDeleteChildStepForm", "childSteps", "childStepForms", "onInput"]);
+    , ["childStepForm", "index", "childStepFormCount", "oldInputs", "errors", "childSteps", "onUpdate:childStepTitle", "onUpdate:childStepDescription", "onUpdate:childStepEstimatedAchievementDay", "onUpdate:childStepEstimatedAchievementHour", "onDeleteChildStepForm"]);
   }), 128
   /* KEYED_FRAGMENT */
   )), _ctx.childStepFormCount > 99 ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, " 登録できるSTEPは100個以下です。 ")) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {

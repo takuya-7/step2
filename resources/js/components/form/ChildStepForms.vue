@@ -1,7 +1,21 @@
 <template>
   <div>
     <input type="hidden" name="child_step_form_count" v-model="childStepFormCount">
-    <ChildStepForm v-for="(childStepForm, index) in childStepForms" :key="childStepForm"  :index='index' :childStepFormCount='childStepFormCount' :oldInputs='oldInputs' :errors='errors' @deleteChildStepForm="deleteChildStepForm" :childSteps="childSteps" :childStepForms="childStepForms" @input="input"></ChildStepForm>
+    <ChildStepForm
+      v-for="(childStepForm, index) in childStepForms"
+      :key="childStepForm"
+      :childStepForm="childStepForm"
+      :index="index"
+      :childStepFormCount="childStepFormCount"
+      :oldInputs="oldInputs"
+      :errors="errors"
+      :childSteps="childSteps"
+      @update:childStepTitle="childStepForms[index].title = $event"
+      @update:childStepDescription="childStepForms[index].description = $event"
+      @update:childStepEstimatedAchievementDay="childStepForms[index].estimatedAchievementDay = $event"
+      @update:childStepEstimatedAchievementHour="childStepForms[index].estimatedAchievementHour = $event"
+      @deleteChildStepForm="deleteChildStepForm"
+    ></ChildStepForm>
 
     <div v-if="childStepFormCount > 99" class="u-mb-4 u-text-center">
       登録できるSTEPは100個以下です。
@@ -78,7 +92,12 @@
         console.log('add')
         console.log(this.childStepForms)
         this.childStepForms.push(
-          this.childStepForm
+          {
+            title: null,
+            description: null,
+            estimatedAchievementDay: null,
+            estimatedAchievementHour: null,
+          }
         )
         console.log(this.childStepForms)
         ++this.childStepFormCount

@@ -7,7 +7,14 @@
       <div class="c-form__invalid-feedback" v-for="value in error.title" :key="value">
         {{ value }}
       </div>
-      <input id="title" type="text" name="title" v-model="title" :class="{ 'is-invalid': (error.title) }" placeholder="例：最短でWebエンジニアになる手順を公開！">
+      <input
+        id="title"
+        type="text"
+        name="title"
+        v-model="title"
+        :class="{ 'is-invalid': (error.title) }"
+        placeholder="例：最短でWebエンジニアになる手順を公開！"
+      >
     </fieldset>
     
     <fieldset class="c-form__field">
@@ -15,7 +22,15 @@
       <div class="c-form__invalid-feedback" v-for="value in error.description" :key="value">
         {{ value }}
       </div>
-      <textarea name="description" id="description" v-model="description" class="c-form__field__textarea" :class="{ 'is-invalid': (error.description) }" style="min-height: 8rem;" placeholder="学びのステップに関するサマリー。対象者や難易度、得られるものについて。"></textarea>
+      <textarea
+        name="description"
+        id="description"
+        v-model="description"
+        class="c-form__field__textarea"
+        :class="{ 'is-invalid': (error.description) }"
+        style="min-height: 8rem;"
+        placeholder="学びのステップに関するサマリー。対象者や難易度、得られるものについて。"
+      ></textarea>
     </fieldset>
 
     <fieldset class="c-form__field">
