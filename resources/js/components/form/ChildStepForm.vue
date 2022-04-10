@@ -1,10 +1,11 @@
 <template>
-  <div>
-    <label class="c-form__field__name">
+  <div class="u-mb-4">
+    <div class="c-form__field__name">
       ステップ{{ i }}
       <span class="c-form__field--required">（必須）</span>
+
       <button type="button" v-if="i!==1 && i===childStepFormCount" @click="deleteChildStepForm" class="c-button--x">×</button>
-    </label>
+    </div>
 
     <fieldset class="c-form__field">
       <div class="c-form__invalid-feedback" v-for="value in error.title" :key="value">
