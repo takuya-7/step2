@@ -221,6 +221,8 @@ class StepsController extends Controller
         // -------------------------------------------
         // 登録するデータ準備
         $step = Step::find($id);
+        // 既に登録されている子STEPを取得
+        $old_child_steps = ChildStep::where('step_id', $step->id)->get();
         // 全体の所要日数・所要時間算出用変数
         $estimated_achievement_day = 0;
         $estimated_achievement_hour = 0;
@@ -251,6 +253,20 @@ class StepsController extends Controller
             $estimated_achievement_hour += $child_step_estimated_achievement_hour[$i];
         }
 
+        // ステップ更新で子ステップ数を減らす場合（更新する子ステップ数 < 既に登録されている子ステップ数）
+        if(count($child_steps) < count($old_child_steps)){
+            $child_steps_count = count($child_steps);
+            $old_child_steps_count = count($old_child_steps);
+            // DBにある不要分子ステップを削除
+            $delete_count = $old_child_steps_count - $child_steps_count;
+            for($i = 0; $i < $delete_count; $i++){
+                DB::table('child_steps')
+                    ->where('step_id', $step->id)
+                    ->where('order', $old_child_steps[$old_child_steps_count - 1 - $i]->order)
+                    ->delete();
+            }
+        }
+
         // --------------------------------
         // step更新
         $step->title = $request->title;
@@ -271,7 +287,8 @@ class StepsController extends Controller
                     'title' => $value['title'],
                     'estimated_achievement_day' => $value['estimated_achievement_day'],
                     'estimated_achievement_hour' => $value['estimated_achievement_hour'],
-                    'description' => $value['description']]
+                    'description' => $value['description']
+                ]
             );
         }
 
