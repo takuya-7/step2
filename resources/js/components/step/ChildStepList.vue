@@ -10,12 +10,12 @@
             <a v-if="challenge.current_step >= child_step.order" :href="`/steps/${ step.id }/${ child_step.order }`">
               STEP{{ child_step.order }}：{{ child_step.title }}
             </a>
-            <a v-else style="cursor: default">
+            <a v-else style="cursor: not-allowed">
               STEP{{ child_step.order }}：{{ child_step.title }}
             </a>
           </template>
           <template v-else>
-            <a style="cursor: default">
+            <a style="cursor: not-allowed">
               STEP{{ child_step.order }}：{{ child_step.title }}
             </a>
           </template>

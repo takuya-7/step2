@@ -1095,9 +1095,13 @@ input[type=number] {
   box-shadow: 0.2rem 0.2rem 0.4rem #cad4e2;
   white-space: nowrap;
   letter-spacing: 0.2rem;
+  cursor: pointer;
 }
 .p-mypage-step-list__button--gray {
   background: #969696;
+}
+.p-mypage-step-list__button:hover {
+  color: #fff;
 }
 .p-mypage-step-list__progress {
   color: #4a4a4a;

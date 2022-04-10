@@ -24165,13 +24165,13 @@ var _hoisted_4 = ["href"];
 var _hoisted_5 = {
   key: 1,
   style: {
-    "cursor": "default"
+    "cursor": "not-allowed"
   }
 };
 var _hoisted_6 = {
   key: 1,
   style: {
-    "cursor": "default"
+    "cursor": "not-allowed"
   }
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {

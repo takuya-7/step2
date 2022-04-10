@@ -29,7 +29,7 @@
         password-update-url="{{ route('password.update') }}"
       ></user-information>
 
-      <a href="{{ route('steps') }}" class="c-button c-button--gray c-button--radius100">STEP一覧へ</a>
+      <a href="{{ route('steps') }}" class="c-button c-button--blue c-button--radius100">STEP一覧へ</a>
     </div>
   </div>
 </div>
