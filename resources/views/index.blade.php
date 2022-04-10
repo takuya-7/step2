@@ -51,7 +51,7 @@
   </div>
 </div>
 
-<div class="l-content-wrapper">
+<div class="l-content-wrapper" id="app">
   <div class="l-container">
     <section class="p-top-section">
       <div class="p-top-section__about">
@@ -65,14 +65,12 @@
 
     <section class="p-top-section">
       <h2 class="p-top-section__title">STEP</h2>
-      <div id="app">
-        <list :steps="{{ $steps }}" :categories="{{ $categories }}"></list>
-      </div>
+      <list :steps="{{ $steps }}" :categories="{{ $categories }}"></list>
       <a href="{{ route('steps') }}" class="c-button c-button--gray c-button--radius100">STEP一覧へ</a>
     </section>
 
     <section class="p-top-section">
-      <h2 class="p-top-section__title">ユーザー登録してSTEP投稿、挑戦しよう！</h2>
+      <h2 class="p-top-section__title">ユーザー登録してSTEPに挑戦しよう！</h2>
       <a href="{{ route('register') }}" class="c-button c-button--green c-button--radius100">ユーザー登録する（無料）</a>
       <a href="{{ route('login') }}" class="p-top-section__login-link">ログインする</a>
     </section>
