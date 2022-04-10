@@ -8,15 +8,12 @@
   <div class="l-content-wrapper">
     <div class="l-container">
       <div class="l-inner-container">
-
-        <h2>
+        <h2 class="u-text-center">
           STEP一覧
         </h2>
-
         <div id="app">
           <list :steps="{{ $steps }}" :categories="{{ $categories }}"></list>
         </div>
-        
       </div>
     </div>
   </div>

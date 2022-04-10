@@ -29,7 +29,7 @@
 
           <fieldset  class="c-form__field">
             <label for="name">ニックネーム</label>
-            <input id="name" type="text" name="name" value="{{ old('name', isset($user->name) ? $user->name : '') }}" required>
+            <input id="name" type="text" name="name" value="{{ old('name', isset($user->name) ? $user->name : '') }}">
 
             @error('name')
               <span class="c-form__invalid-feedback" role="alert">

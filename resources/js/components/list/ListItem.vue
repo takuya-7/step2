@@ -1,5 +1,5 @@
 <template>
-  <a :href="stepURL" class="c-card c-card--link c-card--shadow">
+  <a :href="stepUrl" class="c-card c-card--link c-card--shadow">
     <div class="c-card__header">
       <h2 class="c-card__title u-fw-bold">{{ step.title }}</h2>
       <span class="c-card__header__item">カテゴリ：{{  categories[step.category_id - 1]['name'] }}</span>
@@ -13,12 +13,11 @@
 </template>
 
 <script>
-  import { ref } from "vue";
   export default {
     props: ['step', 'categories'],
-    computed: {
-      stepURL: function(){
-        return '/steps/' + this.step.id
+    data: function() {
+      return {
+        stepUrl: '/steps/' + this.step.id
       }
     },
   }

@@ -24,9 +24,9 @@
 <script>
   export default {
     props: ['author'],
-    computed: {
-      imgSrc: function(){
-        return '/storage/uploads/' + this.author.profile_img
+    data: function() {
+      return {
+        imgSrc: '/storage/uploads/' + this.author.profile_img
       }
     },
   }
