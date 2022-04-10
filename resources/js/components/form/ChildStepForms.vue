@@ -1,7 +1,7 @@
 <template>
   <div>
     <input type="hidden" name="child_step_form_count" v-model="childStepFormCount">
-    <ChildStepForm v-for="(childStepForm, index) in childStepForms" :key="childStepForm"  :index='index' :childStepFormCount='childStepFormCount' :oldInputs='oldInputs' :errors='errors' @deleteChildStepForm="deleteChildStepForm"></ChildStepForm>
+    <ChildStepForm v-for="(childStepForm, index) in childStepForms" :key="childStepForm"  :index='index' :childStepFormCount='childStepFormCount' :oldInputs='oldInputs' :errors='errors' @deleteChildStepForm="deleteChildStepForm" :childSteps="childSteps" :childStepForms="childStepForms" @input="input"></ChildStepForm>
 
     <div v-if="childStepFormCount > 99" class="u-mb-4 u-text-center">
       登録できるSTEPは100個以下です。
@@ -19,22 +19,41 @@
     components: {
       ChildStepForm,
     },
-    props: ['oldInputs', 'errors'],
+    props: [
+      'oldInputs',
+      'errors',
+      // edit用
+      'childSteps',
+    ],
     data: function() {
       return {
         childStepForms: [],
         childStepForm: {
           title: '',
           description: '',
-          estimatedAchievementDay: 0,
-          estimatedAchievementHour: 0,
+          estimatedAchievementDay: null,
+          estimatedAchievementHour: null,
         },
         childStepFormCount: 0,
       }
     },
     created() {
-      // 子ステップで入力保持があればそのフォームを作成
-      if(this.oldInputs['child_step_title']){
+      // フォームデータ取得
+      // ステップ編集の場合で初回読み込み時
+      if(this.childSteps && this.oldInputs['child_step_title'] == null){
+        for (let i = 0; i < Object.keys(this.childSteps).length; i++){
+          this.childStepForms.push(
+            {
+              title: this.childSteps[i].title,
+              description: this.childSteps[i].description,
+              estimatedAchievementDay: this.childSteps[i].estimated_achievement_day,
+              estimatedAchievementHour: this.childSteps[i].estimated_achievement_hour,
+            }
+          )
+          ++this.childStepFormCount
+        }
+      }else if(this.oldInputs['child_step_title']){
+        // 子ステップで入力保持があればそのフォームを作成
         for (let i = 0; i < Object.keys(this.oldInputs['child_step_title']).length; i++){
           this.childStepForms.push(
             {
@@ -56,13 +75,13 @@
     methods: {
       // 子ステップフォーム追加
       addChildStepForm: function(){
-        console.log('addChildStepForm')
+        console.log('add')
+        console.log(this.childStepForms)
         this.childStepForms.push(
           this.childStepForm
         )
+        console.log(this.childStepForms)
         ++this.childStepFormCount
-        console.log('this.childStepFormCount')
-        console.log(this.childStepFormCount)
       },
       // 子ステップフォーム削除
       deleteChildStepForm: function(index) {

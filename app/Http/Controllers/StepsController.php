@@ -130,8 +130,6 @@ class StepsController extends Controller
         // -------------------------------------------
         // 登録するデータ準備
         $step = new Step;
-        // step_id取得
-        $step_id = $step->id;
         // 入力されたchiild_step用配列
         $child_steps = [];
         // 全体の所要日数・所要時間算出用変数
@@ -159,12 +157,12 @@ class StepsController extends Controller
                 'estimated_achievement_day' => $child_step_estimated_achievement_day[$i],
                 'estimated_achievement_hour' => $child_step_estimated_achievement_hour[$i],
                 'description' => $child_step_description[$i],
-                'step_id' => $step_id,
+                'step_id' => $step->id,
             ];
             // 所要日数算出
-            $estimated_achievement_day += $request->get('child_step'.$i.'_estimated_achievement_day');
+            $estimated_achievement_day += $child_step_estimated_achievement_day[$i];
             // 所要時間算出
-            $estimated_achievement_hour += $request->get('child_step'.$i.'_estimated_achievement_hour');
+            $estimated_achievement_hour += $child_step_estimated_achievement_hour[$i];
         }
 
         // -------------------------------------------
@@ -200,11 +198,8 @@ class StepsController extends Controller
         if(!ctype_digit($id)){
             return redirect(route('steps.new'))->with('flash_message', __('Invalid operation was performed.'));
         }
-
         // カテゴリー取得
         $categories = Category::all();
-        // 子STEP数設定
-        $child_steps_num = 10;
         // 対象のSTEPを取得
         $step = Auth::user()->steps()->find($id);
         if(empty($step)){
@@ -215,50 +210,71 @@ class StepsController extends Controller
         if(empty($child_steps)){
             return redirect()->route('mypage')->with('flash_message', __('不正な操作がおこなわれました'));
         }
-        return view('steps.edit', compact('categories', 'child_steps_num', 'step', 'child_steps'));
+        return view('steps.edit', compact('categories', 'step', 'child_steps'));
     }
     // STEP更新処理
     public function update(StepRequest $request, $id){
         // GETパラメータが数字かどうかをチェック
         if(!ctype_digit($id)){
-            return redirect(route('steps.new'))->with('flash_message', __('Invalid operation was performed.'));
+            return redirect(route('steps.new'))->with('flash_message', __('不正な操作がおこなわれました'));
         }
-        // --------------------------------
-        // step更新処理
+        // -------------------------------------------
+        // 登録するデータ準備
         $step = Step::find($id);
-        // データをセット
+        // 全体の所要日数・所要時間算出用変数
+        $estimated_achievement_day = 0;
+        $estimated_achievement_hour = 0;
+        // 送信された子ステップフォームの個数
+        $child_step_form_count = $request->get('child_step_form_count');
+
+        // 子STEPの入力情報（配列）を取得
+        $child_step_title = $request->get('child_step_title');
+        $child_step_estimated_achievement_day = $request->get('child_step_estimated_achievement_day');
+        $child_step_estimated_achievement_hour = $request->get('child_step_estimated_achievement_hour');
+        $child_step_description = $request->get('child_step_description');
+
+        // 入力されたchiild_stepを配列に格納
+        $child_steps = [];
+        for($i = 0; $i < $child_step_form_count; $i++){
+            // 入力された子STEPを配列に格納
+            $child_steps[] = [
+                'order' => $i + 1,
+                'title' => $child_step_title[$i],
+                'estimated_achievement_day' => $child_step_estimated_achievement_day[$i],
+                'estimated_achievement_hour' => $child_step_estimated_achievement_hour[$i],
+                'description' => $child_step_description[$i],
+                'step_id' => $step->id,
+            ];
+            // 所要日数算出
+            $estimated_achievement_day += $child_step_estimated_achievement_day[$i];
+            // 所要時間算出
+            $estimated_achievement_hour += $child_step_estimated_achievement_hour[$i];
+        }
+
+        // --------------------------------
+        // step更新
         $step->title = $request->title;
-        $step->estimated_achievement_day = isset($request->estimated_achievement_day) ? $request->estimated_achievement_day : 0;
-        $step->estimated_achievement_hour = isset($request->estimated_achievement_hour) ? $request->estimated_achievement_hour : 0;
+        $step->estimated_achievement_day = $estimated_achievement_day;
+        $step->estimated_achievement_hour = $estimated_achievement_hour;
         $step->description = $request->description;
         $step->category_id = $request->category_id;
         // ログインユーザーの投稿STEPをDBに保存
         Auth::user()->steps()->save($step);
         
         // --------------------------------
-        // child_step更新処理
-        // step_id取得
-        $step_id = $step->id;
-        // 入力されたchiild_stepを配列に格納
-        $child_steps = [];
-        for($i = 1; $i <= 10; $i++){
-            if(!empty($request->get('child-step'.$i.'-title')) && !empty($request->get('child-step'.$i.'-description'))){
-                $child_steps[] = [
-                    'order' => $i,
-                    'title' => $request->get('child-step'.$i.'-title'),
-                    'description' => $request->get('child-step'.$i.'-description'),
-                    'step_id' => $step_id,
-                ];
-            }
-        }
-        // 入力されたchild_stepsを展開、データをセットしてDBへ保存する
+        // child_step更新
         foreach ($child_steps as $key => $value) {
             DB::table('child_steps')->updateOrInsert(
-                ['step_id' => $id, 'order' => $value['order']],
-                ['order' => $value['order'], 'title' => $value['title'], 'description' => $value['description']]
+                ['step_id' => $step->id, 'order' => $value['order']],
+                [
+                    'order' => $value['order'],
+                    'title' => $value['title'],
+                    'estimated_achievement_day' => $value['estimated_achievement_day'],
+                    'estimated_achievement_hour' => $value['estimated_achievement_hour'],
+                    'description' => $value['description']]
             );
         }
-        // マイページへリダイレクト
+
         return redirect()->route('mypage')->with('flash_message', __('STEPが更新されました！'));
     }
 

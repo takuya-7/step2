@@ -1,5 +1,5 @@
 <template>
-  <form action="/steps" method="POST" class="c-form">
+  <form :action="action" method="POST" class="c-form">
     <input type="hidden" name="_token" :value="csrf">
 
     <fieldset class="c-form__field">
@@ -42,9 +42,10 @@
       </ul>
     </div>
     
-    <ChildStepForms :oldInputs="oldInputs" :errors="errors"></ChildStepForms>
+    <ChildStepForms :oldInputs="oldInputs" :errors="errors" :childSteps="childSteps"></ChildStepForms>
 
-    <button type="submit" class="c-button c-button--blue c-button--width100">投稿する</button>
+    <button v-if="this.step" type="submit" class="c-button c-button--blue c-button--width100">更新する</button>
+    <button v-else type="submit" class="c-button c-button--blue c-button--width100">投稿する</button>
   </form>
 </template>
 
@@ -55,12 +56,21 @@
     components: {
       ChildStepForms,
     },
-    props: ['csrf', 'categories', 'oldInputs', 'errors'],
+    props: [
+      'csrf',
+      'categories',
+      'oldInputs',
+      'errors',
+      // edit用
+      'step',
+      'childSteps',
+    ],
     data: function() {
       return {
-        title: this.oldInputs.title,
-        description: this.oldInputs.description,
-        category_id: this.oldInputs.category_id,
+        action: (this.step) ? '/steps/' + this.step.id + '/edit' : '/steps',
+        title: (this.step) ? this.step.title : this.oldInputs.title,
+        description: (this.step) ? this.step.description : this.oldInputs.description,
+        category_id: (this.step) ? this.step.category_id : this.oldInputs.category_id,
         error:{
           title: this.errors.title,
           description: this.errors.description,
