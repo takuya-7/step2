@@ -265,6 +265,19 @@ class StepsController extends Controller
                     ->where('order', $old_child_steps[$old_child_steps_count - 1 - $i]->order)
                     ->delete();
             }
+            // 更新するステップのチャレンジを更新
+            $update_challenges = Challenge::where('step_id', $step->id)->get();
+            foreach($update_challenges as $key => $value){
+                if($value['current_step'] > $child_steps_count){
+                    DB::table('challenges')->updateOrInsert(
+                        ['id' => $value->id],
+                        [
+                            'current_step' => $child_steps_count,
+                            'clear_flg' => 0,
+                        ]
+                    );
+                }
+            }
         }
 
         // --------------------------------
