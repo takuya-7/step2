@@ -83,7 +83,7 @@ class StepsController extends Controller
 
         // child_step取得
         $child_steps = ChildStep::where('step_id', $id)->get();
-        if(empty($child_steps) | count($child_steps) < $order){
+        if(empty($child_steps) || count($child_steps) < $order){
             return redirect(route('steps'))->with('flash_message', __('不正な操作がおこなわれました'));
         }
         // 該当のchild_stepを取得
