@@ -243,7 +243,7 @@ resource "aws_instance" "step-bastion" {
       "${aws_security_group.scg-step-bastion.id}"
     ]
     subnet_id = "${aws_subnet.pub-c-subnet-step.id}"
-    associate_public_ip_address = "true"
+    associate_public_ip_address = "false"
     root_block_device {
       volume_type = "gp2"
       volume_size = "30"
@@ -256,3 +256,227 @@ resource "aws_instance" "step-bastion" {
         Name = "step-bastion"
     }
 }
+# ALB
+resource "aws_lb" "alb-step" {
+  desync_mitigation_mode     = "defensive"
+  drop_invalid_header_fields = "false"
+  enable_deletion_protection = "false"
+  enable_http2               = "true"
+  enable_waf_fail_open       = "false"
+  idle_timeout               = "60"
+  internal                   = "false"
+  ip_address_type            = "ipv4"
+  load_balancer_type         = "application"
+  name                       = "alb-step"
+  security_groups            = [aws_security_group.scg_alb-step.id]
+  subnets = [
+    "${aws_subnet.private-a-subnet-step.id}",
+    "${aws_subnet.private-c-subnet-step.id}"
+  ]
+}
+# ALB リスナー
+resource "aws_lb_listener" "http" {
+  default_action {
+    order = "1"
+    redirect {
+      host        = "smi11.com"
+      path        = "/#{path}"
+      port        = "443"
+      protocol    = "HTTPS"
+      query       = "#{query}"
+      status_code = "HTTP_301"
+    }
+    type = "redirect"
+  }
+  load_balancer_arn = "${aws_lb.alb-step.id}"
+  port              = "80"
+  protocol          = "HTTP"
+}
+resource "aws_lb_listener" "https" {
+  certificate_arn = "${aws_acm_certificate.acm-smi11-com.id}"
+  default_action {
+    order            = "1"
+    target_group_arn = "${aws_lb_target_group.tg-alb-step1.id}"
+    type             = "forward"
+  }
+  load_balancer_arn = "${aws_lb.alb-step.id}"
+  port              = "443"
+  protocol          = "HTTPS"
+  ssl_policy        = "ELBSecurityPolicy-FS-1-2-Res-2020-10"
+}
+# ALB ターゲットグループ
+resource "aws_lb_target_group" "tg-alb-step1" {
+  deregistration_delay = "300"
+  health_check {
+    enabled             = "true"
+    healthy_threshold   = "5"
+    interval            = "30"
+    matcher             = "200"
+    path                = "/healthcheck.html"
+    port                = "traffic-port"
+    protocol            = "HTTP"
+    timeout             = "5"
+    unhealthy_threshold = "2"
+  }
+  load_balancing_algorithm_type = "round_robin"
+  name                          = "tg-alb-step1"
+  port                          = "80"
+  protocol                      = "HTTP"
+  protocol_version              = "HTTP1"
+  slow_start                    = "0"
+  stickiness {
+    cookie_duration = "86400"
+    enabled         = "false"
+    type            = "lb_cookie"
+  }
+  target_type = "instance"
+  vpc_id      = "${aws_vpc.vpc-step.id}"
+}
+# ALB ターゲットグループ、ターゲット
+resource "aws_lb_target_group_attachment" "tg-alb-step1-target" {
+  target_group_arn = "${aws_lb_target_group.tg-alb-step1.id}"
+  target_id        = "${aws_instance.step-web1.id}"
+  port             = 80
+}
+# RDS
+resource "aws_db_instance" "rds-step" {
+  allocated_storage                     = "20"
+  auto_minor_version_upgrade            = "false"
+  availability_zone                     = "ap-northeast-1a"
+  backup_retention_period               = "7"
+  backup_window                         = "13:37-14:07"
+  ca_cert_identifier                    = "rds-ca-2019"
+  copy_tags_to_snapshot                 = "true"
+  customer_owned_ip_enabled             = "false"
+  db_subnet_group_name                  = "${aws_db_subnet_group.subnet-group-step.name}"
+  deletion_protection                   = "false"
+  engine                                = "mysql"
+  engine_version                        = "5.7.30"
+  iam_database_authentication_enabled   = "false"
+  identifier                            = "rds-step"
+  instance_class                        = "db.t2.micro"
+  iops                                  = "0"
+  license_model                         = "general-public-license"
+  maintenance_window                    = "wed:20:20-wed:20:50"
+  max_allocated_storage                 = "0"
+  monitoring_interval                   = "0"
+  multi_az                              = "false"
+  option_group_name                     = "default:mysql-5-7"
+  parameter_group_name                  = "default.mysql5.7"
+  performance_insights_enabled          = "false"
+  performance_insights_retention_period = "0"
+  port                                  = "3306"
+  publicly_accessible                   = "false"
+  storage_encrypted                     = "false"
+  storage_type                          = "gp2"
+  username                              = "step_admin"
+  vpc_security_group_ids                = ["${aws_security_group.scg-rds-step.id}"]
+  skip_final_snapshot                   = true
+}
+# RDS サブネットグループ
+resource "aws_db_subnet_group" "subnet-group-step" {
+  description = "Created from the RDS Management Console"
+  name        = "default-${aws_vpc.vpc-step.id}"
+  subnet_ids  = [
+    "${aws_subnet.pub-a-subnet-step.id}",
+    "${aws_subnet.pub-c-subnet-step.id}",
+    "${aws_subnet.private-a-subnet-step.id}",
+    "${aws_subnet.private-c-subnet-step.id}",
+    "${aws_subnet.privateII-a-subnet-step.id}"
+  ]
+}
+# Route53 ホストゾーン
+resource "aws_route53_zone" "smi11-com" {
+  comment       = "step"
+  force_destroy = "false"
+  name          = "smi11.com"
+
+  tags = {
+    name = "step"
+  }
+
+  tags_all = {
+    name = "step"
+  }
+}
+# Route53 レコード
+# resource "aws_route53_record" "smi11-com-CNAME1" {
+#   name    = "6xt46tpx2c3i52knso4ajdwkqn7n3ayj._domainkey.smi11.com"
+#   records = ["6xt46tpx2c3i52knso4ajdwkqn7n3ayj.dkim.amazonses.com"]
+#   ttl     = "1800"
+#   type    = "CNAME"
+#   zone_id = "${aws_route53_zone.tfer--Z0725725DI0685WL02RT_smi11-002E-com.zone_id}"
+# }
+# resource "aws_route53_record" "smi11-com-CNAME2" {
+#   name    = "_bfc04688f31c58cdf179c3781e289f28.smi11.com"
+#   records = ["_cbbde2ddef4b08a8e3586929d7533bae.gskhnxswdw.acm-validations.aws."]
+#   ttl     = "300"
+#   type    = "CNAME"
+#   zone_id = "${aws_route53_zone.tfer--Z0725725DI0685WL02RT_smi11-002E-com.zone_id}"
+# }
+# resource "aws_route53_record" "smi11-com-CNAME3" {
+#   name    = "d6bi26c3ahsjhkijn3oy5w6hkcjpt6sy._domainkey.smi11.com"
+#   records = ["d6bi26c3ahsjhkijn3oy5w6hkcjpt6sy.dkim.amazonses.com"]
+#   ttl     = "1800"
+#   type    = "CNAME"
+#   zone_id = "${aws_route53_zone.tfer--Z0725725DI0685WL02RT_smi11-002E-com.zone_id}"
+# }
+# resource "aws_route53_record" "smi11-com-CNAME4" {
+#   name    = "s2oqgy7jk3isynkh2mx6amt4qrtszmrx._domainkey.smi11.com"
+#   records = ["s2oqgy7jk3isynkh2mx6amt4qrtszmrx.dkim.amazonses.com"]
+#   ttl     = "1800"
+#   type    = "CNAME"
+#   zone_id = "${aws_route53_zone.tfer--Z0725725DI0685WL02RT_smi11-002E-com.zone_id}"
+# }
+# resource "aws_route53_record" "smi11-com-A" {
+#   alias {
+#     evaluate_target_health = "false"
+#     name                   = "alb-step-2088874230.ap-northeast-1.elb.amazonaws.com"
+#     zone_id                = "Z14GRHDCWA56QT"
+#   }
+
+#   name    = "smi11.com"
+#   type    = "A"
+#   zone_id = "${aws_route53_zone.tfer--Z0725725DI0685WL02RT_smi11-002E-com.zone_id}"
+# }
+# resource "aws_route53_record" "smi11-com-NS" {
+#   name    = "smi11.com"
+#   records = ["ns-1372.awsdns-43.org.", "ns-2034.awsdns-62.co.uk.", "ns-3.awsdns-00.com.", "ns-704.awsdns-24.net."]
+#   ttl     = "172800"
+#   type    = "NS"
+#   zone_id = "${aws_route53_zone.tfer--Z0725725DI0685WL02RT_smi11-002E-com.zone_id}"
+# }
+# resource "aws_route53_record" "smi11-com-SOA" {
+#   name    = "smi11.com"
+#   records = ["ns-3.awsdns-00.com. awsdns-hostmaster.amazon.com. 1 7200 900 1209600 86400"]
+#   ttl     = "900"
+#   type    = "SOA"
+#   zone_id = "${aws_route53_zone.tfer--Z0725725DI0685WL02RT_smi11-002E-com.zone_id}"
+# }
+# resource "aws_route53_record" "www-smi11-com-A" {
+#   alias {
+#     evaluate_target_health = "true"
+#     name                   = "alb-step-2088874230.ap-northeast-1.elb.amazonaws.com"
+#     zone_id                = "Z14GRHDCWA56QT"
+#   }
+#   name    = "www.smi11.com"
+#   type    = "A"
+#   zone_id = "${aws_route53_zone.tfer--Z0725725DI0685WL02RT_smi11-002E-com.zone_id}"
+# }
+# ACM
+resource "aws_acm_certificate" "acm-smi11-com" {
+  domain_name = "smi11.com"
+  options {
+    certificate_transparency_logging_preference = "ENABLED"
+  }
+  subject_alternative_names = ["smi11.com"]
+  tags = {
+    name = "step-acm"
+  }
+  tags_all = {
+    name = "step-acm"
+  }
+  validation_method = "DNS"
+}
+
+# EIP 固定IPなしでも良い？
