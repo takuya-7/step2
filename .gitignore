@@ -13,4 +13,13 @@ npm-debug.log
 yarn-error.log
 /.idea
 /.vscode
-terraform.tfvars
+
+#  Local .terraform directories
+**/.terraform/*
+
+# .tfstate files
+*.tfstate
+*.tfstate.*
+
+# .tfvars files
+*.tfvars
