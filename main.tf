@@ -390,79 +390,81 @@ resource "aws_route53_zone" "smi11-com" {
   comment       = "step"
   force_destroy = "false"
   name          = "smi11.com"
-
   tags = {
     name = "step"
   }
-
   tags_all = {
     name = "step"
   }
 }
 # Route53 レコード
-# resource "aws_route53_record" "smi11-com-CNAME1" {
-#   name    = "6xt46tpx2c3i52knso4ajdwkqn7n3ayj._domainkey.smi11.com"
-#   records = ["6xt46tpx2c3i52knso4ajdwkqn7n3ayj.dkim.amazonses.com"]
-#   ttl     = "1800"
-#   type    = "CNAME"
-#   zone_id = "${aws_route53_zone.tfer--Z0725725DI0685WL02RT_smi11-002E-com.zone_id}"
-# }
-# resource "aws_route53_record" "smi11-com-CNAME2" {
-#   name    = "_bfc04688f31c58cdf179c3781e289f28.smi11.com"
-#   records = ["_cbbde2ddef4b08a8e3586929d7533bae.gskhnxswdw.acm-validations.aws."]
-#   ttl     = "300"
-#   type    = "CNAME"
-#   zone_id = "${aws_route53_zone.tfer--Z0725725DI0685WL02RT_smi11-002E-com.zone_id}"
-# }
-# resource "aws_route53_record" "smi11-com-CNAME3" {
-#   name    = "d6bi26c3ahsjhkijn3oy5w6hkcjpt6sy._domainkey.smi11.com"
-#   records = ["d6bi26c3ahsjhkijn3oy5w6hkcjpt6sy.dkim.amazonses.com"]
-#   ttl     = "1800"
-#   type    = "CNAME"
-#   zone_id = "${aws_route53_zone.tfer--Z0725725DI0685WL02RT_smi11-002E-com.zone_id}"
-# }
-# resource "aws_route53_record" "smi11-com-CNAME4" {
-#   name    = "s2oqgy7jk3isynkh2mx6amt4qrtszmrx._domainkey.smi11.com"
-#   records = ["s2oqgy7jk3isynkh2mx6amt4qrtszmrx.dkim.amazonses.com"]
-#   ttl     = "1800"
-#   type    = "CNAME"
-#   zone_id = "${aws_route53_zone.tfer--Z0725725DI0685WL02RT_smi11-002E-com.zone_id}"
-# }
-# resource "aws_route53_record" "smi11-com-A" {
-#   alias {
-#     evaluate_target_health = "false"
-#     name                   = "alb-step-2088874230.ap-northeast-1.elb.amazonaws.com"
-#     zone_id                = "Z14GRHDCWA56QT"
-#   }
-
-#   name    = "smi11.com"
-#   type    = "A"
-#   zone_id = "${aws_route53_zone.tfer--Z0725725DI0685WL02RT_smi11-002E-com.zone_id}"
-# }
-# resource "aws_route53_record" "smi11-com-NS" {
-#   name    = "smi11.com"
-#   records = ["ns-1372.awsdns-43.org.", "ns-2034.awsdns-62.co.uk.", "ns-3.awsdns-00.com.", "ns-704.awsdns-24.net."]
-#   ttl     = "172800"
-#   type    = "NS"
-#   zone_id = "${aws_route53_zone.tfer--Z0725725DI0685WL02RT_smi11-002E-com.zone_id}"
-# }
-# resource "aws_route53_record" "smi11-com-SOA" {
-#   name    = "smi11.com"
-#   records = ["ns-3.awsdns-00.com. awsdns-hostmaster.amazon.com. 1 7200 900 1209600 86400"]
-#   ttl     = "900"
-#   type    = "SOA"
-#   zone_id = "${aws_route53_zone.tfer--Z0725725DI0685WL02RT_smi11-002E-com.zone_id}"
-# }
-# resource "aws_route53_record" "www-smi11-com-A" {
-#   alias {
-#     evaluate_target_health = "true"
-#     name                   = "alb-step-2088874230.ap-northeast-1.elb.amazonaws.com"
-#     zone_id                = "Z14GRHDCWA56QT"
-#   }
-#   name    = "www.smi11.com"
-#   type    = "A"
-#   zone_id = "${aws_route53_zone.tfer--Z0725725DI0685WL02RT_smi11-002E-com.zone_id}"
-# }
+resource "aws_route53_record" "smi11-com-CNAME1" {
+  name    = "6xt46tpx2c3i52knso4ajdwkqn7n3ayj._domainkey.smi11.com"
+  records = ["6xt46tpx2c3i52knso4ajdwkqn7n3ayj.dkim.amazonses.com"]
+  ttl     = "1800"
+  type    = "CNAME"
+  zone_id = "${aws_route53_zone.smi11-com.zone_id}"
+}
+resource "aws_route53_record" "smi11-com-CNAME2" {
+  name    = "_bfc04688f31c58cdf179c3781e289f28.smi11.com"
+  records = ["_cbbde2ddef4b08a8e3586929d7533bae.gskhnxswdw.acm-validations.aws."]
+  ttl     = "300"
+  type    = "CNAME"
+  zone_id = "${aws_route53_zone.smi11-com.zone_id}"
+}
+resource "aws_route53_record" "smi11-com-CNAME3" {
+  name    = "d6bi26c3ahsjhkijn3oy5w6hkcjpt6sy._domainkey.smi11.com"
+  records = ["d6bi26c3ahsjhkijn3oy5w6hkcjpt6sy.dkim.amazonses.com"]
+  ttl     = "1800"
+  type    = "CNAME"
+  zone_id = "${aws_route53_zone.smi11-com.zone_id}"
+}
+resource "aws_route53_record" "smi11-com-CNAME4" {
+  name    = "s2oqgy7jk3isynkh2mx6amt4qrtszmrx._domainkey.smi11.com"
+  records = ["s2oqgy7jk3isynkh2mx6amt4qrtszmrx.dkim.amazonses.com"]
+  ttl     = "1800"
+  type    = "CNAME"
+  zone_id = "${aws_route53_zone.smi11-com.zone_id}"
+}
+resource "aws_route53_record" "smi11-com-A" {
+  alias {
+    evaluate_target_health = "false"
+    name                   = "${aws_lb.alb-step.dns_name}"
+    zone_id                = "${aws_lb.alb-step.zone_id}"
+  }
+  name    = "smi11.com"
+  type    = "A"
+  zone_id = "${aws_route53_zone.smi11-com.zone_id}"
+}
+resource "aws_route53_record" "smi11-com-NS" {
+  name    = "smi11.com"
+  records = [
+    "ns-1372.awsdns-43.org.",
+    "ns-2034.awsdns-62.co.uk.",
+    "ns-3.awsdns-00.com.",
+    "ns-704.awsdns-24.net."
+  ]
+  ttl     = "172800"
+  type    = "NS"
+  zone_id = "${aws_route53_zone.smi11-com.zone_id}"
+}
+resource "aws_route53_record" "smi11-com-SOA" {
+  name    = "smi11.com"
+  records = ["ns-3.awsdns-00.com. awsdns-hostmaster.amazon.com. 1 7200 900 1209600 86400"]
+  ttl     = "900"
+  type    = "SOA"
+  zone_id = "${aws_route53_zone.smi11-com.zone_id}"
+}
+resource "aws_route53_record" "www-smi11-com-A" {
+  alias {
+    evaluate_target_health = "true"
+    name                   = "${aws_lb.alb-step.dns_name}"
+    zone_id                = "${aws_lb.alb-step.zone_id}"
+  }
+  name    = "www.smi11.com"
+  type    = "A"
+  zone_id = "${aws_route53_zone.smi11-com.zone_id}"
+}
 # ACM
 resource "aws_acm_certificate" "acm-smi11-com" {
   domain_name = "smi11.com"
@@ -478,5 +480,38 @@ resource "aws_acm_certificate" "acm-smi11-com" {
   }
   validation_method = "DNS"
 }
-
-# EIP 固定IPなしでも良い？
+# EIP
+resource "aws_eip" "eip-step-web1" {
+  instance             = "${aws_instance.step-web1.id}"
+  network_border_group = "ap-northeast-1"
+  network_interface    = "${aws_network_interface.eni-step-web1.id}"
+  public_ipv4_pool     = "amazon"
+  tags = {
+    Name = "eip-step-web1"
+  }
+  tags_all = {
+    Name = "eip-step-web1"
+  }
+  vpc = "true"
+}
+# Elastic network interface
+resource "aws_network_interface" "eni-step-web1" {
+  attachment {
+    device_index = "0"
+    instance     = "${aws_instance.step-web1.id}"
+  }
+  description        = "Primary network interface"
+  ipv4_prefix_count  = "0"
+  ipv6_address_count = "0"
+  ipv6_prefix_count  = "0"
+  private_ip         = "172.16.3.11"
+  security_groups    = [aws_security_group.scg-stepweb1.id]
+  source_dest_check  = "true"
+  subnet_id          = "${aws_subnet.private-a-subnet-step.id}"
+  tags = {
+    Name = "eni-step-web1"
+  }
+  tags_all = {
+    Name = "eni-step-web1"
+  }
+}
