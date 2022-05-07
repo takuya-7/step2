@@ -9,7 +9,7 @@ variable "region" {
 variable "images" {
   default = {
     step-bastion = "ami-034e9fbef9c54ebf7"
-    step-web1 = "ami-0f25352aa13d9a3ca"
+    step-web1 = "ami-023951d8c98983bf2"
     us-east-1 = ""
     us-west-2 = ""
     us-west-1 = ""
