@@ -234,9 +234,6 @@ resource "aws_instance" "step-web1" {
     tags = {
         Name = "step-web1"
     }
-    lifecycle {
-      prevent_destroy = true
-    }
 }
 resource "aws_instance" "step-bastion" {
     ami = "${var.images.step-bastion}"
@@ -257,9 +254,6 @@ resource "aws_instance" "step-bastion" {
     }
     tags = {
         Name = "step-bastion"
-    }
-    lifecycle {
-      prevent_destroy = true
     }
 }
 # ALB
@@ -378,9 +372,7 @@ resource "aws_db_instance" "rds-step" {
   username                              = "step_admin"
   vpc_security_group_ids                = ["${aws_security_group.scg-rds-step.id}"]
   skip_final_snapshot                   = true
-  lifecycle {
-    prevent_destroy = true
-  }
+  snapshot_identifier                   = "${var.rds_snapshots.rds-step}"
 }
 # RDS サブネットグループ
 resource "aws_db_subnet_group" "subnet-group-step" {
@@ -493,7 +485,7 @@ resource "aws_acm_certificate" "acm-smi11-com" {
 resource "aws_eip" "eip-step-web1" {
   instance             = "${aws_instance.step-web1.id}"
   network_border_group = "ap-northeast-1"
-  network_interface    = "${aws_network_interface.eni-step-web1.id}"
+  # network_interface    = "${aws_network_interface.eni-step-web1.id}"
   public_ipv4_pool     = "amazon"
   tags = {
     Name = "eip-step-web1"
@@ -504,23 +496,23 @@ resource "aws_eip" "eip-step-web1" {
   vpc = "true"
 }
 # Elastic network interface
-resource "aws_network_interface" "eni-step-web1" {
-  attachment {
-    device_index = "0"
-    instance     = "${aws_instance.step-web1.id}"
-  }
-  description        = "Primary network interface"
-  ipv4_prefix_count  = "0"
-  ipv6_address_count = "0"
-  ipv6_prefix_count  = "0"
-  private_ip         = "172.16.3.11"
-  security_groups    = [aws_security_group.scg-stepweb1.id]
-  source_dest_check  = "true"
-  subnet_id          = "${aws_subnet.private-a-subnet-step.id}"
-  tags = {
-    Name = "eni-step-web1"
-  }
-  tags_all = {
-    Name = "eni-step-web1"
-  }
-}
+# resource "aws_network_interface" "eni-step-web1" {
+#   attachment {
+#     device_index = "0"
+#     instance     = "${aws_instance.step-web1.id}"
+#   }
+#   description        = "Primary network interface"
+#   ipv4_prefix_count  = "0"
+#   ipv6_address_count = "0"
+#   ipv6_prefix_count  = "0"
+#   private_ip         = "172.16.3.11"
+#   security_groups    = [aws_security_group.scg-stepweb1.id]
+#   source_dest_check  = "true"
+#   subnet_id          = "${aws_subnet.private-a-subnet-step.id}"
+#   tags = {
+#     Name = "eni-step-web1"
+#   }
+#   tags_all = {
+#     Name = "eni-step-web1"
+#   }
+# }
