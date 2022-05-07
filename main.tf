@@ -292,6 +292,7 @@ resource "aws_lb_listener" "http" {
   port              = "80"
   protocol          = "HTTP"
 }
+# ACM発行済みでないと作成されない↓（ドメイン他社管理の場合、ネームサーバー登録必要あり）
 resource "aws_lb_listener" "https" {
   certificate_arn = "${aws_acm_certificate.acm-smi11-com.id}"
   default_action {
@@ -399,13 +400,13 @@ resource "aws_route53_zone" "smi11-com" {
   }
 }
 # Route53 レコード
-resource "aws_route53_record" "smi11-com-CNAME1" {
-  name    = "6xt46tpx2c3i52knso4ajdwkqn7n3ayj._domainkey.smi11.com"
-  records = ["6xt46tpx2c3i52knso4ajdwkqn7n3ayj.dkim.amazonses.com"]
-  ttl     = "1800"
-  type    = "CNAME"
-  zone_id = "${aws_route53_zone.smi11-com.zone_id}"
-}
+# resource "aws_route53_record" "smi11-com-CNAME1" {
+#   name    = "6xt46tpx2c3i52knso4ajdwkqn7n3ayj._domainkey.smi11.com"
+#   records = ["6xt46tpx2c3i52knso4ajdwkqn7n3ayj.dkim.amazonses.com"]
+#   ttl     = "1800"
+#   type    = "CNAME"
+#   zone_id = "${aws_route53_zone.smi11-com.zone_id}"
+# }
 resource "aws_route53_record" "smi11-com-CNAME2" {
   name    = "_bfc04688f31c58cdf179c3781e289f28.smi11.com"
   records = ["_cbbde2ddef4b08a8e3586929d7533bae.gskhnxswdw.acm-validations.aws."]
@@ -413,20 +414,20 @@ resource "aws_route53_record" "smi11-com-CNAME2" {
   type    = "CNAME"
   zone_id = "${aws_route53_zone.smi11-com.zone_id}"
 }
-resource "aws_route53_record" "smi11-com-CNAME3" {
-  name    = "d6bi26c3ahsjhkijn3oy5w6hkcjpt6sy._domainkey.smi11.com"
-  records = ["d6bi26c3ahsjhkijn3oy5w6hkcjpt6sy.dkim.amazonses.com"]
-  ttl     = "1800"
-  type    = "CNAME"
-  zone_id = "${aws_route53_zone.smi11-com.zone_id}"
-}
-resource "aws_route53_record" "smi11-com-CNAME4" {
-  name    = "s2oqgy7jk3isynkh2mx6amt4qrtszmrx._domainkey.smi11.com"
-  records = ["s2oqgy7jk3isynkh2mx6amt4qrtszmrx.dkim.amazonses.com"]
-  ttl     = "1800"
-  type    = "CNAME"
-  zone_id = "${aws_route53_zone.smi11-com.zone_id}"
-}
+# resource "aws_route53_record" "smi11-com-CNAME3" {
+#   name    = "d6bi26c3ahsjhkijn3oy5w6hkcjpt6sy._domainkey.smi11.com"
+#   records = ["d6bi26c3ahsjhkijn3oy5w6hkcjpt6sy.dkim.amazonses.com"]
+#   ttl     = "1800"
+#   type    = "CNAME"
+#   zone_id = "${aws_route53_zone.smi11-com.zone_id}"
+# }
+# resource "aws_route53_record" "smi11-com-CNAME4" {
+#   name    = "s2oqgy7jk3isynkh2mx6amt4qrtszmrx._domainkey.smi11.com"
+#   records = ["s2oqgy7jk3isynkh2mx6amt4qrtszmrx.dkim.amazonses.com"]
+#   ttl     = "1800"
+#   type    = "CNAME"
+#   zone_id = "${aws_route53_zone.smi11-com.zone_id}"
+# }
 resource "aws_route53_record" "smi11-com-A" {
   alias {
     evaluate_target_health = "false"
@@ -437,25 +438,27 @@ resource "aws_route53_record" "smi11-com-A" {
   type    = "A"
   zone_id = "${aws_route53_zone.smi11-com.zone_id}"
 }
-resource "aws_route53_record" "smi11-com-NS" {
-  name    = "smi11.com"
-  records = [
-    "ns-1372.awsdns-43.org.",
-    "ns-2034.awsdns-62.co.uk.",
-    "ns-3.awsdns-00.com.",
-    "ns-704.awsdns-24.net."
-  ]
-  ttl     = "172800"
-  type    = "NS"
-  zone_id = "${aws_route53_zone.smi11-com.zone_id}"
-}
-resource "aws_route53_record" "smi11-com-SOA" {
-  name    = "smi11.com"
-  records = ["ns-3.awsdns-00.com. awsdns-hostmaster.amazon.com. 1 7200 900 1209600 86400"]
-  ttl     = "900"
-  type    = "SOA"
-  zone_id = "${aws_route53_zone.smi11-com.zone_id}"
-}
+# 自動で作成されるため不要↓
+# resource "aws_route53_record" "smi11-com-NS" {
+#   name    = "smi11.com"
+#   records = [
+#     "ns-1372.awsdns-43.org.",
+#     "ns-2034.awsdns-62.co.uk.",
+#     "ns-3.awsdns-00.com.",
+#     "ns-704.awsdns-24.net."
+#   ]
+#   ttl     = "172800"
+#   type    = "NS"
+#   zone_id = "${aws_route53_zone.smi11-com.zone_id}"
+# }
+# 自動で作成されるため不要↓
+# resource "aws_route53_record" "smi11-com-SOA" {
+#   name    = "smi11.com"
+#   records = ["ns-3.awsdns-00.com. awsdns-hostmaster.amazon.com. 1 7200 900 1209600 86400"]
+#   ttl     = "900"
+#   type    = "SOA"
+#   zone_id = "${aws_route53_zone.smi11-com.zone_id}"
+# }
 resource "aws_route53_record" "www-smi11-com-A" {
   alias {
     evaluate_target_health = "true"
@@ -474,10 +477,10 @@ resource "aws_acm_certificate" "acm-smi11-com" {
   }
   subject_alternative_names = ["smi11.com"]
   tags = {
-    name = "step-acm"
+    Name = "acm-step"
   }
   tags_all = {
-    name = "step-acm"
+    Name = "acm-step"
   }
   validation_method = "DNS"
 }
@@ -495,6 +498,7 @@ resource "aws_eip" "eip-step-web1" {
   }
   vpc = "true"
 }
+# 自動で作成されるため不要↓
 # Elastic network interface
 # resource "aws_network_interface" "eni-step-web1" {
 #   attachment {
