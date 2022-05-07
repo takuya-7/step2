@@ -234,6 +234,9 @@ resource "aws_instance" "step-web1" {
     tags = {
         Name = "step-web1"
     }
+    lifecycle {
+      prevent_destroy = true
+    }
 }
 resource "aws_instance" "step-bastion" {
     ami = "${var.images.step-bastion}"
@@ -254,6 +257,9 @@ resource "aws_instance" "step-bastion" {
     }
     tags = {
         Name = "step-bastion"
+    }
+    lifecycle {
+      prevent_destroy = true
     }
 }
 # ALB
@@ -372,6 +378,9 @@ resource "aws_db_instance" "rds-step" {
   username                              = "step_admin"
   vpc_security_group_ids                = ["${aws_security_group.scg-rds-step.id}"]
   skip_final_snapshot                   = true
+  lifecycle {
+    prevent_destroy = true
+  }
 }
 # RDS サブネットグループ
 resource "aws_db_subnet_group" "subnet-group-step" {
